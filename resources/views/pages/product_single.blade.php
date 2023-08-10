@@ -50,15 +50,16 @@
                                             data-zoom-image="{{ asset('uploads/product/' . $product->image) }}"
                                             width="640" height="530" alt="Image" />
                                     </a>
-                                    <a class="lightbox-image swiper-slide nav-item zoom" data-fancybox="gallery" href="#">
-                                        <img src="{{ asset($product->otherimage) }}" width="640"
-                                            height="530" alt="Image" />
+                                    <a class="lightbox-image swiper-slide nav-item zoom" data-fancybox="gallery"
+                                        href="#">
+                                        <img src="{{ asset($product->otherimage) }}" width="640" height="530"
+                                            alt="Image" />
                                     </a>
                                     @foreach ($product_images as $multi)
-                                    <a class="lightbox-image swiper-slide zoom" data-fancybox="gallery" href="#">
-                                        <img src="{{ asset($product->otherimage) }}" width="640"
-                                            height="530" alt="Image" />
-                                    </a>
+                                        <a class="lightbox-image swiper-slide zoom" data-fancybox="gallery" href="#">
+                                            <img src="{{ asset($product->otherimage) }}" width="640" height="530"
+                                                alt="Image" />
+                                        </a>
                                         <a class="lightbox-image swiper-slide zoom" data-fancybox="gallery" href="#">
                                             <img src="{{ asset($multi->multiimage) }}"
                                                 data-zoom-image="{{ asset($multi->multiimage) }}" width="640"
@@ -75,9 +76,10 @@
                                             <img src="{{ asset('uploads/product/' . $product->image) }}" width="640"
                                                 height="530" alt="Image" />
                                         </a>
-                                        <a class="lightbox-image swiper-slide nav-item" data-fancybox="gallery" href="#">
-                                            <img src="{{ asset($product->otherimage) }}" width="640"
-                                                height="530" alt="Image" />
+                                        <a class="lightbox-image swiper-slide nav-item" data-fancybox="gallery"
+                                            href="#">
+                                            <img src="{{ asset($product->otherimage) }}" width="640" height="530"
+                                                alt="Image" />
                                         </a>
                                         @foreach ($product_images as $multiimg)
                                             <div class="nav-item swiper-slide">
@@ -128,20 +130,23 @@
                             </ul>
                             <div class="my-2 d-flex">
                                 @if ($product->quantity == 0)
-                                <div class="pro-qty" style="display: none">
-                                    <input type="text" title="Quantity" name="qty" min="1" value="1" />
-                                </div>
+                                    <div class="pro-qty" style="display: none">
+                                        <input type="text" title="Quantity" name="qty" min="1"
+                                            value="1" />
+                                    </div>
                                 @else
-                                <div class="pro-qty">
-                                    <input type="text" title="Quantity" name="qty" min="1" value="1" />
-                                </div>
+                                    <div class="pro-qty">
+                                        <input type="text" title="Quantity" name="qty" min="1"
+                                            value="1" />
+                                    </div>
                                 @endif
-                               
+
                                 <input type="hidden" id="product_id" value="{{ $product->id }}">
                                 @if ($product->quantity == 0)
                                     <div class="cart-button">
-                                        <button class="product-detail-cart-btn js-prd-addtocar addcart btn-danger text-white" disabled
-                                            type="button">Out of stock</button>
+                                        <button
+                                            class="product-detail-cart-btn js-prd-addtocar addcart btn-danger text-white"
+                                            disabled type="button">Out of stock</button>
                                     </div>
                                 @else
                                     <button class="product-detail-cart-btn buynow me-1" value="cart" type="button"
@@ -172,7 +177,7 @@
 
         <div class="product_details">
             <div class="container">
-                <div class="row text-center">
+                <div class="row text-center" style="margin:15px; 0">
                     <div class="col-lg-3 col-6">
                         <div class="feature-svg">
                             <div class="svg d-none d-md-block">
@@ -205,6 +210,7 @@
 
                         </div>
                     </div>
+
                     <div class="col-lg-3 col-6">
                         <div class="feature-svg">
 
@@ -240,6 +246,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-3 col-6">
                         <div class="feature-svg">
                             <div class="svg d-none d-md-block">
@@ -308,7 +315,7 @@
                                 <ul class="feat-item">
                                     @foreach ($productItem as $item)
                                         <li class="feature-link mt-2">
-                                            <p class="name">{{ $item->label }}</p>
+                                            <p class="name" style="font-weight:bold;">{{ $item->label }}</p>
                                             <p class="value">{{ $item->value }}</p>
                                         </li>
                                     @endforeach
@@ -327,7 +334,7 @@
                                 <ul class="feat-item">
                                     @foreach ($productCase as $case)
                                         <li class="feature-link mt-2">
-                                            <p class="name">{{ $case->case_label }}</p>
+                                            <p class="name" style="font-weight:bold;">{{ $case->case_label }}</p>
                                             <p class="value">{{ $case->case_value }}</p>
                                         </li>
                                     @endforeach
@@ -344,7 +351,7 @@
                                 <ul class="feat-item">
                                     @foreach ($productDial as $dial)
                                         <li class="feature-link mt-2">
-                                            <p class="name">{{ $dial->dial_label }}</p>
+                                            <p class="name" style="font-weight:bold;">{{ $dial->dial_label }}</p>
                                             <p class="value">{{ $dial->dial_value }}</p>
                                         </li>
                                     @endforeach
@@ -362,7 +369,8 @@
                                 <ul class="feat-item">
                                     @foreach ($productMovement as $movement)
                                         <li class="feature-link mt-2">
-                                            <p class="name">{{ $movement->movement_label }}</p>
+                                            <p class="name" style="font-weight:bold;">{{ $movement->movement_label }}
+                                            </p>
                                             <p class="value">{{ $movement->movement_value }}</p>
                                         </li>
                                     @endforeach
@@ -379,7 +387,7 @@
                                 <ul class="feat-item">
                                     @foreach ($productBand as $band)
                                         <li class="feature-link mt-2">
-                                            <p class="name">{{ $band->band_label }}</p>
+                                            <p class="name" style="font-weight:bold;">{{ $band->band_label }}</p>
                                             <p class="value">{{ $band->band_value }}</p>
                                         </li>
                                     @endforeach
@@ -396,7 +404,8 @@
                                 <ul class="feat-item">
                                     @foreach ($productAddition as $addition)
                                         <li class="feature-link mt-2">
-                                            <p class="name">{{ $addition->addition_label }}</p>
+                                            <p class="name" style="font-weight:bold;">{{ $addition->addition_label }}
+                                            </p>
                                             <p class="value">{{ $addition->addition_value }}</p>
                                         </li>
                                     @endforeach
@@ -506,15 +515,13 @@
     <script src="{{ asset('website/js/jquery.zoom.js') }}"></script>
 
     <script>
-
-
         $('.swiper-wrapper').addClass('transform');
 
-    
-        $(".swiper-button-prev").click(function(){
+
+        $(".swiper-button-prev").click(function() {
             $('.swiper-wrapper').removeClass('transform')
         });
-        $(".swiper-button-next").click(function(){
+        $(".swiper-button-next").click(function() {
             $('.swiper-wrapper').removeClass('transform')
         });
 

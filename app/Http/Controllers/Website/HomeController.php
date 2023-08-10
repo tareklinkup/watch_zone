@@ -53,10 +53,11 @@ class HomeController extends Controller
     public function category($cat)
     {
         $category_id = Category::where('slug', $cat)->first()->id;
+        // dd($product);
         $product = Product::with(['brand', 'images'])->where('brand_id', $category_id)->orderBy('quantity', 'desc');
         $product = $product->paginate(200);
         $brands = Brand::with('product')->orderBy('id', 'asc')->get();
-        $categories = Category::with('products')->orderBy('id', 'asc')->take(2)->get();
+        $categories = Category::with('products')->orderBy('id', 'asc')->take(6)->get();
         return view('pages.category', compact('product', 'brands', 'categories'));
     }
     public function saleProduct()

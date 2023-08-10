@@ -54,12 +54,13 @@
                                                 <div class="product-item pb-2">
                                                     <div class="product-img">
                                                         <a class="product-item-thumb"
-                                                        href="{{ route('product.show', $item->slug) }}">
-                                                        <img class="pic-1" src="{{ asset('uploads/product/thumbnail/' . $item->thumb_image) }}"
-                                                            width="270" height="264" alt="product image"/>
+                                                            href="{{ route('product.show', $item->slug) }}">
+                                                            <img class="pic-1"
+                                                                src="{{ asset('uploads/product/thumbnail/' . $item->thumb_image) }}"
+                                                                width="270" height="264" alt="product image" />
                                                             <img class="pic-2" src="{{ asset($item->otherimage) }}"
                                                                 alt="productimg-2">
-                                                    </a>
+                                                        </a>
                                                     </div>
                                                     @if ($item->discount > 0)
                                                         <span class="badges">Sale-{{ round($item->discount) }}%</span>
@@ -99,7 +100,8 @@
                                                         </div>
                                                     @else
                                                         <div class="cart-button">
-                                                            <button class="product-detail-cart-btn js-prd-addtocar addcart me-1"
+                                                            <button
+                                                                class="product-detail-cart-btn js-prd-addtocar addcart me-1"
                                                                 type="button" data-id="{{ $item->id }}"
                                                                 data-bs-toggle="offcanvas"
                                                                 data-bs-target="#offcanvasWithCartSidebar"
@@ -138,7 +140,7 @@
                     <div class="col-lg-4 col-xl-3 order-1 order-lg-0 d-none d-md-block">
                         <!--== Start Sidebar Area Wrapper ==-->
                         <div class="sidebar-area mt-10 mt-lg-0 accordion" id="accordionExample">
-                            
+
                             <div class="widget-item widget-item-one">
                                 <h4 class="accordion-header" id="headingTwo1">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -171,8 +173,8 @@
                                 </h4>
                                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                                     data-bs-parent="#accordionExample">
-                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                        data-bs-parent="#accordionExample">
+                                    <div id="collapseTwo" class="accordion-collapse collapse"
+                                        aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                         <ul class="accordion-body side_area">
                                             @foreach ($brands as $item)
                                                 <li class="border-bottom"><a
@@ -252,7 +254,7 @@
                         </div>
                     </div>
 
-                  
+
                 </div>
             </div>
         </div>
@@ -260,61 +262,61 @@
 
 
         <div class="offcanvas offcanvas-start product_items_filter" tabindex="-1" id="offcanvasExample"
-        aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Side Manu</h5>
-            <button type="button" class="btn-close text-reset " data-bs-dismiss="offcanvas"
-                aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
+            aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Side Manu</h5>
+                <button type="button" class="btn-close text-reset " data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
 
-            <div class="sidebar-area accordion" id="accordionExample">
+                <div class="sidebar-area accordion" id="accordionExample">
 
-                <div class="widget-item widget-item-one">
-                    <h4 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Brand
-                        </button>
-                    </h4>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                        data-bs-parent="#accordionExample">
-                        <ul class="accordion-body side_area">
-                            @foreach ($brands as $item)
-                                <li class="border-bottom"><a
-                                        href="{{ route('product.brand', $item->slug) }}">{{ $item->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-                <div class="widget-item widget-item-one">
-                    <h4 class="accordion-header" id="headingTwo1">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo1">
-                            Gender
-                        </button>
-                    </h4>
-                    <div id="collapseTwo1" class="accordion-collapse collapse" aria-labelledby="headingTwo1"
-                        data-bs-parent="#accordionExample">
-                        <div id="collapseTwo1" class="accordion-collapse collapse" aria-labelledby="headingTwo1"
+                    <div class="widget-item widget-item-one">
+                        <h4 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Brand
+                            </button>
+                        </h4>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                             data-bs-parent="#accordionExample">
                             <ul class="accordion-body side_area">
-                                @foreach ($categories as $item)
+                                @foreach ($brands as $item)
                                     <li class="border-bottom"><a
-                                            href="{{ route('product.cat', $item->slug) }}">{{ $item->name }}</a>
+                                            href="{{ route('product.brand', $item->slug) }}">{{ $item->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>
                         </div>
-
                     </div>
-                </div>
+                    <div class="widget-item widget-item-one">
+                        <h4 class="accordion-header" id="headingTwo1">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo1">
+                                Gender
+                            </button>
+                        </h4>
+                        <div id="collapseTwo1" class="accordion-collapse collapse" aria-labelledby="headingTwo1"
+                            data-bs-parent="#accordionExample">
+                            <div id="collapseTwo1" class="accordion-collapse collapse" aria-labelledby="headingTwo1"
+                                data-bs-parent="#accordionExample">
+                                <ul class="accordion-body side_area">
+                                    @foreach ($categories as $item)
+                                        <li class="border-bottom"><a
+                                                href="{{ route('product.cat', $item->slug) }}">{{ $item->name }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
 
-          
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
         </div>
-    </div>
 
 
         </form>

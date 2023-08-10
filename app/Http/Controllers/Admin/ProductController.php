@@ -109,16 +109,16 @@ class ProductController extends Controller
         $thumbImage = 'thumb-' . time() . rand() . $image->getClientOriginalName();
 
         Image::make($image)->resize(800, 800)->save('uploads/product/' . $Image);
-        Image::make($image)->resize(250, 250)->save('uploads/product/thumbnail/' . $thumbImage);
+        Image::make($image)->resize(800, 800)->save('uploads/product/thumbnail/' . $thumbImage);
 
         $product = new Product();
         $product->category_id = $request->category_id;
         $product->brand_id = $request->brand_id;
-        $product->series_id = $request->series_id;
-        $product->material_id = $request->material_id;
-        $product->color_id = $request->color_id;
-        $product->size_id = $request->size_id;
-        $product->movement_id = $request->movement_id;
+        $product->series_id = $request->series_id ?? null;
+        $product->material_id = $request->material_id ?? null;
+        $product->color_id = $request->color_id ?? null;
+        $product->size_id = $request->size_id ?? null;
+        $product->movement_id = $request->movement_id ?? null;
         $product->name = $request->name;
         $product->slug = Str::slug($request->name);
         $product->model = $request->model;
@@ -128,8 +128,8 @@ class ProductController extends Controller
         $product->short_desc = $request->short_desc;
         $product->description = $request->description;
         $product->quantity = $request->quantity;
-        $product->warranty = $request->warranty;
-        $product->resistant = $request->resistant;
+        $product->warranty = $request->warranty ?? null;
+        $product->resistant = $request->resistant ?? null;
         $product->image      = $Image;
         $product->thumb_image = $thumbImage;
         $product->otherimage = $this->imageUpload($request, 'otherimage', 'uploads/product');
@@ -305,11 +305,11 @@ class ProductController extends Controller
 
         $product->category_id = $request->category_id;
         $product->brand_id = $request->brand_id;
-        $product->series_id = $request->series_id;
-        $product->material_id = $request->material_id;
-        $product->color_id = $request->color_id;
-        $product->size_id = $request->size_id;
-        $product->movement_id = $request->movement_id;
+        $product->series_id = $request->series_id ?? null;
+        $product->material_id = $request->material_id ?? null;
+        $product->color_id = $request->color_id ?? null;
+        $product->size_id = $request->size_id ?? null;
+        $product->movement_id = $request->movement_id ?? null;
         $product->name = $request->name;
         $product->slug = Str::slug($request->name);
         $product->model = $request->model;

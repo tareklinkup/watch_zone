@@ -129,7 +129,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row mb-1">
+                                        <div class="form-group row mb-1" id="brandId">
                                             <label for="brand_id" class="col-sm-3 col-form-label">Brand <span
                                                     class="text-danger">*</span></label>
                                             <div class="col-sm-9">
@@ -146,7 +146,7 @@
 
 
                                         <!------------- start Serialization------------------------------>
-                                        <div class="form-group row mb-1">
+                                        <div class="form-group row mb-1" id="movementId">
                                             <label for="movement_id" class="col-sm-3 col-form-label">Movement <span
                                                     class="text-danger">*</span></label>
                                             <div class="col-sm-9">
@@ -161,7 +161,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row mb-1">
+                                        <div class="form-group row mb-1" id="sizeId">
                                             <label for="size_id" class="col-sm-3 col-form-label">Case Size <span
                                                     class="text-danger">*</span></label>
                                             <div class="col-sm-9">
@@ -176,7 +176,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row mb-1">
+                                        <div class="form-group row mb-1" id="colorId">
                                             <label for="color_id" class="col-sm-3 col-form-label">Dial Color <span
                                                     class="text-danger">*</span></label>
                                             <div class="col-sm-9">
@@ -191,7 +191,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row mb-1">
+                                        <div class="form-group row mb-1" id="materialId">
                                             <label for="material_id" class="col-sm-3 col-form-label">Brand Material <span
                                                     class="text-danger">*</span></label>
                                             <div class="col-sm-9">
@@ -207,7 +207,7 @@
                                         </div>
 
 
-                                        <div class="form-group row mb-1">
+                                        <div class="form-group row mb-1" id="seriesId">
                                             <label for="series_id" class="col-sm-3 col-form-label"> Series <span
                                                     class="text-danger">*</span></label>
                                             <div class="col-sm-9">
@@ -664,6 +664,52 @@
                     });
                 }
             });
+
+        });
+    </script>
+
+    <script>
+        $("#category_id").on('change', function() {
+
+            var category_id = $(this).val();
+
+
+            console.log(category_id);
+
+            if (category_id == 1 || category_id == 2) {
+                $("#movementId").show();
+                $("#colorId").show();
+                $("#sizeId").show();
+                $("#materialId").show();
+                $("#seriesId").show();
+            } else {
+                $("#movementId").hide();
+                $("#colorId").hide();
+                $("#sizeId").hide();
+                $("#materialId").hide();
+                $("#seriesId").hide();
+            }
+
+
+
+            var data = {
+                brand_id: brand_id,
+                category_id: category_id
+            };
+
+            // $.ajax({
+            //     type: "POST",
+            //     url: "{{ url('material-get') }}",
+            //     dataType: "json",
+            //     data: data,
+            //     success: function(res) {
+            //         $('#material_id').empty();
+            //         $.each(res, function(key, value) {
+            //             $('#material_id').append('<option value="' + value.id +
+            //                 '">' + value.name + '</option>');
+            //         });
+            //     }
+            // });
 
         });
     </script>
