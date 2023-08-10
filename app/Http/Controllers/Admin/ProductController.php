@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use stdClass;
+use Exception;
 use App\Models\Size;
 use App\Models\Brand;
 use App\Models\Color;
@@ -12,6 +13,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Movement;
 use App\Models\SizeColor;
+use App\Models\OrderDetail;
 use App\Models\ProductBand;
 use App\Models\ProductCase;
 use App\Models\ProductDial;
@@ -24,7 +26,6 @@ use App\Models\ProductMovement;
 use App\Models\ProductAdditional;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 use Intervention\Image\Facades\Image;
@@ -51,34 +52,38 @@ class ProductController extends Controller
         return view('admin.product_create', compact('brand', 'category'));
     }
 
-    public function seriesGet($id)
+    public function seriesGet(Request $request)
     {
-        $serise = Series::where('brand_id', $id)->get();
+        // dd($request->all());
+        $serise = Series::where(['brand_id' => $request->brand_id, 'category_id' => $request->category_id])->get();
         return response()->json($serise);
     }
 
 
-    public function materialGet($id)
+    public function materialGet(Request $request)
     {
-        $marerial = BrandMaterial::where('brand_id', $id)->get();
+            //dd($request->brand_id);
+        $marerial = BrandMaterial::where(['brand_id' => $request->brand_id, 'category_id' => $request->category_id])->get();
         return response()->json($marerial);
     }
 
-    public function colorGet($id)
+    public function colorGet(Request $request)
     {
-        $color = Color::where('brand_id', $id)->get();
+        // dd($request->all());
+        $color = Color::where(['brand_id' => $request->brand_id, 'category_id' => $request->category_id])->get();
         return response()->json($color);
     }
 
-    public function sizeGet($id)
+    public function sizeGet(Request $request)
     {
-        $size = Size::where('brand_id', $id)->get();
+
+        $size = Size::where(['brand_id' => $request->brand_id, 'category_id' => $request->category_id])->get();
         return response()->json($size);
     }
 
-    public function movementGet($id)
+    public function movementGet(Request $request)
     {
-        $movement = Movement::where('brand_id', $id)->get();
+        $movement = Movement::where(['brand_id' => $request->brand_id, 'category_id' => $request->category_id])->get();
         return response()->json($movement);
     }
 
@@ -94,7 +99,9 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg,webp',
 
         ]);
-        $price = $request->selling_price;
+        try{
+
+              $price = $request->selling_price;
         $discount = (isset($request->discount_price) && $request->discount_price == 0) ? 0 : $request->discount_price;
 
         $image = $request->file('image');
@@ -201,6 +208,11 @@ class ProductController extends Controller
             }
         }
 
+
+        } catch (Exception $e)
+        {
+            return response()->json(['error' => $e->getMessage()]);
+        }
         return redirect()->back()->with('message', 'Product Successfully Saved!');
     }
 

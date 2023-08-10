@@ -89,12 +89,12 @@ class SeriesController extends Controller
             if($series){
                 $series->delete();
             }
-            
+
             return response()->json([
                 'message'=>'Series Deleted Successfully',
                 'success'=> true
             ]);
-            
+
         } catch (\Exception $e) {
             return response()->json([
                 'message'=>'Something went wrong!',
@@ -105,18 +105,24 @@ class SeriesController extends Controller
 
     public function getSeries(Request $req)
     {
-        
+
         $series = Series::query();
 
         if(isset($req->categoryId)) {
-            $series = $series->where('category_id', $req->categoryId);
+            $series = $series->where('category_id', $req->categoryId)->orderBy('name', 'asc');
         }
-        
+
         if(isset($req->brandId)) {
-            $series = $series->where('brand_id', $req->brandId);
+            $series = $series->where('brand_id', $req->brandId)->orderBy('name', 'asc');
         }
 
         $series = $series->get();
+        return $series;
+    }
+
+    public function getSeriesCategory(Request $req)
+    {
+         $series = Series::where(['brand_id' => $req->brandId, 'category_id' => $req->categoryId])->orderBy('name', 'asc')->get();
         return $series;
     }
 }

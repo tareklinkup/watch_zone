@@ -107,16 +107,18 @@
                                 aria-labelledby="column-three-tab">
                                 <div class="row mb-n6 lozad" id="product-row" style="display: none"
                                     :style="{ display: products.length > 0 ? '' : 'none' }">
-                                    <div v-for="(product, ind) in products" class="col-sm-6 col-md-4 col-6 mb-6 masonry-item"
-                                        :key="ind">
+                                    <div v-for="(product, ind) in products"
+                                        class="col-sm-6 col-md-4 col-6 mb-6 masonry-item" :key="ind">
                                         <div class="product-item pb-2">
                                             <div class="product-img">
                                                 <a class="product-item-thumb"
-                                                :href="`${baseUrl}/product/single/${product.slug}`">
-                                                <img class="pic-1" :src="'/uploads/product/thumbnail/' + product.thumb_image" width="270"
-                                                    height="264" alt="product_image"/>
-                                                <img class="pic-2 " :src="`${baseUrl}/`+ product.otherimage" alt="productimg1-2">
-                                            </a>
+                                                    :href="`${baseUrl}/product/single/${product.slug}`">
+                                                    <img class="pic-1"
+                                                        :src="'/uploads/product/thumbnail/' + product.thumb_image"
+                                                        width="270" height="264" alt="product_image" />
+                                                    <img class="pic-2 " :src="`${baseUrl}/` + product.otherimage"
+                                                        alt="productimg1-2">
+                                                </a>
                                             </div>
                                             <span v-if="product.discount > 0"
                                                 class="badges">Sale-@{{ Math.round(product.discount) }}%</span>
@@ -182,9 +184,9 @@
                                 <div class="widget-item widget-item-one ">
 
                                     <h4 class="accordion-header" id="headingTwo4">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo4"
-                                            aria-expanded="false" aria-controls="collapseTwo4">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseTwo4" aria-expanded="false"
+                                            aria-controls="collapseTwo4">
                                             Movement
                                         </button>
                                     </h4>
@@ -470,11 +472,11 @@
                         </div>
                     </div>
 
-                   
-                   
-                    
-                   
-                   
+
+
+
+
+
                 </div>
             </div>
         </div>
@@ -569,7 +571,7 @@
                 getDialColors() {
                     axios.post('/get-dial-colors', {
                             brandId: this.brandId,
-                            brandcategoryIdId: this.categoryId
+                            categoryId: this.categoryId
                         })
                         .then(res => {
                             this.dialColor = res.data;
@@ -710,7 +712,4 @@
             },
         });
     </script>
-
-
-
 @endpush

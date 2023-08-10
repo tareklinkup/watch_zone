@@ -23,8 +23,6 @@
                                         background-repeat: no-repeat;
                                         background-size: contain;
                                      ">
-                                    <div>
-                                    </div>
                                 </a>
                             @endforeach
 
@@ -75,12 +73,12 @@
 
         <!-- category area start -->
         <section class="category-area">
+            <div class="sub-header">
+                <h3 class="text-center mb-1 mt-n2"> Authenticity Guaranteed and 1-5 Year Warranty On All
+                    Watches.</h3>
+            </div>
+            <div class="header-border"></div>
             <div class="container">
-                <div class="sub-header">
-                    <h3 class="text-center mb-1 mt-n2"> Authenticity Guaranteed and 1-5 Year Warranty On All
-                        Watches.</h3>
-                </div>
-                <div class="header-border"></div>
                 <div class="category-content">
                     <div class="row">
                         @foreach ($categories as $item)
@@ -97,6 +95,18 @@
                             {{-- @endif --}}
                         @endforeach
 
+                        <div class="col-lg-2 col-md-3 col-4">
+                            <div class="cat-item">
+                                <a href="{{ route('sale') }}">
+                                    <img src="{{ asset('uploads/sale.webp') }}" alt="category image"></a>
+                            </div>
+                            <div class="cat-title">
+                                <h4><a href="{{ route('sale') }}">Sale</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
                     </div>
                 </div>
             </div>
@@ -109,7 +119,7 @@
             <div class="container ">
                 <div class="features-area pt-5 pb-5 mx-3 ">
                     <div class="row features-row ">
-                        <div class="col-sm-6 col-md-6 col-lg-3 col-6 ">
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-6 ">
                             <!--== Start Feature Item ==-->
                             <div class="feature-item">
                                 <div class="feature-icon">
@@ -123,7 +133,7 @@
                             </div>
                             <!--== End Feature Item ==-->
                         </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3 col-6">
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-6">
                             <!--== Start Feature Item ==-->
                             <div class="feature-item ">
                                 <div class="feature-icon">
@@ -138,7 +148,7 @@
                             </div>
                             <!--== End Feature Item ==-->
                         </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3 col-6 ">
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-6 ">
                             <!--== Start Feature Item ==-->
                             <div class="feature-item">
                                 <div class="feature-icon">
@@ -152,7 +162,7 @@
                             </div>
                             <!--== End Feature Item ==-->
                         </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3 col-6 ">
+                        <div class="col-sm-6 col-md-3 col-lg-3 col-6 ">
                             <!--== Start Feature Item ==-->
                             <div class="feature-item border-0 ">
                                 <div class="feature-icon">
@@ -177,7 +187,8 @@
                 <div class="container bg-white bg-white-wrp ">
                     <!--== Start Product Banner Item ==-->
                     <a href="{{ $bann->link }}">
-                        <div class="product-banner-seven-item text-center" data-bg-img="{{ asset($bann->image) }}" style="background-image: url({{ asset($bann->image) }});"> </div>
+                        <div class="product-banner-seven-item text-center" data-bg-img="{{ asset($bann->image) }}"
+                            style="background-image: url({{ asset($bann->image) }});"> </div>
                     </a>
 
                     @php
@@ -201,7 +212,7 @@
                                     <div class="product-img">
                                         <a href="{{ route('product.show', $item->slug) }}" class="product-item-thumb">
                                             <img class="pic-1 "
-                                                src="{{ asset('uploads/product/thumbnail/' .$item->thumb_image) }}"
+                                                src="{{ asset('uploads/product/thumbnail/' . $item->thumb_image) }}"
                                                 alt="productimg1">
                                             <img class="pic-2 " src="{{ asset($item->otherimage) }}"
                                                 alt="productimg1-2">

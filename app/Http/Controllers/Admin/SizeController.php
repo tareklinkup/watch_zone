@@ -18,7 +18,7 @@ class SizeController extends Controller
         return view('admin.size.index', compact('brand', 'size', 'category'));
     }
 
-    
+
     public function  store(Request $request)
     {
         $this->validate($request, [
@@ -104,7 +104,27 @@ class SizeController extends Controller
 
     public function getCasesize(Request $req)
     {
-        $casesize = Size::where('brand_id', $req->brandId)->where('category_id', $req->categoryId)->get();
-        return $casesize;
+        // $casesize = Size::where('brand_id', $req->brandId)->where('category_id', $req->categoryId)->get();
+        // return $casesize;
+
+        $sizes = Size::query();
+        if(isset($req->categoryId)) {
+            $sizes = $sizes->where('category_id', $req->categoryId)->orderby('name', 'asc');
+        }
+
+        if(isset($req->brandId)) {
+            $sizes = $sizes->where('brand_id', $req->brandId)->orderby('name', 'asc');
+        }
+
+
+        $sizes = $sizes->get();
+        return $sizes;
+
+    }
+
+    public function getCasesizeCategory(Request $req){
+
+            $sizes = Size::where(['brand_id' => $req->brandId, 'category_id' => $req->categoryId])->orderBy('name', 'asc')->get();
+            return $sizes;
     }
 }

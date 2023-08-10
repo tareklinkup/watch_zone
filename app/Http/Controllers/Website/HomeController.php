@@ -42,13 +42,13 @@ class HomeController extends Controller
     {
         $data['slider'] = Slider::where('status', 1)->get();
         $data['brands'] = Brand::where('is_homepage', 1)->orderBy('id', 'asc')->take(12)->get();
-        $data['categories'] = Category::where('is_homepage', 1)->take(6)->get();
+        $data['categories'] = Category::where('is_homepage', 1)->take(5)->get();
         $data['banner'] = Banner::where('status', 1)->get();
         $data['coupon'] = Coupon::first();
         return view('pages.web_index', $data);
     }
 
-  
+
     // category Product Page
     public function category($cat)
     {
@@ -70,23 +70,32 @@ class HomeController extends Controller
       // Brand Product Page
       public function brand($brand)
       {
-        $brandId = null;   
+        $brandId = null;
         $categoryId = null;
 
           $brand_id = Brand::where('slug', $brand)->first()->id;
+
+
           $product = Product::with(['brand', 'images'])->where('brand_id', $brand_id)->orderBy('quantity', 'desc');
+        //     echo "<pre>";
+        //      print_r($product);
+        //   echo "<pre/>";
+        //   dd();
 
           if(request()->query('brand')) {
-           
+
             $brand_id = Brand::where('slug', request()->query('brand'))->first()->id;
         }
 
           if(request()->query('series')) {
               $product->where('series_id', request()->query('series'));
           }
-          if(request()->query('brand_material')) {
+
+          if(request()->query('brand_material'))
+          {
               $product->where('material_id', request()->query('brand_material'));
           }
+
           if(request()->query('color')) {
               $product->where('color_id', request()->query('color'));
           }
@@ -96,9 +105,9 @@ class HomeController extends Controller
           if(request()->query('size')) {
               $product->where('size_id', request()->query('size'));
           }
-  
+
           $product = $product->paginate(200);
-          $data['brands'] = Brand::with('product')->orderBy('id', 'asc')->get();
+          $data['brands'] = Brand::with('product')->orderBy('name', 'asc')->get();
           $data['categories'] = Category::with('products')->orderBy('id', 'asc')->take(2)->get();
            if(isset($brand_id)) {
             $data['series']= Series::where('brand_id', $brand_id)->orderBy('id', 'asc')->get();
@@ -108,17 +117,20 @@ class HomeController extends Controller
             $data['movements']= Movement::where('brand_id', $brand_id)->orderBy('id', 'asc')->get();
             $brandId = $brand_id;
         }
+
         $data['brandId'] = $brandId;
+
         $data['categoryId'] = $categoryId;
           return view('pages.product_brand', $data, compact('product'));
+
       }
-      
+
 
 
     // Category Product Page
     public function shop($category)
     {
-        $brandId = null;   
+        $brandId = null;
         $categoryId = null;
 
         if($category) {
@@ -127,7 +139,7 @@ class HomeController extends Controller
             $categoryId = $id;
         }
         if(request()->query('brand')) {
-           
+
             $brand_id = Brand::where('slug', request()->query('brand'))->first()->id;
         }
         if(isset($brand_id)) {
@@ -154,18 +166,18 @@ class HomeController extends Controller
         $data['categories'] = Category::withCount('products')->get();
         $data['brands'] = Brand::with('product')->orderBy('id', 'asc')->get();
         if(isset($brand_id)) {
-            $data['series']= Series::where('brand_id', $id)->orderBy('id', 'asc')->get();
-            $data['brand_material']= BrandMaterial::where('brand_id', $id)->orderBy('id', 'asc')->get();
-            $data['color']= Color::where('brand_id', $id)->orderBy('id', 'asc')->get();
-            $data['sizes']= Size::where('brand_id', $id)->orderBy('id', 'asc')->get();
-            $data['movements']= Movement::where('brand_id', $id)->orderBy('id', 'asc')->get();
+            $data['series']= Series::where('brand_id', $id)->orderBy('name', 'asc')->get();
+            $data['brand_material']= BrandMaterial::where('brand_id', $id)->orderBy('name', 'asc')->get();
+            $data['color']= Color::where('brand_id', $id)->orderBy('name', 'asc')->get();
+            $data['sizes']= Size::where('brand_id', $id)->orderBy('name', 'asc')->get();
+            $data['movements']= Movement::where('brand_id', $id)->orderBy('name', 'asc')->get();
             $brandId = $brand_id;
         }
         $data['brandId'] = $brandId;
         $data['categoryId'] = $categoryId;
-        
-        
-        return view('pages.product_shop', $data);
+
+
+    return view('pages.product_shop', $data);
     }
 
     public function allProduct() {
@@ -198,7 +210,7 @@ class HomeController extends Controller
     //     $categories = Category::where('category_id', $id)->with('products')->get();
     //     return view('pages.parent_product', compact('categories'));
     // }
-    
+
     public function show($slug)
     {
         $product = Product::with('productImage')->where('slug', $slug)->first();
@@ -289,7 +301,7 @@ class HomeController extends Controller
         return view('pages.service');
     }
 
-   
+
 
     // Order Tracking
     public function trackingOrder(Request $request)
@@ -307,8 +319,8 @@ class HomeController extends Controller
         }
     }
 
-    public function getSearchSuggestions($keyword) 
-    {   
+    public function getSearchSuggestions($keyword)
+    {
         $product = Product::select('name')
         ->where('name', 'like', "%$keyword%")->get()->toArray();
         $newProduct = array_map(function($item) {
@@ -333,9 +345,9 @@ class HomeController extends Controller
             $item['type'] = 'b';
             return $item;
         }, $brand);
-        
+
         $mergedArray = array_merge($newProduct, $newCategory, $newBrand);
-        
+
         $search_results = [];
         foreach ($mergedArray as $sr) {
             $search_results[] = $sr['name'];
@@ -351,7 +363,7 @@ class HomeController extends Controller
             $product = Product::Where('name', 'like', "$keyword%")->first();
             $category = Category::where('name', 'like', "$keyword%")->first();
             $brand = Brand::where('name', 'like', "$keyword%")->first();
-            
+
             if(request()->query('type')=='p') {
                 $product_images = ProductImage::where('product_id', $product->id)->get();
                 if (isset($product->category_id)) {
@@ -505,5 +517,5 @@ class HomeController extends Controller
 
 
 
- 
+
 }

@@ -104,9 +104,27 @@ class ColorController extends Controller
 
     public function getDialColors(Request $req)
     {
-        $colors = Color::where('brand_id', $req->brandId)->where('Category_id', $req->categoryId)->get();
-        // $colors = Color::where('Category_id', $req->categoryId)->get();
+        // $colors = Color::where('brand_id', $req->brandId)->get();
+        // return $colors;
+
+         $colors = Color::query();
+
+        if(isset($req->brandId)) {
+            $colors = $colors->where('brand_id', $req->brandId)->orderBy('name', 'asc');
+        }
+
+        if(isset($req->categoryId)) {
+            $colors = $colors->where('category_id', $req->categoryId)->orderBy('name', 'asc');
+        }
+
+        $colors = $colors->get();
         return $colors;
 
+    }
+
+    public function getDialColorsCategory(Request $req)
+    {
+           $colors = Color::where(['brand_id' => $req->brandId, 'category_id' => $req->categoryId])->orderBy('name', 'asc')->get();
+            return $colors;
     }
 }

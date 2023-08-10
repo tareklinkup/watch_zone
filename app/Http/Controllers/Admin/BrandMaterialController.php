@@ -29,7 +29,7 @@ class BrandMaterialController extends Controller
             $material = new BrandMaterial();
             $material->name = $request->name;
             $material->brand_id = $request->brand_id;
-            $material->brand_id = $request->category_id;
+            $material->category_id = $request->category_id;
             $material->created_by = 1;
             $material->ip_address = $request->ip();
             $material->save();
@@ -104,8 +104,26 @@ class BrandMaterialController extends Controller
 
     public function getBrandMaterials(Request $req)
     {
-        $materials = BrandMaterial::where('brand_id', $req->brandId)->where('category_id', $req->categoryId)->get();
-        // $materials = BrandMaterial::where('category_id', $req->categoryId)->get();
-        return $materials;
+
+        $brandMaterials = BrandMaterial::query();
+
+        if(isset($req->categoryId)) {
+            $brandMaterials = $brandMaterials->where('category_id', $req->categoryId)->orderby('name', 'asc');
+        }
+
+        if(isset($req->brandId)) {
+            $brandMaterials = $brandMaterials->where('brand_id', $req->brandId)->orderby('name', 'asc');
+        }
+
+        $brandMaterials = $brandMaterials->get();
+        return $brandMaterials;
+        // $materials = BrandMaterial::where('brand_id', $req->brandId)->get();
+        // return $materials;
+    }
+
+    public function getBrandMaterialsCategory(Request $req)
+    {
+        $brandMaterials = BrandMaterial::where(['brand_id' => $req->brandId, 'category_id' => $req->categoryId])->orderBy('name', 'asc')->get();
+        return $brandMaterials;
     }
 }

@@ -83,9 +83,10 @@
                     <div class="product_scr d-none d-lg-block">
                         <form action="{{ route('search.product') }}" method="GET" class="header-search-box">
                             <input name="search" id="search" type="text" onfocus="showSearchResult()"
-                                onblur="hideSearchResult()" class="form-control serach-control search-box search-input input-empty"
-                                placeholder="Search for products" autocomplete="off"/>
-                            <button  type="submit" class="btn-src search-button">
+                                onblur="hideSearchResult()"
+                                class="form-control serach-control search-box search-input input-empty"
+                                placeholder="Search for products" autocomplete="off" />
+                            <button type="submit" class="btn-src search-button">
                                 <i class="icon-magnifier"></i>
                             </button>
                         </form>
@@ -142,21 +143,21 @@
                 </div>
                 <div class="col-auto">
                     <div class="product_scr d-block d-lg-none">
-                        <form action="{{ route('search.product') }}" method="GET"
-                            class="header-search-box ">
-                                <input name="search" id="search" type="text" onfocus="showSearchResult()"
-                                onblur="hideSearchResult()" class="form-control serach-control search-box search-input input-empty"
-                                placeholder="Search for products" autocomplete="off"/>
+                        <form action="{{ route('search.product') }}" method="GET" class="header-search-box ">
+                            <input name="search" id="search" type="text" onfocus="showSearchResult()"
+                                onblur="hideSearchResult()"
+                                class="form-control serach-control search-box search-input input-empty"
+                                placeholder="Search for products" autocomplete="off" />
                             <button type="submit" class="btn-src search-button">
                                 <i class="icon-magnifier"></i>
                             </button>
                         </form>
                         <div class="suggestProduct"></div>
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
     </div>
 
     <div class="header-two-area d-none d-lg-block sticky">
@@ -169,7 +170,7 @@
                             <i class="icon fa fa-angle-down"></i>
                         </button>
                         @php
-                            $brand = App\Models\Brand::get();
+                            $brand = App\Models\Brand::orderBy('name', 'asc')->get();
                         @endphp
                         <ul class="vmenu-content vmenu-content-none" style="display: none; overflow-y:scroll;">
                             @foreach ($brand as $item)
@@ -189,7 +190,7 @@
 
                             @php
                                 $categories = App\Models\Category::where('is_homepage', 1)
-                                    ->take(6)
+                                    ->take(7)
                                     ->get();
                             @endphp
 
@@ -208,7 +209,7 @@
                                         @endif
                                     </a>
                                     <ul class="submenu-nav-mega">
-                                        @foreach ($caterorisBrad->chunk(7) as $item)
+                                        @foreach ($caterorisBrad->chunk(10) as $item)
                                             <li class="submenu-nav-mega-item">
                                                 <ul>
                                                     @foreach ($item as $brand)
@@ -224,8 +225,7 @@
                                 </li>
                             @endforeach
                             <li class="main-nav-item has-submenu position-static">
-                                <a class="main-nav-link"
-                                    href="{{ route('sale') }}">Sale </a>
+                                <a class="main-nav-link" href="{{ route('sale') }}">Sale </a>
                             </li>
                         </ul>
                     </div>
@@ -260,14 +260,13 @@
 </header>
 
 @push('web_script')
-
-<script>
-      $.ajaxSetup({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-                },
-            });
-</script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+        });
+    </script>
     <script>
         $("body").on("keyup", "#search", function() {
             let searchData = $(this).val();
@@ -277,15 +276,16 @@
                     url: "{{ url('/product/get') }}",
                     data: {
                         search: searchData
-                        
+
                     },
                     success: function(result) {
                         let ulData = "";
                         if (result.length > 0) {
                             $.each(result, (index, value) => {
-                                ulData += `<li > <a href='/product/single/${value.slug}'> ${value.name} </a></li>`;
+                                ulData +=
+                                    `<li > <a href='/product/single/${value.slug}'> ${value.name} </a></li>`;
                             })
-                        }else{
+                        } else {
                             ulData += "<li>No Found Data</li>";
                         }
                         $(".suggestProduct").html(`<ul>${ulData}</ul>`);

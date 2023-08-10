@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('website/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('website/css/custom.css') }}" />
     @stack('webcss')
-   
+
 </head>
 
 <body>
@@ -59,7 +59,8 @@
                             <div class="form-group">
                                 <label for="order_number">Order Number</label>
                                 <input type="text" name="order_number" class="form-control shadow-none"
-                                    id="order_number" aria-describedby="emailHelp" placeholder="Enter Order No" required>
+                                    id="order_number" aria-describedby="emailHelp" placeholder="Enter Order No"
+                                    required>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -121,7 +122,7 @@
                     <nav id="offcanvasNav" class="offcanvas-menu">
                         <ul>
                             @php
-                                $categories = App\Models\Category::get();
+                                $categories = App\Models\Category::where('is_homepage', 1)->get();
                             @endphp
                             @foreach ($categories as $category)
                                 <li>
@@ -147,6 +148,11 @@
 
                                 </li>
                             @endforeach
+                            <li>
+                                <a href="{{ route('sale') }}">Sale</a>
+
+                            </li>
+
 
                             <li class="vmenu-menu-item">
                                 <a href="javascript:void(0)">All Brands</a>
@@ -240,77 +246,77 @@
             },
         });
 
-        function AddToCart(event){
+        function AddToCart(event) {
             var id = event.target.value;
             // return
-                if (id) {
-                    $.ajax({
-                        url: "{{ url('/product/cart/store/') }}/" + id,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            miniCart();
+            if (id) {
+                $.ajax({
+                    url: "{{ url('/product/cart/store/') }}/" + id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        miniCart();
 
-                            //  start message
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 4000
+                        //  start message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 4000
+                        })
+
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                type: 'success',
+                                title: data.success
                             })
 
-                            if ($.isEmptyObject(data.error)) {
-                                Toast.fire({
-                                    type: 'success',
-                                    title: data.success
-                                })
-
-                            } else {
-                                Toast.fire({
-                                    type: 'error',
-                                    title: data.error
-                                })
-                            }
-                            //  end message
+                        } else {
+                            Toast.fire({
+                                type: 'error',
+                                title: data.error
+                            })
                         }
-                    });
-                }
+                        //  end message
+                    }
+                });
+            }
         }
 
         function BuyNow(e) {
             let id = e.target.value;
             if (id) {
-                    $.ajax({
-                        url: "{{ url('/product/cart/buying/') }}/" + id,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            miniCart();
+                $.ajax({
+                    url: "{{ url('/product/cart/buying/') }}/" + id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        miniCart();
 
-                            //  start message
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 4000
+                        //  start message
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 4000
+                        })
+
+                        if ($.isEmptyObject(data.error)) {
+                            Toast.fire({
+                                type: 'success',
+                                title: data.success
                             })
-
-                            if ($.isEmptyObject(data.error)) {
-                                Toast.fire({
-                                    type: 'success',
-                                    title: data.success
-                                })
-                                window.location.href = '/product/carts';
-                            } else {
-                                Toast.fire({
-                                    type: 'error',
-                                    title: data.error
-                                })
-                            }
-                            //  end message
+                            window.location.href = '/product/carts';
+                        } else {
+                            Toast.fire({
+                                type: 'error',
+                                title: data.error
+                            })
                         }
-                    });
-                }
+                        //  end message
+                    }
+                });
+            }
         }
     </script>
 
@@ -422,7 +428,7 @@
                         miniCart += `<li class="single-product-cart">
                                     <div class="cart-img">
                                         <a href="shop-single-product.html">
-                                            <img src="{{URL::asset('/uploads/product/${value.options.image}')}}" alt="product Image" height="200" width="200">
+                                            <img src="{{ URL::asset('/uploads/product/${value.options.image}') }}" alt="product Image" height="200" width="200">
                                         </a>
                                     </div>
                                     <div class="cart-title">
@@ -487,33 +493,43 @@
                 dataType: "json",
                 success: function(response) {
                     var rows = '';
-                    $.each(response.carts, function(key, value) {
-                        rows += `
-                             <tr>
-                               <td class="product-thumbnail">
-                                     <img src="{{URL::asset('/uploads/product/${value.options.image}')}}" alt="product image"  width=300">
-                                    </td>
-                                    <td class="product-name">
-                                        <h5><a href="">${value.name}</a></h5>
-                                    </td>
-                                    <td class="product-price text-center"><span class="amount">${value.price}</span></td>
-                                    <td class="cart_btn text-center">
-                                        ${value.qty > 1
-                                    ? ` <button type="submit" class="" id="${value.rowId}" onclick="cartDecrement(this.id)">-</button>`
-                                    : ` <button type="submit" class="" disabled>-</button>`
-                                    }
+                    if ((response.carts.length != 0)) {
+                        $.each(response.carts, function(key, value) {
+                            rows += `
+                         <tr>
+                           <td class="product-thumbnail">
+                                 <img src="{{ URL::asset('/uploads/product/${value.options.image}') }}" alt="product image"  width=300">
+                                </td>
+                                <td class="product-name">
+                                    <h5><a href="">${value.name}</a></h5>
+                                </td>
+                                <td class="product-price text-center"><span class="amount">${value.price}</span></td>
+                                <td class="cart_btn text-center">
+                                    ${value.qty > 1
+                                ? ` <button type="submit" class="" id="${value.rowId}" onclick="cartDecrement(this.id)">-</button>`
+                                : ` <button type="submit" class="" disabled>-</button>`
+                                }
 
-                                    <input type="text" value="${value.qty}" min="1" max="100" disabled style="width:35px;text-align:center;height:32px;margin:0 5px;">
-                                    <button type="submit" id="${value.rowId}" onclick="cartIncrement(this.id)" class="">+</button>
-                                    </td>
-                                    
-                                    <td class="product-total text-center"><span>${value.subtotal}</span></td>
-                                    <td class="product-remove text-center">
-                                        <a href="javascript::void(0)" class="border-0" id="${value.rowId}" onclick="CartRemove(this.id)"><i class="fa fa-trash-o"></i></a>
-                                    </td>
-                                </tr>
-                                `
-                    });
+                                <input type="text" value="${value.qty}" min="1" max="100" disabled style="width:35px;text-align:center;height:32px;margin:0 5px;">
+                                <button type="submit" id="${value.rowId}" onclick="cartIncrement(this.id)" class="">+</button>
+                                </td>
+
+                                <td class="product-total text-center"><span>${value.subtotal}</span></td>
+                                <td class="product-remove text-center">
+                                    <a href="javascript::void(0)" class="border-0" id="${value.rowId}" onclick="CartRemove(this.id)"><i class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                            `
+                        });
+                    } else {
+                        rows += `
+                         <tr>
+                                <td colspan="5" style="text-align:center;">
+                                    <h5> Your Cart is Currently Empty ! </h5>
+                                </td>
+                            </tr>      `
+                    }
+
 
 
                     $('#cartPage').html(rows);
@@ -533,7 +549,7 @@
                     $.each(response.carts, function(key, value) {
                         rows += `<div class="row border m-1">
                                         <div class='col-xs-12 col-sm-12 col-md-12 col-lg-3 text-center border-bottom'>
-                                            <img src="{{URL::asset('/uploads/product/${value.options.image}')}}" alt="product image"  width=150">
+                                            <img src="{{ URL::asset('/uploads/product/${value.options.image}') }}" alt="product image"  width=150">
                                         </div>
                                         <div class='col-xs-12 col-sm-12 col-md-12 col-lg-2 border-bottom'>
                                             <div class="row">
@@ -573,7 +589,7 @@
                                                 <div class="col-4"><strong>Action : </strong></div>
                                                 <div class="col-8 text-end"> <a href="javascript::void(0)" class="border-0" id="${value.rowId}" onclick="CartRemoveM(this.id)"><i class="fa fa-trash-o"></i></a></div>
                                             </div>
-                                           
+
                                         </div>
                                 </div>
                                 `
@@ -705,8 +721,6 @@
                 }
             });
         }
-
-
     </script>
 
 

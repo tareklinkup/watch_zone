@@ -103,7 +103,28 @@ class MovementController extends Controller
 
     public function getMovements(Request $req)
     {
-        $movements = Movement::where('brand_id', $req->brandId)->where('category_id', $req->categoryId)->get();
+
+        $movements = Movement::query();
+
+        if(isset($req->categoryId)) {
+            $movements = $movements->where('category_id', $req->categoryId)->orderBy('name', 'asc');
+        }
+
+        if(isset($req->brandId)) {
+            $movements = $movements->where('brand_id', $req->brandId)->orderBy('name', 'asc');
+        }
+
+        $movements = $movements->get();
         return $movements;
+
+        // $movements = Movement::where('brand_id', $req->brandId)->get();
+        // return $movements;
+    }
+
+
+    public function getMovementsCategory(Request $req){
+
+        $movements = Movement::where(['brand_id' => $req->brandId, 'category_id' => $req->categoryId])->orderby('name', 'asc')->get();
+            return $movements;
     }
 }

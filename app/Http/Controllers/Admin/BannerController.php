@@ -67,10 +67,10 @@ class BannerController extends Controller
         try {
             $banner = Banner::find($id);
 
-          
+
             $image = $request->file('image');
             if ($request->hasFile('image')) {
-                if (!empty($banner->image) && file_exists($banner->image)) 
+                if (!empty($banner->image) && file_exists($banner->image))
                     unlink($banner->image);
                 $imageName  = 'banner' . rand() .'.'. $image->getClientOriginalExtension();
                 Image::make($image)->resize(1200, 424)->save('uploads/banner/' .$imageName);
@@ -106,7 +106,7 @@ class BannerController extends Controller
                 if(file_exists($banner->image) AND !empty($banner->image)){
                     unlink($banner->image);
                 }
-                
+
                 $banner->delete();
             }
 

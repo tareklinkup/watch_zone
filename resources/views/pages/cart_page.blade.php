@@ -68,7 +68,7 @@
                     <div class="col-lg-4">
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="col-md-12 col-lg-4 ms-auto">
                         <div class="grand-total-wrap mt-10 mt-lg-0">
@@ -101,11 +101,11 @@
 
                     </div>
                 </div>
-                
-             
+
+
             </div>
         </div> --}}
-      
+
         <!--== End Product Cart Area Wrapper ==-->
 
     </main>

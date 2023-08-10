@@ -76,10 +76,18 @@ Route::post('/product/get', [SearchController::class, 'productGet'])->name('get.
 
 Route::get('/get-category', [HomeController::class, 'getCategories']);
 Route::post('/get-series', [SeriesController::class, 'getSeries']);
+Route::post('/get-series-category', [SeriesController::class, 'getSeriesCategory']);
+
 Route::post('/get-brand-materials', [BrandMaterialController::class, 'getBrandMaterials']);
+Route::post('/get-brand-materials-category', [BrandMaterialController::class, 'getBrandMaterialsCategory']);
+
 Route::post('/get-dial-colors', [ColorController::class, 'getDialColors']);
+Route::post('/ get-dial-colors-category', [ColorController::class, 'getDialColorsCategory']);
+
 Route::post('/get-movements', [MovementController::class, 'getMovements']);
+Route::post('/get-movements-category', [MovementController::class, 'getMovementsCategory']);
 Route::post('/get-case-size', [SizeController::class, 'getCasesize']);
+Route::post('/get-case-size-category', [SizeController::class, 'getCasesizeCategory']);
 Route::post('/get-filter-products', [HomeController::class, 'getFilterPoducts']);
 Route::post('/get-products', [ProductController::class, 'getProducts']);
 Route::post('/get-products-stock', [ProductController::class, 'getPoductsStockReport']);
@@ -127,11 +135,13 @@ Route::prefix('customer')->name('customer.')->group(function () {
 });
 
 Route::group(['middleware' => 'customer'], function () {
+
     // Customer Dashboard Routes
     Route::get('/customer/dashboard', [CustomerdashboardController::class, 'index'])->name('customer.dashboard');
     Route::get('/customer/address', [CustomerdashboardController::class, 'Cusaddress'])->name('customer.address');
     Route::put('/customer/address/update/{id}', [CustomerdashboardController::class, 'updateAddress'])->name('customer.address.update');
     Route::get('/customer/order', [CustomerdashboardController::class, 'cusOrder'])->name('customer.order');
+
     // Route::get('/customer/order/show', [CustomerdashboardController::class, 'CustomerOrderShow'])->name('customer.order.show');
     Route::get('/customer/order/show/{id}', [CustomerdashboardController::class, 'CustomerOrderShow'])->name('customer.order.show');
     Route::get('customer/order/print/{id}', [CustomerdashboardController::class, 'orderPrint'])->name('customer.order.print');
@@ -230,7 +240,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/delete_product_image/{id}', [ProductController::class, 'removeImage']);
 
     //category and brand filter
-   
+
     Route::post('/search/catbybrand/select', [ProductController::class, 'searchCatBrandSelect'])->name('search.catbybrand.select');
     Route::post('/search/catbybrand/sale', [ProductController::class, 'saleCatBrandSelect'])->name('sale.catbybrand.select');
     Route::post('/search/category-brand', [ReportController::class, 'searchCategoryBrand'])->name('search.categorybrand');
@@ -249,11 +259,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     // get product all feature
-    Route::get('/series-get/{id}', [ProductController::class, 'seriesGet']);
-    Route::get('/material-get/{id}', [ProductController::class, 'materialGet']);
-    Route::get('/dial/color-get/{id}', [ProductController::class, 'colorGet']);
-    Route::get('/size-get/{id}', [ProductController::class, 'sizeGet']);
-    Route::get('/movement-get/{id}', [ProductController::class, 'movementGet']);
+     Route::post('/series-get', [ProductController::class, 'seriesGet']);
+    // Route::get('/material-get/{id}', [ProductController::class, 'materialGet']);
+        Route::post('/material-get', [ProductController::class, 'materialGet']);
+
+    Route::post('/dial/color-get', [ProductController::class, 'colorGet']);
+    Route::post('/size-get', [ProductController::class, 'sizeGet']);
+    Route::post('/movement-get', [ProductController::class, 'movementGet']);
 
     // Slider Routes
     Route::get('/sliders', [SliderController::class, 'index'])->name('slider.index');
@@ -311,7 +323,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/processing-to/delivered/{id}', [OrderController::class, 'processingToDelivered'])->name('admin.processing.to.delivered');
     Route::get('/delivered-to/shipped/{id}', [OrderController::class, 'deliveredToProcessing'])->name('admin.delivered.to.processing');
     Route::get('/delivered-to/Canceled/{id}', [OrderController::class, 'deliveredToCanceled'])->name('admin.delivered.to.canceled');
-   
+
 
     //Order Print Routes
     Route::get('/admin/order/print/{id}', [OrderController::class, 'printOrder'])->name('admin.order.print');
@@ -331,7 +343,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/role-permission/{id}',[RoleController::class,'permissioin'])->name('role.permission');
     Route::post('/role-permission/{id}',[RoleController::class,'permissioinAssign'])->name('role.permission.assign');
 
-   
+
 
     // Faq's Routes
     Route::get('/admin/faq', [FaqController::class, 'index'])->name('faq.index');
@@ -354,7 +366,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Customer List Routes
     Route::get('/customer/list', [DashboardController::class, 'customerList'])->name('customer.list');
 
-   
+
     //banner
     Route::get('/banner-entry', [BannerController::class, 'index'])->name('banner.index');
     Route::post('/banner-store', [BannerController::class, 'store'])->name('banner.store');

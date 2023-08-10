@@ -72,8 +72,9 @@
                                             <label for="discount_price" class="col-sm-3 col-form-label">Discount</label>
 
                                             <div class="col-sm-5">
-                                                <input type="number" step="any" name="discount" class="form-control form-control-sm shadow-none"
-                                                    min="0" id="Discount" max="99" placeholder="0%" step="any">
+                                                <input type="number" step="any" name="discount"
+                                                    class="form-control form-control-sm shadow-none" min="0"
+                                                    id="Discount" max="99" placeholder="0%" step="any">
                                             </div>
 
                                             <div class="col-sm-4">
@@ -111,12 +112,14 @@
                                                     required>
                                             </div>
                                         </div>
+
+
                                         <div class="form-group row mb-1">
                                             <label for="category_id" class="col-sm-3 col-form-label">Category <span
                                                     class="text-danger">*</span></label>
                                             <div class="col-sm-9">
-                                                <select name="category_id" class="form-control form-control-sm shadow-none"
-                                                    id="category_id">
+                                                <select name="category_id"
+                                                    class="form-control form-control-sm shadow-none" id="category_id">
                                                     <option value="">--Select Category--</option>
                                                     @foreach ($category as $item)
                                                         <option value="{{ $item->id }}">
@@ -125,6 +128,7 @@
                                                 </select>
                                             </div>
                                         </div>
+
                                         <div class="form-group row mb-1">
                                             <label for="brand_id" class="col-sm-3 col-form-label">Brand <span
                                                     class="text-danger">*</span></label>
@@ -137,66 +141,11 @@
                                                             {{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
-
                                             </div>
                                         </div>
 
-                                        <div class="form-group row mb-1">
-                                            <label for="series_id" class="col-sm-3 col-form-label"> Series <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-sm-9">
-                                                <select name="series_id" class="form-control form-control-sm shadow-none"
-                                                    id="series_id">
-                                                    <option value="">--Select Series--</option>
-                                                    {{-- @foreach ($series as $item)
-                                                        <option value="{{ $item->id }}">
-                                                            {{ $item->name }}</option>
-                                                    @endforeach --}}
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row mb-1">
-                                            <label for="material_id" class="col-sm-3 col-form-label">Brand Material <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-sm-9">
-                                                <select name="material_id"
-                                                    class="form-control form-control-sm shadow-none" id="material_id">
-                                                    <option value="">--Select Material--</option>
-                                                    {{-- @foreach ($material as $item)
-                                                        <option value="{{ $item->id }}">
-                                                            {{ $item->name }}</option>
-                                                    @endforeach --}}
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row mb-1">
-                                            <label for="size_id" class="col-sm-3 col-form-label">Case Size <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-sm-9">
-                                                <select name="size_id" class="form-control form-control-sm shadow-none"
-                                                    id="size_id">
-                                                    <option value="">--Select Case Size--</option>
-                                                    {{-- @foreach ($size as $item)
-                                                        <option value="{{ $item->id }}">
-                                                            {{ $item->name }}</option>
-                                                    @endforeach --}}
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row mb-1">
-                                            <label for="color_id" class="col-sm-3 col-form-label">Dial Color <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-sm-9">
-                                                <select name="color_id" class="form-control form-control-sm shadow-none"
-                                                    id="color_id">
-                                                    <option value="">--Select Case Size--</option>
-                                                    {{-- @foreach ($color as $item)
-                                                        <option value="{{ $item->id }}">
-                                                            {{ $item->name }}</option>
-                                                    @endforeach --}}
-                                                </select>
-                                            </div>
-                                        </div>
+
+                                        <!------------- start Serialization------------------------------>
                                         <div class="form-group row mb-1">
                                             <label for="movement_id" class="col-sm-3 col-form-label">Movement <span
                                                     class="text-danger">*</span></label>
@@ -212,8 +161,66 @@
                                             </div>
                                         </div>
 
+                                        <div class="form-group row mb-1">
+                                            <label for="size_id" class="col-sm-3 col-form-label">Case Size <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-sm-9">
+                                                <select name="size_id" class="form-control form-control-sm shadow-none"
+                                                    id="size_id">
+                                                    <option value="">--Select Case Size--</option>
+                                                    {{-- @foreach ($size as $item)
+                                                        <option value="{{ $item->id }}">
+                                                            {{ $item->name }}</option>
+                                                    @endforeach --}}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-1">
+                                            <label for="color_id" class="col-sm-3 col-form-label">Dial Color <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-sm-9">
+                                                <select name="color_id" class="form-control form-control-sm shadow-none"
+                                                    id="color_id">
+                                                    <option value="">--Select Case Size--</option>
+                                                    {{-- @foreach ($color as $item)
+                                                        <option value="{{ $item->id }}">
+                                                            {{ $item->name }}</option>
+                                                    @endforeach --}}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-1">
+                                            <label for="material_id" class="col-sm-3 col-form-label">Brand Material <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-sm-9">
+                                                <select name="material_id"
+                                                    class="form-control form-control-sm shadow-none" id="material_id">
+                                                    <option value="">--Select Material--</option>
+                                                    {{-- @foreach ($material as $item)
+                                                        <option value="{{ $item->id }}">
+                                                            {{ $item->name }}</option>
+                                                    @endforeach --}}
+                                                </select>
+                                            </div>
+                                        </div>
 
 
+                                        <div class="form-group row mb-1">
+                                            <label for="series_id" class="col-sm-3 col-form-label"> Series <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-sm-9">
+                                                <select name="series_id" class="form-control form-control-sm shadow-none"
+                                                    id="series_id">
+                                                    <option value="">--Select Series--</option>
+                                                    {{-- @foreach ($series as $item)
+                                                        <option value="{{ $item->id }}">
+                                                            {{ $item->name }}</option>
+                                                    @endforeach --}}
+                                                </select>
+                                            </div>
+                                        </div>
 
                                     </div>
                                     <div class="col-sm-6">
@@ -236,7 +243,9 @@
                                             <div class="col-sm-3">
                                                 <div
                                                     style="width: 80px;height:80px;border: 1px solid #ccc;overflow:hidden;">
-                                                    <img class="form-controlo img-thumbnail" src="" id="previewImage" style="width: 100%; height:100%; background: #3f4a49;">
+                                                    <img class="form-controlo img-thumbnail" src=""
+                                                        id="previewImage"
+                                                        style="width: 100%; height:100%; background: #3f4a49;">
                                                 </div>
                                             </div>
 
@@ -253,15 +262,17 @@
                                             <div class="col-sm-3">
                                                 <div
                                                     style="width: 80px;height:80px;border: 1px solid #ccc;overflow:hidden;">
-                                                    <img class="form-controlo img-thumbnail" src="" id="previewImage1"
+                                                    <img class="form-controlo img-thumbnail" src=""
+                                                        id="previewImage1"
                                                         style="width:100%;height: 100%; background: #3f4a49;">
                                                 </div>
                                             </div>
 
                                         </div>
                                         <div class="form-group row mt-1">
-                                            <label for="" class="col-sm-3 col-form-label">Multi Image(<small class="text-danger">800 X
-                                                800</small>)
+                                            <label for="" class="col-sm-3 col-form-label">Multi Image(<small
+                                                    class="text-danger">800 X
+                                                    800</small>)
                                             </label>
                                             <div class="col-sm-9">
                                                 <input type="file" name="multiimage[]" multiple
@@ -284,35 +295,42 @@
                                         <div class="col-sm-1"></div>
                                         <div class="col-sm-10 ms-5">
                                             <div class="row">
-                                              
+
                                                 <div class="col-sm-6 my-2">
                                                     <div class="card">
                                                         <div class="card-header">
-                                                                <h4 style="margin-bottom: 0; font-size:18px;"> Items Information </h4>
+                                                            <h4 style="margin-bottom: 0; font-size:18px;"> Items
+                                                                Information </h4>
                                                         </div>
                                                         <div class="card-body border pt-0">
                                                             <table id="item-table">
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="label[]" placeholder="Label" /></td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="value[]" placeholder="Value"></td>
                                                                     <td><input type="button" class='del1'
                                                                             value='-' title="Delete" /></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="label[]" placeholder="Label" /></td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="value[]" placeholder="Value"></td>
                                                                     <td><input type="button" class='del1'
                                                                             value='-' title="Delete" /></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="label[]" placeholder="Label" /></td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="value[]" placeholder="Value"></td>
                                                                     <td><input type="button" class="add1"
                                                                             value="+" title="Add More" /></td>
                                                                 </tr>
@@ -324,31 +342,41 @@
                                                 <div class="col-sm-6 my-2">
                                                     <div class="card">
                                                         <div class="card-header">
-                                                                <h4 style="margin-bottom: 0; font-size:18px;"> Case Information </h4>
+                                                            <h4 style="margin-bottom: 0; font-size:18px;"> Case Information
+                                                            </h4>
                                                         </div>
                                                         <div class="card-body border pt-0">
                                                             <table id="case-table">
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="case_label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="case_value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="case_label[]" placeholder="Label" />
+                                                                    </td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="case_value[]" placeholder="Value"></td>
                                                                     <td><input type="button" class='del2'
                                                                             value='-' title="Delete" /></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="case_label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="case_value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="case_label[]" placeholder="Label" />
+                                                                    </td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="case_value[]" placeholder="Value"></td>
                                                                     <td><input type="button" class='del2'
                                                                             value='-' title="Delete" /></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="case_label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="case_value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="case_label[]" placeholder="Label" />
+                                                                    </td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="case_value[]" placeholder="Value"></td>
                                                                     <td><input type="button" class="add2"
                                                                             value="+" title="Add More" /></td>
                                                                 </tr>
@@ -360,31 +388,41 @@
                                                 <div class="col-sm-6 my-2">
                                                     <div class="card">
                                                         <div class="card-header">
-                                                                <h4 style="margin-bottom: 0; font-size:18px;"> Dial Information </h4>
+                                                            <h4 style="margin-bottom: 0; font-size:18px;"> Dial Information
+                                                            </h4>
                                                         </div>
                                                         <div class="card-body border pt-0">
                                                             <table id="dail-table">
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="dial_label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="dial_value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="dial_label[]" placeholder="Label" />
+                                                                    </td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="dial_value[]" placeholder="Value"></td>
                                                                     <td><input type="button" class='del3'
                                                                             value='-' title="Delete" /></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="dial_label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="dial_value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="dial_label[]" placeholder="Label" />
+                                                                    </td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="dial_value[]" placeholder="Value"></td>
                                                                     <td><input type="button" class='del3'
                                                                             value='-' title="Delete" /></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="dial_label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="dial_value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="dial_label[]" placeholder="Label" />
+                                                                    </td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="dial_value[]" placeholder="Value"></td>
                                                                     <td><input type="button" class="add3"
                                                                             value="+" title="Add More" /></td>
                                                                 </tr>
@@ -396,31 +434,44 @@
                                                 <div class="col-sm-6 my-2">
                                                     <div class="card">
                                                         <div class="card-header">
-                                                                <h4 style="margin-bottom: 0; font-size:18px;"> Movement Information </h4>
+                                                            <h4 style="margin-bottom: 0; font-size:18px;"> Movement
+                                                                Information </h4>
                                                         </div>
                                                         <div class="card-body border pt-0">
                                                             <table id="movement-table">
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="movement_label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="movement_value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="movement_label[]" placeholder="Label" />
+                                                                    </td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="movement_value[]" placeholder="Value">
+                                                                    </td>
                                                                     <td><input type="button" class='del4'
                                                                             value='-' title="Delete" /></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="movement_label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="movement_value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="movement_label[]" placeholder="Label" />
+                                                                    </td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="movement_value[]" placeholder="Value">
+                                                                    </td>
                                                                     <td><input type="button" class='del4'
                                                                             value='-' title="Delete" /></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="movement_label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="movement_value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="movement_label[]" placeholder="Label" />
+                                                                    </td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="movement_value[]" placeholder="Value">
+                                                                    </td>
                                                                     <td><input type="button" class="add4"
                                                                             value="+" title="Add More" /></td>
                                                                 </tr>
@@ -432,31 +483,42 @@
                                                 <div class="col-sm-6 my-2">
                                                     <div class="card">
                                                         <div class="card-header">
-                                                                <h4 style="margin-bottom: 0; font-size:18px;"> Band Information </h4>
+                                                            <h4 style="margin-bottom: 0; font-size:18px;"> Band Information
+                                                            </h4>
                                                         </div>
                                                         <div class="card-body border pt-0">
                                                             <table id="brand-table">
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="band_label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="band_value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="band_label[]" placeholder="Label" />
+                                                                    </td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="band_value[]" placeholder="Value"></td>
                                                                     <td><input type="button" class='del5'
                                                                             value='-' title="Delete" /></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="band_label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="band_value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="band_label[]" placeholder="Label" />
+                                                                    </td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="band_value[]" placeholder="Value"></td>
                                                                     <td><input type="button" class='del5'
                                                                             value='-' title="Delete" /></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="band_label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="movement_value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="band_label[]" placeholder="Label" />
+                                                                    </td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="movement_value[]" placeholder="Value">
+                                                                    </td>
                                                                     <td><input type="button" class="add5"
                                                                             value="+" title="Add More" /></td>
                                                                 </tr>
@@ -468,31 +530,44 @@
                                                 <div class="col-sm-6 my-2">
                                                     <div class="card">
                                                         <div class="card-header">
-                                                                <h4 style="margin-bottom: 0; font-size:18px;">Additional Information</h4>
+                                                            <h4 style="margin-bottom: 0; font-size:18px;">Additional
+                                                                Information</h4>
                                                         </div>
                                                         <div class="card-body border pt-0">
                                                             <table id="additional-table">
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="addition_label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="addition_value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="addition_label[]" placeholder="Label" />
+                                                                    </td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="addition_value[]" placeholder="Value">
+                                                                    </td>
                                                                     <td><input type="button" class='del6'
                                                                             value='-' title="Delete" /></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="addition_label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="addition_value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="addition_label[]" placeholder="Label" />
+                                                                    </td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="addition_value[]" placeholder="Value">
+                                                                    </td>
                                                                     <td><input type="button" class='del6'
                                                                             value='-' title="Delete" /></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td><input type="text"class="form-control form-control-sm shadow-none"
-                                                                        name="addition_label[]" placeholder="Label" /></td>
-                                                                    <td><input type="text" class="form-control form-control-sm shadow-none"
-                                                                        name="addition_value[]" placeholder="Value"></td>
+                                                                    <td><input
+                                                                            type="text"class="form-control form-control-sm shadow-none"
+                                                                            name="addition_label[]" placeholder="Label" />
+                                                                    </td>
+                                                                    <td><input type="text"
+                                                                            class="form-control form-control-sm shadow-none"
+                                                                            name="addition_value[]" placeholder="Value">
+                                                                    </td>
                                                                     <td><input type="button" class="add6"
                                                                             value="+" title="Add More" /></td>
                                                                 </tr>
@@ -530,8 +605,6 @@
 @endsection
 
 @push('scripts')
-    
-
     <script>
         $.ajaxSetup({
             headers: {
@@ -542,14 +615,23 @@
 
     <script>
         $("#brand_id").on('change', function() {
+
             var brand_id = $(this).val();
+            var category_id = $('#category_id').val();
+
+            var data = {
+                brand_id: brand_id,
+                category_id: category_id
+            };
+
             $.ajax({
-                url: "{{ url('series-get') }}/" + brand_id,
+                method: "POST",
+                url: "{{ url('series-get') }}",
                 dataType: "json",
-                method: "GET",
-                success: function(data) {
+                data: data,
+                success: function(res) {
                     $('#series_id').empty();
-                    $.each(data, function(key, value) {
+                    $.each(res, function(key, value) {
                         $('#series_id').append('<option value="' + value.id + '">' + value
                             .name + '</option>');
                     });
@@ -562,13 +644,21 @@
     <script>
         $("#brand_id").on('change', function() {
             var brand_id = $(this).val();
+            var category_id = $('#category_id').val();
+
+            var data = {
+                brand_id: brand_id,
+                category_id: category_id
+            };
+
             $.ajax({
-                url: "{{ url('material-get') }}/" + brand_id,
+                type: "POST",
+                url: "{{ url('material-get') }}",
                 dataType: "json",
-                method: "GET",
-                success: function(data) {
+                data: data,
+                success: function(res) {
                     $('#material_id').empty();
-                    $.each(data, function(key, value) {
+                    $.each(res, function(key, value) {
                         $('#material_id').append('<option value="' + value.id +
                             '">' + value.name + '</option>');
                     });
@@ -579,14 +669,22 @@
     </script>
     <script>
         $("#brand_id").on('change', function() {
+
             var brand_id = $(this).val();
+            var category_id = $('#category_id').val();
+
+            var data = {
+                brand_id: brand_id,
+                category_id: category_id
+            };
             $.ajax({
-                url: "{{ url('dial/color-get') }}/" + brand_id,
+                type: "POST",
+                url: "{{ url('dial/color-get') }}",
                 dataType: "json",
-                method: "GET",
-                success: function(data) {
+                data: data,
+                success: function(res) {
                     $('#color_id').empty();
-                    $.each(data, function(key, value) {
+                    $.each(res, function(key, value) {
                         $('#color_id').append('<option value="' + value.id +
                             '">' + value.name + '</option>');
                     });
@@ -597,14 +695,23 @@
     </script>
     <script>
         $("#brand_id").on('change', function() {
+
             var brand_id = $(this).val();
+            var category_id = $('#category_id').val();
+
+            var data = {
+                brand_id: brand_id,
+                category_id: category_id
+            };
+
             $.ajax({
-                url: "{{ url('size-get') }}/" + brand_id,
+                type: "POST",
+                url: "{{ url('size-get') }}",
                 dataType: "json",
-                method: "GET",
-                success: function(data) {
+                data: data,
+                success: function(res) {
                     $('#size_id').empty();
-                    $.each(data, function(key, value) {
+                    $.each(res, function(key, value) {
                         $('#size_id').append('<option value="' + value.id +
                             '">' + value.name + '</option>');
                     });
@@ -615,14 +722,23 @@
     </script>
     <script>
         $("#brand_id").on('change', function() {
+
             var brand_id = $(this).val();
+            var category_id = $('#category_id').val();
+
+            var data = {
+                brand_id: brand_id,
+                category_id: category_id
+            };
+
             $.ajax({
-                url: "{{ url('movement-get') }}/" + brand_id,
+                type: "POST",
+                url: "{{ url('movement-get') }}",
                 dataType: "json",
-                method: "GET",
-                success: function(data) {
+                data: data,
+                success: function(res) {
                     $('#movement_id').empty();
-                    $.each(data, function(key, value) {
+                    $.each(res, function(key, value) {
                         $('#movement_id').append('<option value="' + value.id +
                             '">' + value.name + '</option>');
                     });
@@ -632,97 +748,97 @@
         });
     </script>
 
-<script>
-    $('#item-table').on('click', '.del1', function() {
-        $(this).parent().parent().remove();
-      
-    });
+    <script>
+        $('#item-table').on('click', '.del1', function() {
+            $(this).parent().parent().remove();
 
-    $('#item-table').on('click', '.add1', function() {
-        $(this).val('-');
-        $(this).attr('class', 'del1');
-        var appendTxt =
-            "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='value[]' placeholder='Value'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='value[]' placeholder='Value'></td> <td><input type='button' class='add1' title='Add More' value='+' /></td></tr>";
-        $("#item-table tr:last").after(appendTxt);
-      
-    });
-</script>
-<script>
-    $('#case-table').on('click', '.del2', function() {
-        $(this).parent().parent().remove();
-      
-    });
+        });
 
-    $('#case-table').on('click', '.add2', function() {
-        $(this).val('-');
-        $(this).attr('class', 'del2');
-        var appendTxt =
-            "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='case_label[]' placeholder='Label'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='case_value[]' placeholder='Value'></td> <td><input type='button' class='add2' title='Add More' value='+' /></td></tr>";
-        $("#case-table tr:last").after(appendTxt);
-      
-    });
-</script>
-<script>
-    $('#dail-table').on('click', '.del3', function() {
-        $(this).parent().parent().remove();
-      
-    });
+        $('#item-table').on('click', '.add1', function() {
+            $(this).val('-');
+            $(this).attr('class', 'del1');
+            var appendTxt =
+                "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='value[]' placeholder='Value'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='value[]' placeholder='Value'></td> <td><input type='button' class='add1' title='Add More' value='+' /></td></tr>";
+            $("#item-table tr:last").after(appendTxt);
 
-    $('#dail-table').on('click', '.add3', function() {
-        $(this).val('-');
-        $(this).attr('class', 'del3');
-        var appendTxt =
-            "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='dial_label[]' placeholder='Label'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='dial_value[]' placeholder='Value'></td> <td><input type='button' class='add3' title='Add More' value='+' /></td></tr>";
-        $("#dail-table tr:last").after(appendTxt);
-      
-    });
-</script>
-<script>
-    $('#movement-table').on('click', '.del4', function() {
-        $(this).parent().parent().remove();
-      
-    });
+        });
+    </script>
+    <script>
+        $('#case-table').on('click', '.del2', function() {
+            $(this).parent().parent().remove();
 
-    $('#movement-table').on('click', '.add4', function() {
-        $(this).val('-');
-        $(this).attr('class', 'del4');
-        var appendTxt =
-            "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='movement_label[]' placeholder='Label'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='movement_value[]' placeholder='Value'></td> <td><input type='button' class='add4' title='Add More' value='+' /></td></tr>";
-        $("#movement-table tr:last").after(appendTxt);
-      
-    });
-</script>
-<script>
-    $('#brand-table').on('click', '.del5', function() {
-        $(this).parent().parent().remove();
-      
-    });
+        });
 
-    $('#brand-table').on('click', '.add5', function() {
-        $(this).val('-');
-        $(this).attr('class', 'del5');
-        var appendTxt =
-            "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='band_label[]' placeholder='Label'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='band_value[]' placeholder='Value'></td> <td><input type='button' class='add5' title='Add More' value='+' /></td></tr>";
-        $("#brand-table tr:last").after(appendTxt);
-      
-    });
-</script>
-<script>
-    $('#additional-table').on('click', '.del6', function() {
-        $(this).parent().parent().remove();
-      
-    });
+        $('#case-table').on('click', '.add2', function() {
+            $(this).val('-');
+            $(this).attr('class', 'del2');
+            var appendTxt =
+                "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='case_label[]' placeholder='Label'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='case_value[]' placeholder='Value'></td> <td><input type='button' class='add2' title='Add More' value='+' /></td></tr>";
+            $("#case-table tr:last").after(appendTxt);
 
-    $('#additional-table').on('click', '.add6', function() {
-        $(this).val('-');
-        $(this).attr('class', 'del6');
-        var appendTxt =
-            "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='addition_label[]' placeholder='Label'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='addition_value[]' placeholder='Value'></td> <td><input type='button' class='add6' title='Add More' value='+' /></td></tr>";
-        $("#additional-table tr:last").after(appendTxt);
-      
-    });
-  </script>
-  
+        });
+    </script>
+    <script>
+        $('#dail-table').on('click', '.del3', function() {
+            $(this).parent().parent().remove();
+
+        });
+
+        $('#dail-table').on('click', '.add3', function() {
+            $(this).val('-');
+            $(this).attr('class', 'del3');
+            var appendTxt =
+                "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='dial_label[]' placeholder='Label'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='dial_value[]' placeholder='Value'></td> <td><input type='button' class='add3' title='Add More' value='+' /></td></tr>";
+            $("#dail-table tr:last").after(appendTxt);
+
+        });
+    </script>
+    <script>
+        $('#movement-table').on('click', '.del4', function() {
+            $(this).parent().parent().remove();
+
+        });
+
+        $('#movement-table').on('click', '.add4', function() {
+            $(this).val('-');
+            $(this).attr('class', 'del4');
+            var appendTxt =
+                "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='movement_label[]' placeholder='Label'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='movement_value[]' placeholder='Value'></td> <td><input type='button' class='add4' title='Add More' value='+' /></td></tr>";
+            $("#movement-table tr:last").after(appendTxt);
+
+        });
+    </script>
+    <script>
+        $('#brand-table').on('click', '.del5', function() {
+            $(this).parent().parent().remove();
+
+        });
+
+        $('#brand-table').on('click', '.add5', function() {
+            $(this).val('-');
+            $(this).attr('class', 'del5');
+            var appendTxt =
+                "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='band_label[]' placeholder='Label'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='band_value[]' placeholder='Value'></td> <td><input type='button' class='add5' title='Add More' value='+' /></td></tr>";
+            $("#brand-table tr:last").after(appendTxt);
+
+        });
+    </script>
+    <script>
+        $('#additional-table').on('click', '.del6', function() {
+            $(this).parent().parent().remove();
+
+        });
+
+        $('#additional-table').on('click', '.add6', function() {
+            $(this).val('-');
+            $(this).attr('class', 'del6');
+            var appendTxt =
+                "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='addition_label[]' placeholder='Label'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='addition_value[]' placeholder='Value'></td> <td><input type='button' class='add6' title='Add More' value='+' /></td></tr>";
+            $("#additional-table tr:last").after(appendTxt);
+
+        });
+    </script>
+
     <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
     <script>
         ClassicEditor

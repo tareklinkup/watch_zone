@@ -107,16 +107,18 @@
                                 aria-labelledby="column-three-tab">
                                 <div class="row mb-n6 lozad" id="product-row" style="display: none"
                                     :style="{ display: products.length > 0 ? '' : 'none' }">
-                                    <div v-for="(product, ind) in products" class="col-sm-6 col-md-4 col-6 mb-6 masonry-item"
-                                        :key="ind">
+                                    <div v-for="(product, ind) in products"
+                                        class="col-sm-6 col-md-4 col-6 mb-6 masonry-item" :key="ind">
                                         <div class="product-item pb-2">
                                             <div class="product-img">
                                                 <a class="product-item-thumb"
-                                                :href="`${baseUrl}/product/single/${product.slug}`">
-                                                <img class="pic-1" :src="'/uploads/product/thumbnail/' + product.thumb_image" width="270"
-                                                    height="264" alt="product_image"/>
-                                                <img class="pic-2 " :src="`${baseUrl}/`+ product.otherimage" alt="productimg1-2">
-                                            </a>
+                                                    :href="`${baseUrl}/product/single/${product.slug}`">
+                                                    <img class="pic-1"
+                                                        :src="'/uploads/product/thumbnail/' + product.thumb_image"
+                                                        width="270" height="264" alt="product_image" />
+                                                    <img class="pic-2 " :src="`${baseUrl}/` + product.otherimage"
+                                                        alt="productimg1-2">
+                                                </a>
                                             </div>
                                             <span v-if="product.discount > 0"
                                                 class="badges">Sale-@{{ Math.round(product.discount) }}%</span>
@@ -179,34 +181,14 @@
                         <!--== Start Sidebar Area Wrapper ==-->
                         <div class="sidebar-area mt-10 mt-lg-0 accordion" id="accordionExample">
 
-                            <div class="widget-item widget-item-one">
-                                <h4 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Brand
-                                    </button>
-                                </h4>
-                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                    data-bs-parent="#accordionExample">
-                                    <div id="collapseTwo" class="accordion-collapse collapse"
-                                        aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                        <ul class="accordion-body side_area">
-                                            @foreach ($brands as $item)
-                                                <li class="border-bottom"><a
-                                                        href="{{ route('product.brand', $item->slug) }}">{{ $item->name }}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                             <form action="" id="filter-form">
 
                                 <div class="widget-item widget-item-one">
+
                                     <h4 class="accordion-header" id="headingTwo11">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo11"
-                                            aria-expanded="false" aria-controls="collapseTwo11">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseTwo11" aria-expanded="false"
+                                            aria-controls="collapseTwo11">
                                             Gender
                                         </button>
                                     </h4>
@@ -222,32 +204,82 @@
                                                     @@change="getProductCategoryFilters">
                                                 <label :for="`s-${ind}`"
                                                     class="form-check-label">@{{ categories.name }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                </div>
+
+                                <div class="widget-item widget-item-one ">
+
+                                    <h4 class="accordion-header" id="headingTwo4">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo4"
+                                            aria-expanded="false" aria-controls="collapseTwo4">
+                                            Movement
+                                        </button>
+                                    </h4>
+
+                                    <div id="collapseTwo4" class="accordion-collapse collapse"
+                                        aria-labelledby="headingTwo4" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body side_area">
+                                            <div class="form-group" v-for="(movement, ml) in movements">
+                                                <input class="form-check-input check-input sort-form"
+                                                    :id="`ml-${ml}`" :value="movement.id"
+                                                    v-model="selectmovements" type="checkbox"
+                                                    @@change="getMovementFilters"> <label
+                                                    class="form-check-label"
+                                                    :for="`ml-${ml}`">@{{ movement.name }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="widget-item widget-item-one">
+
+                                    <h4 class="accordion-header" id="headingTwo5">
+                                        <button class="accordion-button collapsed" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo5"
+                                            aria-expanded="false" aria-controls="collapseTwo5">
+                                            Case Size
+                                        </button>
+                                    </h4>
+
+                                    <div id="collapseTwo5" class="accordion-collapse collapse"
+                                        aria-labelledby="headingTwo5" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body side_area">
+                                            <div class="form-group" v-for="(csize, csl) in caseSize">
+                                                <input class="form-check-input check-input sort-form"
+                                                    :id="`csl-${csl}`" :value="csize.id"
+                                                    v-model="selectCaseSize" type="checkbox"
+                                                    @@change="getcaseSizeFilters"> <label
+                                                    class="form-check-label"
+                                                    :for="`csl-${csl}`">@{{ csize.name }}</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="widget-item widget-item-one">
-                                    <h4 class="accordion-header" id="headingTwo1">
+
+                                <div class="widget-item widget-item-one ">
+                                    <h4 class="accordion-header" id="headingTwo3">
                                         <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo1"
-                                            aria-expanded="false" aria-controls="collapseTwo1">
-                                            Series
+                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo3"
+                                            aria-expanded="false" aria-controls="collapseTwo3">
+                                            Dial Color
                                         </button>
                                     </h4>
 
-                                    <div id="collapseTwo1" class="accordion-collapse collapse"
-                                        aria-labelledby="headingTwo1" data-bs-parent="#accordionExample">
-
+                                    <div id="collapseTwo3" class="accordion-collapse collapse"
+                                        aria-labelledby="headingTwo3" data-bs-parent="#accordionExample">
                                         <div class="accordion-body side_area">
-                                            <div class="form-group " v-for="(ser, ind) in series">
+                                            <div class="form-group" v-for="(dcolor, cl) in dialColor">
                                                 <input class="form-check-input check-input sort-form"
-                                                    v-bind:value="ser.id" :id="`s-${ind}`" type="checkbox"
-                                                    v-model="selectedSeries"
-                                                    @@change="getProductSeriesFilters">
-                                                <label :for="`s-${ind}`"
-                                                    class="form-check-label">@{{ ser.name }}</label>
-
+                                                    :id="`cl-${cl}`" :value="dcolor.id"
+                                                    v-model="selectdialColor" type="checkbox"
+                                                    @@change="getColorFilters"> <label
+                                                    class="form-check-label"
+                                                    :for="`cl-${cl}`">@{{ dcolor.name }}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -277,83 +309,58 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="widget-item widget-item-one ">
-                                    <h4 class="accordion-header" id="headingTwo3">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo3"
-                                            aria-expanded="false" aria-controls="collapseTwo3">
-                                            Dial Color
-                                        </button>
-                                    </h4>
 
-                                    <div id="collapseTwo3" class="accordion-collapse collapse"
-                                        aria-labelledby="headingTwo3" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body side_area">
-                                            <div class="form-group" v-for="(dcolor, cl) in dialColor">
-                                                <input class="form-check-input check-input sort-form"
-                                                    :id="`cl-${cl}`" :value="dcolor.id"
-                                                    v-model="selectdialColor" type="checkbox"
-                                                    @@change="getColorFilters"> <label
-                                                    class="form-check-label"
-                                                    :for="`cl-${cl}`">@{{ dcolor.name }}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="widget-item widget-item-one ">
-
-                                    <h4 class="accordion-header" id="headingTwo4">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo4"
-                                            aria-expanded="false" aria-controls="collapseTwo4">
-                                            Movement
-                                        </button>
-                                    </h4>
-
-                                    <div id="collapseTwo4" class="accordion-collapse collapse"
-                                        aria-labelledby="headingTwo4" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body side_area">
-                                            <div class="form-group" v-for="(movement, ml) in movements">
-                                                <input class="form-check-input check-input sort-form"
-                                                    :id="`ml-${ml}`" :value="movement.id"
-                                                    v-model="selectmovements" type="checkbox"
-                                                    @@change="getMovementFilters"> <label
-                                                    class="form-check-label"
-                                                    :for="`ml-${ml}`">@{{ movement.name }}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
                                 <div class="widget-item widget-item-one">
 
-                                    <h4 class="accordion-header" id="headingTwo5">
+                                    <h4 class="accordion-header" id="headingTwo1">
                                         <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo5"
-                                            aria-expanded="false" aria-controls="collapseTwo5">
-                                            Case Size
+                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo1"
+                                            aria-expanded="false" aria-controls="collapseTwo1">
+                                            Series
                                         </button>
                                     </h4>
 
-                                    <div id="collapseTwo5" class="accordion-collapse collapse"
-                                        aria-labelledby="headingTwo5" data-bs-parent="#accordionExample">
+                                    <div id="collapseTwo1" class="accordion-collapse collapse"
+                                        aria-labelledby="headingTwo1" data-bs-parent="#accordionExample">
+
                                         <div class="accordion-body side_area">
-                                            <div class="form-group" v-for="(csize, csl) in caseSize">
+                                            <div class="form-group " v-for="(ser, ind) in series">
                                                 <input class="form-check-input check-input sort-form"
-                                                    :id="`csl-${csl}`" :value="csize.id"
-                                                    v-model="selectCaseSize" type="checkbox"
-                                                    @@change="getcaseSizeFilters"> <label
-                                                    class="form-check-label"
-                                                    :for="`csl-${csl}`">@{{ csize.name }}</label>
+                                                    v-bind:value="ser.id" :id="`s-${ind}`" type="checkbox"
+                                                    v-model="selectedSeries"
+                                                    @@change="getProductSeriesFilters">
+                                                <label :for="`s-${ind}`"
+                                                    class="form-check-label">@{{ ser.name }}</label>
+
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
 
-
-
-
                             </form>
+
+                            <div class="widget-item widget-item-one">
+                                <h4 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Brand
+                                    </button>
+                                </h4>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                    data-bs-parent="#accordionExample">
+                                    <div id="collapseTwo" class="accordion-collapse collapse"
+                                        aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <ul class="accordion-body side_area">
+                                            @foreach ($brands as $item)
+                                                <li class="border-bottom"><a
+                                                        href="{{ route('product.brand', $item->slug) }}">{{ $item->name }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                         <!--== End Sidebar Area Wrapper ==-->
@@ -374,45 +381,115 @@
                 <div class="sidebar-area accordion" id="accordionExample">
 
                     <div class="widget-item widget-item-one">
-                        <h4 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Brand
-                            </button>
-                        </h4>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                            data-bs-parent="#accordionExample">
-                            <ul class="accordion-body side_area">
-                                @foreach ($brands as $item)
-                                    <li class="border-bottom"><a
-                                            href="{{ route('product.brand', $item->slug) }}">{{ $item->name }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="widget-item widget-item-one">
+
                         <h4 class="accordion-header" id="headingTwo11">
-                            <button class="accordion-button collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseTwo11"
-                                aria-expanded="false" aria-controls="collapseTwo11">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo11" aria-expanded="false" aria-controls="collapseTwo11">
                                 Gender
                             </button>
                         </h4>
 
-                        <div id="collapseTwo11" class="accordion-collapse collapse"
-                            aria-labelledby="headingTwo11" data-bs-parent="#accordionExample">
+                        <div id="collapseTwo11" class="accordion-collapse collapse" aria-labelledby="headingTwo11"
+                            data-bs-parent="#accordionExample">
 
                             <div class="accordion-body side_area">
                                 <div class="form-group " v-for="(categories, ind) in categories">
-                                    <input class="form-check-input check-input sort-form"
-                                        v-bind:value="categories.id" :id="`s-${ind}`" type="checkbox"
-                                        v-model="selectedCategories"
+                                    <input class="form-check-input check-input sort-form" v-bind:value="categories.id"
+                                        :id="`s-${ind}`" type="checkbox" v-model="selectedCategories"
                                         @@change="getProductCategoryFilters">
-                                    <label :for="`s-${ind}`"
-                                        class="form-check-label">@{{ categories.name }}</label>
+                                    <label :for="`s-${ind}`" class="form-check-label">@{{ categories.name }}</label>
 
                                 </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="widget-item widget-item-one ">
+
+                        <h4 class="accordion-header" id="headingTwo4">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo4" aria-expanded="false" aria-controls="collapseTwo4">
+                                Movements
+                            </button>
+                        </h4>
+
+                        <div id="collapseTwo4" class="accordion-collapse collapse" aria-labelledby="headingTwo4"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body side_area">
+                                <div class="form-group" v-for="(movement, ml) in movements">
+                                    <input class="form-check-input check-input sort-form" :id="`ml-${ml}`"
+                                        :value="movement.id" v-model="selectmovements" type="checkbox"
+                                        @@change="getMovementFilters"> <label class="form-check-label"
+                                        :for="`ml-${ml}`">@{{ movement.name }}</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="widget-item widget-item-one">
+
+                        <h4 class="accordion-header" id="headingTwo5">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo5" aria-expanded="false" aria-controls="collapseTwo5">
+                                Case Size
+                            </button>
+                        </h4>
+
+                        <div id="collapseTwo5" class="accordion-collapse collapse" aria-labelledby="headingTwo5"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body side_area">
+                                <div class="form-group" v-for="(csize, csl) in caseSize">
+                                    <input class="form-check-input check-input sort-form" :id="`csl-${csl}`"
+                                        :value="csize.id" v-model="selectCaseSize" type="checkbox"
+                                        @@change="getcaseSizeFilters"> <label class="form-check-label"
+                                        :for="`csl-${csl}`">@{{ csize.name }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget-item widget-item-one ">
+                        <h4 class="accordion-header" id="headingTwo3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo3" aria-expanded="false" aria-controls="collapseTwo3">
+                                Dial Color
+                            </button>
+                        </h4>
+
+                        <div id="collapseTwo3" class="accordion-collapse collapse" aria-labelledby="headingTwo3"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body side_area">
+                                <div class="form-group" v-for="(dcolor, cl) in dialColor">
+                                    <input class="form-check-input check-input sort-form" :id="`cl-${cl}`"
+                                        :value="dcolor.id" v-model="selectdialColor" type="checkbox"
+                                        @@change="getColorFilters"> <label class="form-check-label"
+                                        :for="`cl-${cl}`">@{{ dcolor.name }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget-item widget-item-one">
+
+                        <h4 class="accordion-header" id="headingTwo2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
+                                Band Material
+                            </button>
+                        </h4>
+
+                        <div id="collapseTwo2" class="accordion-collapse collapse" aria-labelledby="headingTwo2"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body side_area">
+                                <div class="form-group" v-for="(bmaterial, sl) in brandMaterials">
+                                    <input class="form-check-input check-input sort-form" :id="`bm-${sl}`"
+                                        :value="bmaterial.id" v-model="selectedMaterial" type="checkbox"
+                                        @@change="getBrandMaterialsFilters"> <label
+                                        class="form-check-label" :for="`bm-${sl}`">@{{ bmaterial.name }}</label>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -439,92 +516,28 @@
                         </div>
 
                     </div>
+
                     <div class="widget-item widget-item-one">
-
-                        <h4 class="accordion-header" id="headingTwo2">
+                        <h4 class="accordion-header" id="headingTwo">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
-                                Band Material
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Brand
                             </button>
                         </h4>
-
-                        <div id="collapseTwo2" class="accordion-collapse collapse" aria-labelledby="headingTwo2"
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                             data-bs-parent="#accordionExample">
-                            <div class="accordion-body side_area">
-                                <div class="form-group" v-for="(bmaterial, sl) in brandMaterials">
-                                    <input class="form-check-input check-input sort-form" :id="`bm-${sl}`"
-                                        :value="bmaterial.id" v-model="selectedMaterial" type="checkbox"
-                                        @@change="getBrandMaterialsFilters"> <label
-                                        class="form-check-label" :for="`bm-${sl}`">@{{ bmaterial.name }}</label>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="widget-item widget-item-one ">
-                        <h4 class="accordion-header" id="headingTwo3">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo3" aria-expanded="false" aria-controls="collapseTwo3">
-                                Dial Color
-                            </button>
-                        </h4>
-
-                        <div id="collapseTwo3" class="accordion-collapse collapse" aria-labelledby="headingTwo3"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body side_area">
-                                <div class="form-group" v-for="(dcolor, cl) in dialColor">
-                                    <input class="form-check-input check-input sort-form" :id="`cl-${cl}`"
-                                        :value="dcolor.id" v-model="selectdialColor" type="checkbox"
-                                        @@change="getColorFilters"> <label class="form-check-label"
-                                        :for="`cl-${cl}`">@{{ dcolor.name }}</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="widget-item widget-item-one ">
-
-                        <h4 class="accordion-header" id="headingTwo4">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo4" aria-expanded="false" aria-controls="collapseTwo4">
-                                Movements
-                            </button>
-                        </h4>
-
-                        <div id="collapseTwo4" class="accordion-collapse collapse" aria-labelledby="headingTwo4"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body side_area">
-                                <div class="form-group" v-for="(movement, ml) in movements">
-                                    <input class="form-check-input check-input sort-form" :id="`ml-${ml}`"
-                                        :value="movement.id" v-model="selectmovements" type="checkbox"
-                                        @@change="getMovementFilters"> <label class="form-check-label"
-                                        :for="`ml-${ml}`">@{{ movement.name }}</label>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="widget-item widget-item-one">
-
-                        <h4 class="accordion-header" id="headingTwo5">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseTwo5" aria-expanded="false" aria-controls="collapseTwo5">
-                                Case Size
-                            </button>
-                        </h4>
-
-                        <div id="collapseTwo5" class="accordion-collapse collapse" aria-labelledby="headingTwo5"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body side_area">
-                                <div class="form-group" v-for="(csize, csl) in caseSize">
-                                    <input class="form-check-input check-input sort-form" :id="`csl-${csl}`"
-                                        :value="csize.id" v-model="selectCaseSize" type="checkbox"
-                                        @@change="getcaseSizeFilters"> <label class="form-check-label"
-                                        :for="`csl-${csl}`">@{{ csize.name }}</label>
-                                </div>
-                            </div>
+                            <ul class="accordion-body side_area">
+                                @foreach ($brands as $item)
+                                    <li class="border-bottom"><a
+                                            href="{{ route('product.brand', $item->slug) }}">{{ $item->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </main>
@@ -601,9 +614,11 @@
                 getCategories() {
                     axios.get('/get-category')
                         .then(res => {
-                            this.categories = res.data.filter(c => c.id  <= 2);
+                            this.categories = res.data.filter(c => c.id <= 2);
                         })
                 },
+
+
                 getSeries() {
                     axios.post('/get-series', {
                             brandId: this.brandId
@@ -612,6 +627,18 @@
                             this.series = res.data;
                         })
                 },
+
+                getSeriesByCategory() {
+                    axios.post('/get-series-category', {
+                            brandId: this.brandId,
+                            categoryId: this.selectedCategories
+                        })
+                        .then(res => {
+                            this.series = res.data;
+                        })
+                },
+
+
                 getBrandMaterials() {
                     axios.post('/get-brand-materials', {
                             brandId: this.brandId
@@ -620,6 +647,18 @@
                             this.brandMaterials = res.data;
                         })
                 },
+
+                getBrandMaterialsByCategory() {
+                    axios.post('/get-brand-materials-category', {
+                            brandId: this.brandId,
+                            categoryId: this.selectedCategories,
+                        })
+                        .then(res => {
+                            this.brandMaterials = res.data;
+                        })
+                },
+
+
                 getDialColors() {
                     axios.post('/get-dial-colors', {
                             brandId: this.brandId
@@ -628,6 +667,17 @@
                             this.dialColor = res.data;
                         })
                 },
+
+                getDialColorByCategory() {
+                    axios.post('/get-dial-colors-category', {
+                            brandId: this.brandId,
+                            categoryId: this.selectedCategories,
+                        })
+                        .then(res => {
+                            this.dialColor = res.data;
+                        })
+                },
+
                 getMovements() {
                     axios.post('/get-movements', {
                             brandId: this.brandId
@@ -636,9 +686,33 @@
                             this.movements = res.data;
                         })
                 },
+
+                getMovementsByCategoy() {
+                    axios.post('/get-movements-category', {
+                            brandId: this.brandId,
+                            categoryId: this.selectedCategories,
+                        })
+                        .then(res => {
+                            this.movements = res.data;
+                        })
+                },
+
                 getCasesize() {
+
                     axios.post('/get-case-size', {
                             brandId: this.brandId
+                        })
+                        .then(res => {
+                            this.caseSize = res.data;
+                        })
+                },
+
+
+                getCasesizeByCategory() {
+
+                    axios.post('/get-case-size-category', {
+                            brandId: this.brandId,
+                            categoryId: this.selectedCategories,
                         })
                         .then(res => {
                             this.caseSize = res.data;
@@ -647,7 +721,7 @@
                 getProductFilters() {
                     axios.post('/get-filter-products', {
                             brandId: this.brandId,
-                            categoryId: this.categoryId,
+                            categoryId: this.selectedCategories,
                             series: this.selectedSeries,
                             brandMaterial: this.selectedMaterial,
                             dialColor: this.selectdialColor,
@@ -665,14 +739,31 @@
                     this.selectmovements = [];
                     this.selectdialColor = [];
                     this.selectedSeries = [];
+
                     axios.post('/get-filter-products', {
-                        brandId: this.brandId,
-                        categoryId: this.selectedCategories,
-                        sortBy: this.sortBy
-                    })
-                    .then(res => {
-                        this.products = res.data;
-                    })
+                            brandId: this.brandId,
+                            categoryId: this.selectedCategories,
+                            sortBy: this.sortBy
+                        })
+                        .then(res => {
+                            this.products = res.data;
+                        })
+
+                    if (this.selectedCategories != '') {
+                        this.getCasesize();
+                        this.getDialColorByCategory();
+                        this.getMovementsByCategoy();
+                        this.getCasesizeByCategory();
+                        this.getBrandMaterialsByCategory();
+                        this.getSeriesByCategory();
+                    } else {
+                        this.getCasesize();
+                        this.getDialColor();
+                        this.getMovements();
+                        this.getBrandMaterials();
+                        this.getSeries();
+                    }
+
                 },
                 getProductSeriesFilters() {
                     this.selectedMaterial = [];
@@ -681,7 +772,7 @@
                     this.selectdialColor = [];
                     axios.post('/get-filter-products', {
                             brandId: this.brandId,
-                            categoryId: this.categoryId,
+                            categoryId: this.selectedCategories,
                             series: this.selectedSeries,
                             sortBy: this.sortBy
                         })
@@ -696,7 +787,7 @@
                     this.selectdialColor = [];
                     axios.post('/get-filter-products', {
                             brandId: this.brandId,
-                            categoryId: this.categoryId,
+                            categoryId: this.selectedCategories,
                             brandMaterial: this.selectedMaterial,
                             sortBy: this.sortBy
                         })
@@ -711,7 +802,7 @@
                     this.selectedMaterial = [];
                     axios.post('/get-filter-products', {
                             brandId: this.brandId,
-                            categoryId: this.categoryId,
+                            categoryId: this.selectedCategories,
                             movement: this.selectmovements,
                             sortBy: this.sortBy
                         })
@@ -726,7 +817,7 @@
                     this.selectmovements = [];
                     axios.post('/get-filter-products', {
                             brandId: this.brandId,
-                            categoryId: this.categoryId,
+                            categoryId: this.selectedCategories,
                             dialColor: this.selectdialColor,
                             sortBy: this.sortBy
                         })
@@ -741,7 +832,7 @@
                     this.selectdialColor = [];
                     axios.post('/get-filter-products', {
                             brandId: this.brandId,
-                            categoryId: this.categoryId,
+                            categoryId: this.selectedCategories,
                             caseSize: this.selectCaseSize,
                             sortBy: this.sortBy
                         })
@@ -776,7 +867,4 @@
             },
         });
     </script>
-
-
-
 @endpush

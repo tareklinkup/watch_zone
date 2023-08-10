@@ -35,12 +35,13 @@
 
             @yield('main-content')
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Change Password</h5>
-                            <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                             </button>
                         </div>
                         <form action="{{ route('password.change') }}" method="POST">
@@ -53,22 +54,20 @@
                                     </div>
                                     <div class="col-sm-8">
                                         <input type="password" name="old_password" class="form-control mb-1"
-                                    placeholder="Enter Old Password">
+                                            placeholder="Enter Old Password">
                                     </div>
                                     <div class="col-sm-4"><label for="">New Password</label></div>
                                     <div class="col-sm-8"><input type="password" class="form-control" name="password"
-                                        placeholder="Enter New password"></div>
+                                            placeholder="Enter New password"></div>
                                 </div>
-                                
-                                
-                                
-                                
+
+
+
+
                             </div>
                             <div class="modal-footer">
-                                <button type="reset"
-                                    class="btn btn-secondary">Reset</button>
-                                <button type="submit"
-                                    class="btn btn-primary">Save changes</button>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
                         </form>
                     </div>
