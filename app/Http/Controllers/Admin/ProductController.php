@@ -229,11 +229,11 @@ class ProductController extends Controller
         $productAddition = ProductAdditional::where('product_id', $id)->get();
         $brand = Brand::get();
         $category = Category::get();
-        $series = Series::where('brand_id', $product->brand_id)->get();
-        $material = BrandMaterial::where('brand_id', $product->brand_id)->get();
-        $color = Color::where('brand_id', $product->brand_id)->get();
-        $size = Size::where('brand_id', $product->brand_id)->get();
-        $movement = Movement::where('brand_id', $product->brand_id)->get();
+        $series = Series::where(['brand_id' => $product->brand_id, 'category_id' => $product->category_id])->get();
+        $material = BrandMaterial::where(['brand_id'=> $product->brand_id, 'category_id' => $product->category_id])->get();
+        $color = Color::where(['brand_id'=> $product->brand_id, 'category_id' => $product->category_id])->get();
+        $size = Size::where(['brand_id'=> $product->brand_id, 'category_id' => $product->category_id])->get();
+        $movement = Movement::where(['brand_id'=> $product->brand_id, 'category_id' => $product->category_id])->get();
         return view('admin.product_edit', compact('brand', 'product', 'category', 'series', 'material', 'color', 'size', 'movement', 'productItem', 'productCase', 'productBand', 'productDail', 'productMovement', 'productAddition'));
     }
 
@@ -537,7 +537,7 @@ class ProductController extends Controller
             $products = $products->where('category_id', $req->catId);
         }
 
-        $products = $products->get();
+        $products = $products->orderBy('id', 'desc')->get();
         return $products;
     }
 
@@ -576,7 +576,7 @@ class ProductController extends Controller
         $category = Category::get();
         $banner = Banner::get();
         $products = Product::latest()->get();
-        return view('admin.product_selected', compact('products', 'brand', 'category', 'banner'));
+        return view('admin.product_selected', compact('banner', 'category', 'brand', 'products'));
     }
 
     public function searchCatBrandSelect(Request $request)

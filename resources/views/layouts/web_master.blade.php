@@ -23,8 +23,9 @@
 
     <link rel="stylesheet" href="{{ asset('website/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('website/css/custom.css') }}" />
-    @stack('webcss')
 
+    @stack('webcss')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -206,10 +207,13 @@
     <script src="{{ asset('website/js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
     <script src="{{ asset('website/js/vendor/bootstrap.bundle.min.js') }}"></script>
 
+
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <!-- Plugins JS -->
     <script src="{{ asset('website/js/plugins/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('website/js/plugins/isotope.pkgd.min.js') }}"></script>
-
     <!-- Custom Main JS -->
     <script src="{{ asset('website/js/bootstrap3-typeahead.min.js') }}"></script>
     <script src="{{ asset('website/js/main.js') }}"></script>

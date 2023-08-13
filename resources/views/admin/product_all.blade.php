@@ -80,8 +80,7 @@
                     </div>
                 </div>
                 <div class="col-sm-2">
-                    <input type="button" class="search_btn" value="Search" v-on:click="getProductFilters"
-                       >
+                    <input type="button" class="search_btn" value="Search" v-on:click="getProductFilters">
 
                 </div>
 
@@ -247,7 +246,7 @@
                 },
 
                 getProductFilters() {
-                    axios.post('/get-filter-products', {
+                    axios.post('/get-filtering-discount-products', {
                             brandId: this.selectedBrand.id,
                             categoryId: this.selectedCategory.id,
                         })

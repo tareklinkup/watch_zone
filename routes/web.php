@@ -89,6 +89,7 @@ Route::post('/get-movements-category', [MovementController::class, 'getMovements
 Route::post('/get-case-size', [SizeController::class, 'getCasesize']);
 Route::post('/get-case-size-category', [SizeController::class, 'getCasesizeCategory']);
 Route::post('/get-filter-products', [HomeController::class, 'getFilterPoducts']);
+Route::post('/get-filtering-discount-products', [HomeController::class, 'getFilterDiscountPoducts']);
 Route::post('/get-products', [ProductController::class, 'getProducts']);
 Route::post('/get-products-stock', [ProductController::class, 'getPoductsStockReport']);
 

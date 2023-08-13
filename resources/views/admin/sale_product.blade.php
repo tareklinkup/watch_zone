@@ -119,7 +119,8 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>
                                                 <input class="checkbox" type="checkbox" name="selectedProduct[]"
-                                                    id="selectedProduct[]" value="{{$product->id}}" {{  $product->sale == 1 ? "checked" : "" }} />
+                                                    id="selectedProduct[]" value="{{ $product->id }}"
+                                                    {{ $product->sale == 1 ? 'checked' : '' }} />
                                                 <input type="hidden" name="product_id[]" id="product_id[]"
                                                     value="{{ $product->id }}">
                                             </td>
@@ -127,11 +128,11 @@
                                             <td>{{ $product->model }}</td>
                                             <td>
                                                 @if ($product->sale == 1)
-                                                      Sale
+                                                    Sale
                                                 @endif
                                             </td>
                                             <td>{{ optional($product->category)->name }}</td>
-                                            <td>{{ $product->brand->name }}</td>
+                                            <td>{{ optional($product->brand)->name }}</td>
                                             <td>{{ $product->quantity }}</td>
                                         </tr>
                                     @endforeach
@@ -156,6 +157,4 @@
             }
         }
     </script>
-
-
 @endpush

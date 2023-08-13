@@ -196,7 +196,8 @@
                                                     <label>District/City <small class="text-danger"
                                                             title="required">*</small></label>
                                                     <div class="select-style">
-                                                        <select class="select-active" id="b_district" name="b_district">
+                                                        <select class="select2 select-active" id="b_district"
+                                                            name="b_district">
                                                             <option>Select an option…</option>
                                                             @foreach ($B_district as $item)
                                                                 <option value="{{ $item->id }}">{{ $item->name }}
@@ -355,9 +356,6 @@
     </main>
 
 
-
-
-
 @endsection
 
 @push('web_script')
@@ -472,6 +470,12 @@
                     }
                 }
             })
+        })
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.select2').select2({})
         })
     </script>
 @endpush

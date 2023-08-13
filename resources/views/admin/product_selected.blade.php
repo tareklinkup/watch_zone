@@ -11,6 +11,8 @@
 @endpush
 @section('main-content')
 
+    {{-- @dd('this is product selected page'); --}}
+
     <main>
         <div class="container-fluid">
             <div class="heading-title p-2 my-2">
@@ -29,6 +31,7 @@
                             <div class="col-sm-4">
                                 <label for="" class=""><strong>Category :</strong> </label>
                             </div>
+
 
                             <div class="col-sm-8">
                                 <select name="category" class="form-control form-control-sm shadow-none">
@@ -80,10 +83,10 @@
                                             <option value="">--Select Banner--</option>
                                             @foreach ($banner as $banner)
                                                 <option value="{{ $banner->id }}">{{ $banner->title }}</option>
-                                                @endforeach
+                                            @endforeach
                                         </select>
                                     </div>
-                                   
+
                                     <div class="col-sm-2">
                                         <button type="submit" class="btn btn-success">Update</button>
                                     </div>
@@ -118,10 +121,10 @@
                                         <th>Quantity</th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
                                     @foreach ($products as $key => $product)
-                                        <tr class="">
-
+                                        <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>
                                                 <input class="checkbox" type="checkbox" name="selectedProduct[]"
@@ -132,9 +135,8 @@
                                             <td style="width: 20%">{{ $product->name }}</td>
                                             <td>{{ $product->model }}</td>
                                             <td>{{ optional($product->banner)->title }}</td>
-                                           
                                             <td>{{ optional($product->category)->name }}</td>
-                                            <td>{{ $product->brand->name }}</td>
+                                            <td>{{ optional($product->brand)->name }}</td>
                                             <td>{{ $product->quantity }}</td>
                                         </tr>
                                     @endforeach

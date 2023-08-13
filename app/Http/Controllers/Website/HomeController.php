@@ -54,10 +54,10 @@ class HomeController extends Controller
     {
         $category_id = Category::where('slug', $cat)->first()->id;
         // dd($product);
-        $product = Product::with(['brand', 'images'])->where('brand_id', $category_id)->orderBy('quantity', 'desc');
+        $product = Product::with(['brand', 'images'])->where('brand_id', $category_id)->orderBy('id', 'desc');
         $product = $product->paginate(200);
-        $brands = Brand::with('product')->orderBy('id', 'asc')->get();
-        $categories = Category::with('products')->orderBy('id', 'asc')->take(6)->get();
+        $brands = Brand::with('product')->orderBy('id', 'desc')->get();
+        $categories = Category::with('products')->orderBy('id', 'desc')->take(6)->get();
         return view('pages.category', compact('product', 'brands', 'categories'));
     }
     public function saleProduct()
@@ -224,7 +224,7 @@ class HomeController extends Controller
         $product_images = ProductImage::where('product_id', $product->id)->get();
         if (isset($product->category_id)) {
             $category_id = $product->category_id;
-            $related = Product::where('category_id', '=', $product->category->id)->where('id', '!=', $product->id)->limit('4')->get();
+            $related = Product::where('category_id', '=', $product->category->id)->where('brand_id', '=', $product->brand->id)->where('id', '!=', $product->id)->limit('4')->get();
         }
         return view('pages.product_single', compact('product', 'product_images', 'related','productItem', 'productCase', 'productBand', 'productDial', 'productMovement', 'productAddition'));
     }
@@ -458,7 +458,7 @@ class HomeController extends Controller
 
     public function getFilterPoducts(Request $req)
     {
-        // return $req->series;
+
         $products = Product::with(['brand', 'category'])->where('status', true);
 
         if (isset($req->productId)) {
@@ -469,13 +469,14 @@ class HomeController extends Controller
             $products = $products->where('brand_id', $req->brandId);
         }
 
-        if (isset($req->catId)) {
-            $products = $products->where('category_id', $req->catId);
+        if (isset($req->categoryId)) {
+            $products = $products->where('category_id', $req->categoryId);
         }
 
         if (isset($req->categoryId) && $req->categoryId != []) {
             $products = $products->whereIn('category_id', $req->categoryId);
         }
+
 
         if (isset($req->series) && $req->series != []) {
             $products = $products->whereIn('series_id', $req->series);
@@ -514,6 +515,18 @@ class HomeController extends Controller
 
         $products = $products->get();
         return $products;
+    }
+
+
+    public function getFilterDiscountPoducts(Request $req)
+    {
+          $products = Product::with(['brand', 'category'])->where('status', true);
+
+            $products = $products->where(['brand_id'=> $req->brandId, 'category_id'=> $req->categoryId]);
+
+            $products = $products->get();
+
+            return $products;
     }
 
 

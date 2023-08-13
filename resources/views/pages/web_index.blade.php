@@ -194,6 +194,7 @@
                     @php
                         $products = App\Models\Product::where('banner_id', $bann->id)
                             ->take(16)
+                            ->orderBy('id', 'desc')
                             ->get();
                     @endphp
                     <!--== End Product Banner Item ==-->

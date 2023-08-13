@@ -143,8 +143,10 @@
                                         @foreach ($orderItem as $item)
                                             <div class="row">
                                                 <div class="col-12 text-center border-bottom"><img
-                                                        src="{{ asset($item->product->image) }}" height="80px;"
-                                                        width="80px;" alt="imga"></div>
+                                                        src="{{ asset('uploads/product/' . $item->product->image) }}"
+                                                        alt="imga" style="width:100px; height:auto;"></div>
+                                                {{-- <td><img src="{{ asset('uploads/product/' . $item->product->image) }}"
+                                                        alt="imga"></td> --}}
                                                 <div class="col-4"><Strong>Name</Strong></div>
                                                 <div class="col-8 text-end"> {{ $item->product->name }}</div>
                                                 <div class="col-4"><Strong>Quantity</Strong></div>

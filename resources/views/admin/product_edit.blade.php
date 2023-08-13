@@ -84,7 +84,8 @@
                                             </div>
 
                                             <div class="col-sm-4">
-                                                <input type="text" name="discount_price" value="{{ $product->discount_price }}"
+                                                <input type="text" name="discount_price"
+                                                    value="{{ $product->discount_price }}"
                                                     class="form-control form-control-sm shadow-none" id="result">
                                             </div>
                                         </div>
@@ -149,35 +150,21 @@
                                         </div>
 
                                         <div class="form-group row mb-1">
-                                            <label for="series_id" class="col-sm-3 col-form-label">Series <span
+                                            <label for="movement_id" class="col-sm-3 col-form-label">Movement <span
                                                     class="text-danger">*</span></label>
                                             <div class="col-sm-9">
-                                                <select name="series_id" class="form-control form-control-sm shadow-none"
-                                                    id="series_id">
-                                                    <option value="">--Select Series--</option>
-                                                    @foreach ($series as $item)
+                                                <select name="movement_id"
+                                                    class="form-control form-control-sm shadow-none" id="movement_id">
+                                                    <option value="">--Select Movement--</option>
+                                                    @foreach ($movement as $item)
                                                         <option value="{{ $item->id }}"
-                                                            {{ $product->series_id == $item->id ? 'selected' : '' }}>
+                                                            {{ $product->movement_id == $item->id ? 'selected' : '' }}>
                                                             {{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group row mb-1">
-                                            <label for="material_id" class="col-sm-3 col-form-label">Brand Material <span
-                                                    class="text-danger">*</span></label>
-                                            <div class="col-sm-9">
-                                                <select name="material_id"
-                                                    class="form-control form-control-sm shadow-none" id="material_id">
-                                                    <option value="">--Select Material--</option>
-                                                    @foreach ($material as $item)
-                                                        <option value="{{ $item->id }}"
-                                                            {{ $product->material_id == $item->id ? 'selected' : '' }}>
-                                                            {{ $item->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
+
                                         <div class="form-group row mb-1">
                                             <label for="size_id" class="col-sm-3 col-form-label">Case Size <span
                                                     class="text-danger">*</span></label>
@@ -193,6 +180,7 @@
                                                 </select>
                                             </div>
                                         </div>
+
                                         <div class="form-group row mb-1">
                                             <label for="color_id" class="col-sm-3 col-form-label">Dial Color <span
                                                     class="text-danger">*</span></label>
@@ -208,16 +196,33 @@
                                                 </select>
                                             </div>
                                         </div>
+
                                         <div class="form-group row mb-1">
-                                            <label for="movement_id" class="col-sm-3 col-form-label">Movement <span
+                                            <label for="material_id" class="col-sm-3 col-form-label">Brand Material <span
                                                     class="text-danger">*</span></label>
                                             <div class="col-sm-9">
-                                                <select name="movement_id"
-                                                    class="form-control form-control-sm shadow-none" id="movement_id">
-                                                    <option value="">--Select Movement--</option>
-                                                    @foreach ($movement as $item)
+                                                <select name="material_id"
+                                                    class="form-control form-control-sm shadow-none" id="material_id">
+                                                    <option value="">--Select Material--</option>
+                                                    @foreach ($material as $item)
                                                         <option value="{{ $item->id }}"
-                                                            {{ $product->movement_id == $item->id ? 'selected' : '' }}>
+                                                            {{ $product->material_id == $item->id ? 'selected' : '' }}>
+                                                            {{ $item->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-1">
+                                            <label for="series_id" class="col-sm-3 col-form-label">Series <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-sm-9">
+                                                <select name="series_id" class="form-control form-control-sm shadow-none"
+                                                    id="series_id">
+                                                    <option value="">--Select Series--</option>
+                                                    @foreach ($series as $item)
+                                                        <option value="{{ $item->id }}"
+                                                            {{ $product->series_id == $item->id ? 'selected' : '' }}>
                                                             {{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
@@ -268,8 +273,9 @@
 
                                         </div>
                                         <div class="form-group row mt-1">
-                                            <label for="" class="col-sm-3 col-form-label">Multi Image (<small class="text-danger">800 X
-                                                800</small>)
+                                            <label for="" class="col-sm-3 col-form-label">Multi Image (<small
+                                                    class="text-danger">800 X
+                                                    800</small>)
                                             </label>
                                             <div class="col-sm-9">
                                                 <input type="file" name="multiimage[]" multiple
@@ -633,13 +639,21 @@
     <script>
         $("#brand_id").on('change', function() {
             var brand_id = $(this).val();
+            var category_id = $('#category_id').val();
+
+            var data = {
+                brand_id: brand_id,
+                category_id: category_id
+            };
+
             $.ajax({
-                url: "{{ url('series-get') }}/" + brand_id,
+                method: "POST",
+                url: "{{ url('series-get') }}",
                 dataType: "json",
-                method: "GET",
-                success: function(data) {
+                data: data,
+                success: function(res) {
                     $('#series_id').empty();
-                    $.each(data, function(key, value) {
+                    $.each(res, function(key, value) {
                         $('#series_id').append('<option value="' + value.id + '">' + value
                             .name + '</option>');
                     });
@@ -652,13 +666,21 @@
     <script>
         $("#brand_id").on('change', function() {
             var brand_id = $(this).val();
+            var category_id = $('#category_id').val();
+
+            var data = {
+                brand_id: brand_id,
+                category_id: category_id
+            };
+
             $.ajax({
-                url: "{{ url('material-get') }}/" + brand_id,
+                type: "POST",
+                url: "{{ url('material-get') }}",
                 dataType: "json",
-                method: "GET",
-                success: function(data) {
+                data: data,
+                success: function(res) {
                     $('#material_id').empty();
-                    $.each(data, function(key, value) {
+                    $.each(res, function(key, value) {
                         $('#material_id').append('<option value="' + value.id +
                             '">' + value.name + '</option>');
                     });
@@ -670,13 +692,20 @@
     <script>
         $("#brand_id").on('change', function() {
             var brand_id = $(this).val();
+            var category_id = $('#category_id').val();
+
+            var data = {
+                brand_id: brand_id,
+                category_id: category_id
+            };
             $.ajax({
-                url: "{{ url('dial/color-get') }}/" + brand_id,
+                type: "POST",
+                url: "{{ url('dial/color-get') }}",
                 dataType: "json",
-                method: "GET",
-                success: function(data) {
+                data: data,
+                success: function(res) {
                     $('#color_id').empty();
-                    $.each(data, function(key, value) {
+                    $.each(res, function(key, value) {
                         $('#color_id').append('<option value="' + value.id +
                             '">' + value.name + '</option>');
                     });
@@ -687,14 +716,23 @@
     </script>
     <script>
         $("#brand_id").on('change', function() {
+
             var brand_id = $(this).val();
+            var category_id = $('#category_id').val();
+
+            var data = {
+                brand_id: brand_id,
+                category_id: category_id
+            };
+
             $.ajax({
-                url: "{{ url('size-get') }}/" + brand_id,
+                type: "POST",
+                url: "{{ url('size-get') }}",
                 dataType: "json",
-                method: "GET",
-                success: function(data) {
+                data: data,
+                success: function(res) {
                     $('#size_id').empty();
-                    $.each(data, function(key, value) {
+                    $.each(res, function(key, value) {
                         $('#size_id').append('<option value="' + value.id +
                             '">' + value.name + '</option>');
                     });
@@ -705,14 +743,23 @@
     </script>
     <script>
         $("#brand_id").on('change', function() {
+
             var brand_id = $(this).val();
+
+            var category_id = $('#category_id').val();
+            var data = {
+                brand_id: brand_id,
+                category_id: category_id
+            };
+
             $.ajax({
-                url: "{{ url('movement-get') }}/" + brand_id,
+                type: "POST",
+                url: "{{ url('movement-get') }}",
                 dataType: "json",
-                method: "GET",
-                success: function(data) {
+                data: data,
+                success: function(res) {
                     $('#movement_id').empty();
-                    $.each(data, function(key, value) {
+                    $.each(res, function(key, value) {
                         $('#movement_id').append('<option value="' + value.id +
                             '">' + value.name + '</option>');
                     });
@@ -875,7 +922,7 @@
         //     if(item == null || item == '') {
         //         console.log(item)
         //         alert("Item information label can't be null");
-        //     } 
+        //     }
         //     if(value[sl] == null || value[sl] == ''){
         //         console.log(value[sl])
         //         alert("Item information value can't be null");
@@ -923,7 +970,7 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        document.getElementById("previewImage").src = "{{ asset('uploads/product/' .$product->image) }}";
+        document.getElementById("previewImage").src = "{{ asset('uploads/product/' . $product->image) }}";
     </script>
 
     <script>
@@ -1002,7 +1049,7 @@
             if (isNaN(price) || isNaN(discp)) {
                 dec = 0;
             } else {
-                var mult = (((100 / price)  * discp)).toFixed(2);
+                var mult = (((100 / price) * discp)).toFixed(2);
                 var discont = price - mult;
             }
 

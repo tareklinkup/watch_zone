@@ -267,7 +267,6 @@
                                                         style="width:100%;height: 100%; background: #3f4a49;">
                                                 </div>
                                             </div>
-
                                         </div>
                                         <div class="form-group row mt-1">
                                             <label for="" class="col-sm-3 col-form-label">Multi Image(<small
@@ -278,7 +277,6 @@
                                                 <input type="file" name="multiimage[]" multiple
                                                     class="form-control form-control-sm" id="multiimage">
                                             </div>
-
                                         </div>
 
                                     </div>
@@ -643,6 +641,7 @@
 
     <script>
         $("#brand_id").on('change', function() {
+
             var brand_id = $(this).val();
             var category_id = $('#category_id').val();
 

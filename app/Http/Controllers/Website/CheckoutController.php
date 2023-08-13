@@ -57,9 +57,9 @@ class CheckoutController extends Controller
             foreach ($contents as $content) {
                 $order_details = new OrderDetail();
                 $order_details->order_id = $order->id;
-                $order_details->product_id = $content->id;             
-                $order_details->price = $content->price;            
-                $order_details->quantity = $content->qty;            
+                $order_details->product_id = $content->id;
+                $order_details->price = $content->price;
+                $order_details->quantity = $content->qty;
                 $order_details->save();
 
                 // main stock update
@@ -71,11 +71,11 @@ class CheckoutController extends Controller
 
             DB::commit();
 
-            $notification=array(
+            $notification = array(
                 'message'=>'Your Order Taken Successfully',
                 'alert-type'=>'success'
             );
-            return Redirect()->route('customer.order.show', $order->id);
+            return Redirect()->route('customer.order.show', $order->id)->with($notification);
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -86,6 +86,6 @@ class CheckoutController extends Controller
             );
             return Redirect()->back()->with($notification);
         }
-        
+
     }
 }
