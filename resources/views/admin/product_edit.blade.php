@@ -101,20 +101,20 @@
                                         </div>
                                         <div class="form-group row">
                                             <label for="resistant" class="col-sm-3 col-form-label">Water Resistance <span
-                                                    class="text-danger">*</span></label>
+                                                    class="text-danger"></span></label>
                                             <div class="col-sm-9">
                                                 <input type="text" name="resistant"
                                                     class="form-control form-control-sm shadow-none"
-                                                    value="{{ $product->resistant }}" id="resistant" required>
+                                                    value="{{ $product->resistant }}" id="resistant">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="warranty" class="col-sm-3 col-form-label">Warranty <span
-                                                    class="text-danger">*</span></label>
+                                                    class="text-danger"></span></label>
                                             <div class="col-sm-9">
                                                 <input type="text" name="warranty"
                                                     class="form-control form-control-sm shadow-none"
-                                                    value="{{ $product->warranty }}" id="warranty" required>
+                                                    value="{{ $product->warranty }}" id="warranty">
                                             </div>
                                         </div>
                                         <div class="form-group row mb-1">
@@ -149,7 +149,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row mb-1">
+                                        <div class="form-group row mb-1" id="movementId">
                                             <label for="movement_id" class="col-sm-3 col-form-label">Movement <span
                                                     class="text-danger">*</span></label>
                                             <div class="col-sm-9">
@@ -165,7 +165,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row mb-1">
+                                        <div class="form-group row mb-1" id="sizeId">
                                             <label for="size_id" class="col-sm-3 col-form-label">Case Size <span
                                                     class="text-danger">*</span></label>
                                             <div class="col-sm-9">
@@ -181,7 +181,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row mb-1">
+                                        <div class="form-group row mb-1" id="colorId">
                                             <label for="color_id" class="col-sm-3 col-form-label">Dial Color <span
                                                     class="text-danger">*</span></label>
                                             <div class="col-sm-9">
@@ -197,8 +197,8 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row mb-1">
-                                            <label for="material_id" class="col-sm-3 col-form-label">Brand Material <span
+                                        <div class="form-group row mb-1" id="materialId">
+                                            <label for="material_id" class="col-sm-3 col-form-label">Band Material <span
                                                     class="text-danger">*</span></label>
                                             <div class="col-sm-9">
                                                 <select name="material_id"
@@ -213,7 +213,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row mb-1">
+                                        <div class="form-group row mb-1" id="seriesId">
                                             <label for="series_id" class="col-sm-3 col-form-label">Series <span
                                                     class="text-danger">*</span></label>
                                             <div class="col-sm-9">
@@ -571,6 +571,52 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-sm-12 my-2">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 style="margin-bottom: 0; font-size:18px;"> SEO Information
+                                                            </h4>
+                                                        </div>
+
+                                                        <div class="card-body border pt-2">
+                                                            <div class="form-group row">
+                                                                <label for="meta_title"
+                                                                    class="col-sm-3 col-form-label">Meta
+                                                                    Title</label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" name="meta_title"
+                                                                        class="form-control form-control-sm shadow-none"
+                                                                        id="meta_title"
+                                                                        value="{{ $product->meta_title }}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="meta_description"
+                                                                    class="col-sm-3 col-form-label">Meta
+                                                                    Description</label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" name="meta_description"
+                                                                        class="form-control form-control-sm shadow-none"
+                                                                        id="meta_description"
+                                                                        value="{{ $product->meta_description }}">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group row">
+                                                                <label for="meta_keywords"
+                                                                    class="col-sm-3 col-form-label">Meta
+                                                                    Keywords</label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" name="meta_keywords"
+                                                                        class="form-control form-control-sm shadow-none"
+                                                                        id="meta_keywords"
+                                                                        value="{{ $product->meta_keywords }}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
 
@@ -686,6 +732,30 @@
                     });
                 }
             });
+
+        });
+    </script>
+    <script>
+        $("#category_id").on('change', function() {
+
+            var category_id = $(this).val();
+
+
+            console.log(category_id);
+
+            if (category_id == 1 || category_id == 2) {
+                $("#movementId").show();
+                $("#colorId").show();
+                $("#sizeId").show();
+                $("#materialId").show();
+                $("#seriesId").show();
+            } else {
+                $("#movementId").hide();
+                $("#colorId").hide();
+                $("#sizeId").hide();
+                $("#materialId").hide();
+                $("#seriesId").hide();
+            }
 
         });
     </script>

@@ -95,21 +95,18 @@
 
 
                                         <div class="form-group row">
-                                            <label for="resistant" class="col-sm-3 col-form-label">Water Resistance <span
-                                                    class="text-danger">*</span></label>
+                                            <label for="resistant" class="col-sm-3 col-form-label">Water Resistance </label>
                                             <div class="col-sm-9">
                                                 <input type="text" name="resistant"
-                                                    class="form-control form-control-sm shadow-none" id="resistant"
-                                                    required>
+                                                    class="form-control form-control-sm shadow-none" id="resistant">
                                             </div>
                                         </div>
+
                                         <div class="form-group row">
-                                            <label for="warranty" class="col-sm-3 col-form-label">Warranty <span
-                                                    class="text-danger">*</span></label>
+                                            <label for="warranty" class="col-sm-3 col-form-label">Warranty </label>
                                             <div class="col-sm-9">
                                                 <input type="text" name="warranty"
-                                                    class="form-control form-control-sm shadow-none" id="warranty"
-                                                    required>
+                                                    class="form-control form-control-sm shadow-none" id="warranty">
                                             </div>
                                         </div>
 
@@ -118,8 +115,8 @@
                                             <label for="category_id" class="col-sm-3 col-form-label">Category <span
                                                     class="text-danger">*</span></label>
                                             <div class="col-sm-9">
-                                                <select name="category_id"
-                                                    class="form-control form-control-sm shadow-none" id="category_id">
+                                                <select name="category_id" class="form-control form-control-sm shadow-none"
+                                                    id="category_id">
                                                     <option value="">--Select Category--</option>
                                                     @foreach ($category as $item)
                                                         <option value="{{ $item->id }}">
@@ -147,8 +144,7 @@
 
                                         <!------------- start Serialization------------------------------>
                                         <div class="form-group row mb-1" id="movementId">
-                                            <label for="movement_id" class="col-sm-3 col-form-label">Movement <span
-                                                    class="text-danger">*</span></label>
+                                            <label for="movement_id" class="col-sm-3 col-form-label">Movement </label>
                                             <div class="col-sm-9">
                                                 <select name="movement_id"
                                                     class="form-control form-control-sm shadow-none" id="movement_id">
@@ -162,8 +158,7 @@
                                         </div>
 
                                         <div class="form-group row mb-1" id="sizeId">
-                                            <label for="size_id" class="col-sm-3 col-form-label">Case Size <span
-                                                    class="text-danger">*</span></label>
+                                            <label for="size_id" class="col-sm-3 col-form-label">Case Size </label>
                                             <div class="col-sm-9">
                                                 <select name="size_id" class="form-control form-control-sm shadow-none"
                                                     id="size_id">
@@ -177,8 +172,7 @@
                                         </div>
 
                                         <div class="form-group row mb-1" id="colorId">
-                                            <label for="color_id" class="col-sm-3 col-form-label">Dial Color <span
-                                                    class="text-danger">*</span></label>
+                                            <label for="color_id" class="col-sm-3 col-form-label">Dial Color </label>
                                             <div class="col-sm-9">
                                                 <select name="color_id" class="form-control form-control-sm shadow-none"
                                                     id="color_id">
@@ -192,8 +186,8 @@
                                         </div>
 
                                         <div class="form-group row mb-1" id="materialId">
-                                            <label for="material_id" class="col-sm-3 col-form-label">Brand Material <span
-                                                    class="text-danger">*</span></label>
+                                            <label for="material_id" class="col-sm-3 col-form-label">Band Material
+                                            </label>
                                             <div class="col-sm-9">
                                                 <select name="material_id"
                                                     class="form-control form-control-sm shadow-none" id="material_id">
@@ -208,8 +202,7 @@
 
 
                                         <div class="form-group row mb-1" id="seriesId">
-                                            <label for="series_id" class="col-sm-3 col-form-label"> Series <span
-                                                    class="text-danger">*</span></label>
+                                            <label for="series_id" class="col-sm-3 col-form-label"> Series </label>
                                             <div class="col-sm-9">
                                                 <select name="series_id" class="form-control form-control-sm shadow-none"
                                                     id="series_id">
@@ -574,6 +567,50 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="col-sm-12 my-2">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 style="margin-bottom: 0; font-size:18px;"> SEO Information
+                                                            </h4>
+                                                        </div>
+
+                                                        <div class="card-body border pt-2">
+                                                            <div class="form-group row">
+                                                                <label for="meta_title"
+                                                                    class="col-sm-3 col-form-label">Meta
+                                                                    Title</label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" name="meta_title"
+                                                                        class="form-control form-control-sm shadow-none"
+                                                                        id="meta_title">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="meta_description"
+                                                                    class="col-sm-3 col-form-label">Meta
+                                                                    Description</label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" name="meta_description"
+                                                                        class="form-control form-control-sm shadow-none"
+                                                                        id="meta_description">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group row">
+                                                                <label for="meta-keywords"
+                                                                    class="col-sm-3 col-form-label">Meta
+                                                                    Keywords</label>
+                                                                <div class="col-sm-9">
+                                                                    <input type="text" name="meta_keywords"
+                                                                        class="form-control form-control-sm shadow-none"
+                                                                        id="meta-keywords">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
 
@@ -688,27 +725,6 @@
                 $("#materialId").hide();
                 $("#seriesId").hide();
             }
-
-
-
-            var data = {
-                brand_id: brand_id,
-                category_id: category_id
-            };
-
-            // $.ajax({
-            //     type: "POST",
-            //     url: "{{ url('material-get') }}",
-            //     dataType: "json",
-            //     data: data,
-            //     success: function(res) {
-            //         $('#material_id').empty();
-            //         $.each(res, function(key, value) {
-            //             $('#material_id').append('<option value="' + value.id +
-            //                 '">' + value.name + '</option>');
-            //         });
-            //     }
-            // });
 
         });
     </script>

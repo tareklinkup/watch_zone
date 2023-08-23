@@ -101,9 +101,10 @@
                                                 <label>Shipping Area <small class="text-danger"
                                                         title="required">*</small></label>
                                                 <div class="select-style">
-                                                    <select class="select-active" id="district" required name="area">
+                                                    <select class="select-active @error('area') is-invalid @enderror"
+                                                        id="area" required name="area">
                                                         <option>Select an option…</option>
-                                                        <option value="80">Inside Dhaka</option>
+                                                        <option value="80" selected>Inside Dhaka</option>
                                                         <option value="150">Outside Dhaka</option>
                                                     </select>
                                                     @error('area')
@@ -118,7 +119,9 @@
                                                 <label>District/City
                                                     <small class="text-danger" title="required">*</small> </label>
                                                 <div class="select-style">
-                                                    <select class="select-active" id="district" name="district">
+                                                    <select
+                                                        class="select2 select-active @error('district') is-invalid @enderror"
+                                                        id="district" name="district" required>
                                                         <option>Select an option…</option>
                                                         @foreach ($district as $item)
                                                             <option value="{{ $item->id }}">{{ $item->name }}
@@ -246,7 +249,8 @@
                                                                     <p style="font-size: 14px">{{ $cart->name }}</p>
                                                                 </div>
                                                                 <div class="col-lg-2"> {{ $cart->qty }} ×</div>
-                                                                <div class="col-lg-2"><span>৳ {{ $cart->subtotal }}
+                                                                <div class="col-lg-2"><span>৳
+                                                                        {{ number_format($cart->subtotal, 2) }}
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -256,7 +260,7 @@
                                             </div>
 
                                             <div class="your-order-subtotal">
-                                                <h3>Subtotal <span>{{ $cartTotal }}</span></h3>
+                                                <h3>Subtotal <span>{{ number_format($cartTotal, 2) }}</span></h3>
                                                 <input style="display: none;" type="text"
                                                     class="form-control shadow-none" id="SubAmount"
                                                     value="{{ $cartTotal }}">
@@ -312,10 +316,7 @@
 
                                         </div>
 
-
-
                                     </div>
-
 
                                     @auth('customer')
                                         <div class="place-order">
@@ -354,8 +355,6 @@
         </div>
 
     </main>
-
-
 @endsection
 
 @push('web_script')
@@ -369,7 +368,7 @@
         $(document).ready(function() {
             $('.showDiv').hide();
 
-            $('#district').on('change', function() {
+            $('#area').on('change', function() {
                 var data = $(this).val();
                 $('#ShipCharge').text("");
                 $('#totalAmount').text("");
@@ -389,6 +388,7 @@
                 } else {
                     alert('danger');
                 }
+
             });
 
 

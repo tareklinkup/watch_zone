@@ -1,5 +1,7 @@
 @extends('layouts.web_master')
-@section('title', 'Product Brand')
+@section('title', $brandMeta->meta_title)
+@section('meta_description', $brandMeta->meta_description)
+@section('meta_keywords', $brandMeta->meta_keywords)
 @push('name')
     <link rel="stylesheet" href="https://unpkg.com/vue-select@3.0.0/dist/vue-select.css">
 
@@ -598,7 +600,7 @@
                 getProducts() {
                     axios.post('/get-products', {
                             brandId: this.brandId,
-                            categoryId: this.categoryId
+                            catId: this.categoryId
                         })
                         .then(res => {
                             this.products = res.data;
@@ -707,7 +709,6 @@
                         })
                 },
 
-
                 getCasesizeByCategory() {
 
                     axios.post('/get-case-size-category', {
@@ -721,7 +722,7 @@
                 getProductFilters() {
                     axios.post('/get-filter-products', {
                             brandId: this.brandId,
-                            categoryId: this.selectedCategories,
+                            catId: this.selectedCategories,
                             series: this.selectedSeries,
                             brandMaterial: this.selectedMaterial,
                             dialColor: this.selectdialColor,
@@ -742,7 +743,7 @@
 
                     axios.post('/get-filter-products', {
                             brandId: this.brandId,
-                            categoryId: this.selectedCategories,
+                            catId: this.selectedCategories,
                             sortBy: this.sortBy
                         })
                         .then(res => {
@@ -772,7 +773,7 @@
                     this.selectdialColor = [];
                     axios.post('/get-filter-products', {
                             brandId: this.brandId,
-                            categoryId: this.selectedCategories,
+                            catId: this.selectedCategories,
                             series: this.selectedSeries,
                             sortBy: this.sortBy
                         })
@@ -787,7 +788,7 @@
                     this.selectdialColor = [];
                     axios.post('/get-filter-products', {
                             brandId: this.brandId,
-                            categoryId: this.selectedCategories,
+                            catId: this.selectedCategories,
                             brandMaterial: this.selectedMaterial,
                             sortBy: this.sortBy
                         })
@@ -802,7 +803,7 @@
                     this.selectedMaterial = [];
                     axios.post('/get-filter-products', {
                             brandId: this.brandId,
-                            categoryId: this.selectedCategories,
+                            catId: this.selectedCategories,
                             movement: this.selectmovements,
                             sortBy: this.sortBy
                         })
@@ -817,7 +818,7 @@
                     this.selectmovements = [];
                     axios.post('/get-filter-products', {
                             brandId: this.brandId,
-                            categoryId: this.selectedCategories,
+                            catId: this.selectedCategories,
                             dialColor: this.selectdialColor,
                             sortBy: this.sortBy
                         })
@@ -832,7 +833,7 @@
                     this.selectdialColor = [];
                     axios.post('/get-filter-products', {
                             brandId: this.brandId,
-                            categoryId: this.selectedCategories,
+                            catId: this.selectedCategories,
                             caseSize: this.selectCaseSize,
                             sortBy: this.sortBy
                         })

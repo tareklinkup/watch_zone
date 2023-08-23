@@ -15,7 +15,7 @@ class CategoryController extends Controller
     {
         $this->middleware(['permission:Category Management']);
     }
-    
+
     public function index()
     {
         $brands = Brand::get();
@@ -23,16 +23,19 @@ class CategoryController extends Controller
         return view('admin.category', compact('categories', 'brands'));
     }
 
-    public function store(Request $request) 
+    public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|min:3',
         ]);
-        
+
         try {
             $category = new Category();
             $category->name = $request->name;
             $category->slug = Str::slug($request->name);
+            $category->meta_title = $request->meta_title;
+            $category->meta_description = $request->meta_description;
+            $category->meta_keywords = $request->meta_keywords;
             $category->brandChild = $request->brandChild ? join(',', $request->brandChild) : '';
             $category->image = $this->imageUpload($request, 'image', 'uploads/category');
             $category->is_homepage = $request->is_homepage;
@@ -58,7 +61,7 @@ class CategoryController extends Controller
         $brands = Brand::get();
         return view ('admin.category', compact('categories', 'brands', 'brands_child', 'categoryData'));
 
-       
+
     }
 
     public function update(Request $request, $id)
@@ -68,19 +71,22 @@ class CategoryController extends Controller
             'name' => 'required',
             'image' => 'Image|mimes:jpg,png,gif,webp'
         ]);
-        
+
         try {
             $category = Category::find($id);
             //category image update
             $categoryImg = $category->image;
             if ($request->hasFile('image')) {
-                if (!empty($category->image) && file_exists($category->image)) 
+                if (!empty($category->image) && file_exists($category->image))
                     unlink($category->image);
                 $categoryImg = $this->imageUpload($request, 'image', 'uploads/category');
             }
 
             $category->name = $request->name;
             $category->slug = Str::slug($request->name);
+            $category->meta_title = $request->meta_title;
+            $category->meta_description = $request->meta_description;
+            $category->meta_keywords = $request->meta_keywords;
             $category->brandChild = $request->brandChild ? join(',', $request->brandChild) : '';
             $category->image = $categoryImg;
             $category->is_homepage = $request->is_homepage;
@@ -139,5 +145,5 @@ class CategoryController extends Controller
     }
 
 
-   
+
 }

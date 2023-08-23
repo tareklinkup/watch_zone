@@ -68,7 +68,7 @@
         <!--== End Page Header Area Wrapper ==-->
         <section>
             <div class="container">
-                <div class="side_bar mt-3 d-block d-md-none">
+                <div class="side_bar mt-3 d-block d-md-none" style="float:left">
                     <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
                         aria-controls="offcanvasExample">
                         <i class="fa fa-bars"></i> <span>Filters</span>
@@ -89,7 +89,7 @@
 
                             </div>
                             <div class="col-md-3">
-                                <div class="product_sort">
+                                <div class="product_sort" style="margin-top: -16px;">
                                     <select name="sortBy" v-model="sortBy" class="form-control shadow-none"
                                         @@change="getProductFilters">
                                         <option value="">Sort By Products</option>
@@ -180,7 +180,7 @@
                     <div class="col-lg-4 col-xl-3 order-1 order-lg-0 d-none d-md-block">
                         <!--== Start Sidebar Area Wrapper ==-->
                         <div class="sidebar-area mt-10 mt-lg-0 accordion" id="accordionExample">
-                            <form action="" id="filter-form">
+                            <form action="" id="filter-form" v-if="categoryId == 1 || categoryId == 2">
                                 <div class="widget-item widget-item-one ">
 
                                     <h4 class="accordion-header" id="headingTwo4">
@@ -543,12 +543,16 @@
                             this.proImage = '/uploads/product/thumbnail/' + res.data[0].image;
                             console.log(this.proImage);
                         })
+
+                    console.log(this.categoryId);
                 },
                 getBrands() {
                     axios.get('/get-brands')
                         .then(res => {
                             this.brands = res.data;
                         })
+
+                    console.log(this.categoryId);
                 },
                 getSeries() {
                     axios.post('/get-series', {

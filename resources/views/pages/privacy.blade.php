@@ -11,14 +11,13 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="page-header-content">
-                            <h2 class="page-header-title">Privacy Policy</h2>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home //</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Privacy Policy</li>
                             </ol>
                         </div>
                     </div>
-                 
+
                 </div>
             </div>
         </div>

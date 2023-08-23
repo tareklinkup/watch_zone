@@ -46,19 +46,19 @@
                 @endif
 
 
-                @if ( auth()->user()->can('Product Add') ||
+                @if (auth()->user()->can('Product Add') ||
                         auth()->user()->can('Product List') ||
                         auth()->user()->can('Product Edit') ||
-                        auth()->user()->can('Product Delete')||
-                        auth()->user()->can('All Product List')||
-                        auth()->user()->can('Select Product')||
-                        auth()->user()->can('Sale Product')||
-                       auth()->user()->can('Category Management') ||
+                        auth()->user()->can('Product Delete') ||
+                        auth()->user()->can('All Product List') ||
+                        auth()->user()->can('Select Product') ||
+                        auth()->user()->can('Sale Product') ||
+                        auth()->user()->can('Category Management') ||
                         auth()->user()->can('Brand Management') ||
-                        auth()->user()->can('Series Entry')||
-                        auth()->user()->can('Brand Material')||
-                        auth()->user()->can('Dial Color')||
-                        auth()->user()->can('Case Size')||
+                        auth()->user()->can('Series Entry') ||
+                        auth()->user()->can('Brand Material') ||
+                        auth()->user()->can('Dial Color') ||
+                        auth()->user()->can('Case Size') ||
                         auth()->user()->can('Movement Entry'))
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
                         data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -94,19 +94,19 @@
                                 <a class="nav-link" href="{{ route('series.index') }}">Series Entry</a>
                             @endcan
                             @can('Brand Material')
-                                <a class="nav-link" href="{{ route('material.index') }}">Brand Material</a>
+                                <a class="nav-link" href="{{ route('material.index') }}">Band Material</a>
                             @endcan
                             @can('Dial Color')
                                 <a class="nav-link" href="{{ route('color.index') }}">Dial Color</a>
                             @endcan
                             @can('Case Size')
-                                <a class="nav-link" href="{{route('size.index')}}">Case Size</a>
+                                <a class="nav-link" href="{{ route('size.index') }}">Case Size</a>
                             @endcan
                             @can('Movement Entry')
-                                <a class="nav-link" href="{{route('movement.index')}}">Movement Entry</a>
+                                <a class="nav-link" href="{{ route('movement.index') }}">Movement Entry</a>
                             @endcan
-                        
-                        
+
+
                         </nav>
                     </div>
                 @endif
@@ -137,7 +137,7 @@
                             @can('Processing Order')
                                 <a class="nav-link" href="{{ route('admin.processing.order') }}">Processing Order</a>
                             @endcan
-                         
+
                             @can('Delivered Order')
                                 <a class="nav-link" href="{{ route('admin.delivered.order') }}">Delivered Order</a>
                             @endcan
@@ -201,7 +201,7 @@
                             @can('Company Profile')
                                 <a class="nav-link" href="{{ route('company.profiles') }}">Company Profile</a>
                             @endcan
-                            
+
                             @can('Coupon')
                                 <a class="nav-link collapsed" href="{{ route('admin.coupons') }}">Add Coupon</a>
                             @endcan
@@ -209,12 +209,12 @@
                                 <a class="nav-link collapsed" href="{{ route('district.index') }}">Add District</a>
                             @endcan
 
-                           
+
                         </nav>
                     </div>
                 @endif
 
-             
+
 
                 @if (auth()->user()->can('Public Message'))
                     <a class="nav-link {{ Request::is('visitor.index') ? 'active' : '' }}"

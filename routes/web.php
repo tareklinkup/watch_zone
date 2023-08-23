@@ -1,15 +1,19 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\SeriesController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\Website\HomeController;
@@ -17,19 +21,16 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DistrictController;
+use App\Http\Controllers\Admin\MovementController;
 use App\Http\Controllers\Website\SearchController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Website\CheckoutController;
 use App\Http\Controllers\Website\CustomerController;
+use App\Http\Controllers\Admin\SaleServiceController;
+use App\Http\Controllers\Admin\BrandMaterialController;
 use App\Http\Controllers\Admin\CompanypolicyController;
 use App\Http\Controllers\Admin\AuthenticationController;
-use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Admin\BrandMaterialController;
 use App\Http\Controllers\Admin\CompanyprofileController;
-use App\Http\Controllers\Admin\FaqController;
-use App\Http\Controllers\Admin\MovementController;
-use App\Http\Controllers\Admin\SaleServiceController;
-use App\Http\Controllers\Admin\SeriesController;
 use App\Http\Controllers\Website\CustomerdashboardController;
 
 /*
@@ -61,6 +62,8 @@ Route::get('/category-brand/{id}', [HomeController::class, 'CategoryBand']);
 Route::get('/getCartAjax', [HomeController::class, 'GetCartAjax'])->name('get.cart.ajax');
 Route::get('/get-total-amount', [HomeController::class, 'getTotalAmount'])->name('getTotal.Amount');
 Route::get('/add-cart-ajax/{id}', [CartController::class, 'addToCartAjax'])->name('add.cart.ajax');
+
+Route::post('/add-cart', [CartController::class, 'addCart'])->name('add-cart');
 
 // product filter
 Route::post('/search-product', [HomeController::class, 'filter_products_range'])->name('search.products');
@@ -154,7 +157,9 @@ Route::group(['middleware' => 'customer'], function () {
     //Checkout Routes
     Route::get('/get-shipamount/{id}', [CartController::class, 'getShipAmount'])->name('get.ship.amount');
     Route::post('/checkout/store', [CheckoutController::class, 'checkoutStore'])->name('checkout.store');
+    Route::get('/sms-check', [HomeController::class, 'sendMsgs']);
 });
+
 Route::get('/product/checkout', [CartController::class, 'checkout'])->name('product.checkout');
 
 Route::group(['middleware' => 'guest'], function () {

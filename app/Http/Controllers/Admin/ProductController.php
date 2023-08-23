@@ -93,7 +93,6 @@ class ProductController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
-            'model' => 'required',
             'selling_price' => 'required',
             'quantity' => 'required',
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg,webp',
@@ -101,7 +100,7 @@ class ProductController extends Controller
         ]);
         try{
 
-              $price = $request->selling_price;
+        $price = $request->selling_price;
         $discount = (isset($request->discount_price) && $request->discount_price == 0) ? 0 : $request->discount_price;
 
         $image = $request->file('image');
@@ -121,7 +120,7 @@ class ProductController extends Controller
         $product->movement_id = $request->movement_id ?? null;
         $product->name = $request->name;
         $product->slug = Str::slug($request->name);
-        $product->model = $request->model;
+        $product->model = $request->model ?? null;
         $product->selling_price = $request->selling_price;
         $product->discount = $request->discount;
         $product->discount_price = $discount ?? 0;
@@ -129,8 +128,11 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->quantity = $request->quantity;
         $product->warranty = $request->warranty ?? null;
+        $product->meta_title = $request->meta_title ?? null;
+        $product->meta_description = $request->meta_description ?? null;
+        $product->meta_keywords = $request->meta_keywords ?? null;
         $product->resistant = $request->resistant ?? null;
-        $product->image      = $Image;
+        $product->image     = $Image;
         $product->thumb_image = $thumbImage;
         $product->otherimage = $this->imageUpload($request, 'otherimage', 'uploads/product');
         $product->ip_address = $request->ip();
@@ -312,15 +314,18 @@ class ProductController extends Controller
         $product->movement_id = $request->movement_id ?? null;
         $product->name = $request->name;
         $product->slug = Str::slug($request->name);
-        $product->model = $request->model;
+        $product->model = $request->model ?? null;
         $product->selling_price = $request->selling_price;
+        $product->meta_title = $request->meta_title ?? null;
+        $product->meta_description = $request->meta_description ?? null;
+        $product->meta_keywords = $request->meta_keywords ?? null;
         $product->discount = $request->discount;
         $product->discount_price = $discount ?? 0;
         $product->short_desc = $request->short_desc;
         $product->description = $request->description;
         $product->quantity = $request->quantity;
         $product->warranty = $request->warranty;
-        $product->resistant = $request->resistant;
+        $product->resistant = $request->resistant ?? null;
         $product->image  = $Image;
         $product->thumb_image  = $thumbImage;
         $product->otherimage = $anotherImage;

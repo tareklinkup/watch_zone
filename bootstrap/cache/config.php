@@ -3,7 +3,7 @@
   array (
     'name' => 'Watch Zone',
     'env' => 'production',
-    'debug' => false,
+    'debug' => true,
     'url' => 'http://localhost',
     'asset_url' => NULL,
     'timezone' => 'Asia/Dhaka',

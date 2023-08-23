@@ -159,8 +159,8 @@
                                             </div>
                                         @endforeach
                                         <div class="row border-bottom">
-                                            <div class="col-6"><strong>Shipping Charge:</strong></div>
-                                            <div class="col-6 text-end">{{ number_format($order->ship_charge, 2) }}</div>
+                                            <div class="col-8"><strong> Shipping Charge:</strong></div>
+                                            <div class="col-4 text-end">{{ number_format($order->ship_charge, 2) }}</div>
                                         </div>
                                         <div class="row border-bottom">
                                             <div class="col-5"><strong>Total Amount:</strong></div>

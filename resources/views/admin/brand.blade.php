@@ -29,7 +29,7 @@
                                 @csrf
 
                                 <div class="form-group row">
-                                   
+
                                     <label for="title" class="col-sm-3 col-form-label">Name</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="name" value="{{ @$brandData->name }}"
@@ -38,6 +38,29 @@
                                             <span style="color: red">{{ $message }}</span>
                                         @enderror
                                     </div>
+
+                                    <h5 class="text-center">SEO</h5>
+
+                                    <label for="meta_title" class="col-sm-3 col-form-label">Meta Title</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="meta_title" value="{{ @$brandData->meta_title }}"
+                                            class="form-control form-control-sm shadow-none" id="meta_title">
+                                    </div>
+
+                                    <label for="meta_description" class="col-sm-3 col-form-label">Description</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="meta_description"
+                                            value="{{ @$brandData->meta_description }}"
+                                            class="form-control form-control-sm shadow-none" id="meta_title">
+                                    </div>
+
+
+                                    <label for="meta_keywords" class="col-sm-3 col-form-label">Meta Keywords</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="meta_keywords" value="{{ @$brandData->meta_keywords }}"
+                                            class="form-control form-control-sm shadow-none" id="meta_keywords">
+                                    </div>
+
                                     <label for="name" class="col-sm-3 col-form-label">Is Homepage</label>
                                     <div class="col-sm-9">
                                         <input type="checkbox" name="is_homepage" id="is_homepage"

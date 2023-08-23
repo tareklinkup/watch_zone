@@ -2,22 +2,16 @@
 
 namespace App\Http\Controllers\Website;
 
-use App\Models\Blog;
+
 use App\Models\About;
 use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Slider;
 use App\Models\Contact;
-use App\Models\Ourteam;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\ClientSay;
-use App\Models\Subscribe;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
-use App\Models\CompanyPolicy;
-use App\Models\CompanyProfile;
-use App\Models\TrendingProduct;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\BrandMaterial;
@@ -33,8 +27,6 @@ use App\Models\ProductItem;
 use App\Models\ProductMovement;
 use App\Models\Series;
 use App\Models\Size;
-use Illuminate\Support\Facades\Mail;
-use Gloudemans\Shoppingcart\Facades\Cart;
 
 class HomeController extends Controller
 {
@@ -53,13 +45,15 @@ class HomeController extends Controller
     public function category($cat)
     {
         $category_id = Category::where('slug', $cat)->first()->id;
-        // dd($product);
-        $product = Product::with(['brand', 'images'])->where('brand_id', $category_id)->orderBy('id', 'desc');
+        //  dd($category_id);
+        $product = Product::with(['brand', 'images'])->where('category_id', $category_id)->orderBy('id', 'desc');
         $product = $product->paginate(200);
         $brands = Brand::with('product')->orderBy('id', 'desc')->get();
         $categories = Category::with('products')->orderBy('id', 'desc')->take(6)->get();
-        return view('pages.category', compact('product', 'brands', 'categories'));
+        $metaCategories = Category::find($category_id);
+        return view('pages.category', compact('product', 'brands', 'categories', 'metaCategories'));
     }
+
     public function saleProduct()
     {
         $product = Product::with(['brand', 'images'])->where('sale', 1)->orderBy('quantity', 'desc');
@@ -68,6 +62,7 @@ class HomeController extends Controller
         $categories = Category::with('products')->orderBy('id', 'asc')->take(2)->get();
         return view('pages.product_sale', compact('product', 'brands', 'categories'));
     }
+
       // Brand Product Page
       public function brand($brand)
       {
@@ -76,8 +71,10 @@ class HomeController extends Controller
 
           $brand_id = Brand::where('slug', $brand)->first()->id;
 
+          $brandMeta = Brand::find($brand_id);
 
           $product = Product::with(['brand', 'images'])->where('brand_id', $brand_id)->orderBy('quantity', 'desc');
+
         //     echo "<pre>";
         //      print_r($product);
         //   echo "<pre/>";
@@ -122,7 +119,7 @@ class HomeController extends Controller
         $data['brandId'] = $brandId;
 
         $data['categoryId'] = $categoryId;
-          return view('pages.product_brand', $data, compact('product'));
+          return view('pages.product_brand', $data, compact('product', 'brandMeta'));
 
       }
 
@@ -212,9 +209,16 @@ class HomeController extends Controller
     //     return view('pages.parent_product', compact('categories'));
     // }
 
+    public function sendMsgs()
+    {
+
+        $this->sendSms();
+    }
+
     public function show($slug)
     {
         $product = Product::with('productImage')->where('slug', $slug)->first();
+        $productMeta = Product::find($product->id);
         $productItem = ProductItem::where('product_id', $product->id)->get();
         $productCase = ProductCase::where('product_id', $product->id)->get();
         $productDial = ProductDial::where('product_id', $product->id)->get();
@@ -224,9 +228,9 @@ class HomeController extends Controller
         $product_images = ProductImage::where('product_id', $product->id)->get();
         if (isset($product->category_id)) {
             $category_id = $product->category_id;
-            $related = Product::where('category_id', '=', $product->category->id)->where('brand_id', '=', $product->brand->id)->where('id', '!=', $product->id)->limit('4')->get();
+            $related = Product::where('category_id', '=', $product->category->id)->where('brand_id', '=', $product->brand->id)->where('id', '!=', $product->id)->limit('5')->get();
         }
-        return view('pages.product_single', compact('product', 'product_images', 'related','productItem', 'productCase', 'productBand', 'productDial', 'productMovement', 'productAddition'));
+        return view('pages.product_single', compact('product', 'product_images', 'related','productItem', 'productCase', 'productBand', 'productDial', 'productMovement', 'productAddition', 'productMeta'));
     }
 
     // Send Public Message
@@ -461,21 +465,26 @@ class HomeController extends Controller
 
         $products = Product::with(['brand', 'category'])->where('status', true);
 
-        if (isset($req->productId)) {
-            $products = $products->where('id', $req->productId);
+        if(isset($req->catId) && isset($req->brandId))
+        {
+            $products = $products->where(['category_id' => $req->catId, 'brand_id' => $req->brandId]);
         }
 
-        if (isset($req->brandId)) {
-            $products = $products->where('brand_id', $req->brandId);
-        }
+        // if (isset($req->productId)) {
+        //     $products = $products->where('id', $req->productId);
+        // }
 
-        if (isset($req->categoryId)) {
-            $products = $products->where('category_id', $req->categoryId);
-        }
+        // if (isset($req->brandId)) {
+        //     $products = $products->where('brand_id', $req->brandId);
+        // }
 
-        if (isset($req->categoryId) && $req->categoryId != []) {
-            $products = $products->whereIn('category_id', $req->categoryId);
-        }
+          // if (isset($req->catId)) {
+        //     $products = $products->where('category_id', $req->catId);
+        // }
+
+        // if (isset($req->catId) && $req->catId != []) {
+        //     $products = $products->whereIn('category_id', $req->catId);
+        // }
 
 
         if (isset($req->series) && $req->series != []) {
@@ -491,6 +500,7 @@ class HomeController extends Controller
         if (isset($req->movement) && $req->movement != []) {
             $products = $products->whereIn('movement_id', $req->movement);
         }
+
         if (isset($req->caseSize) && $req->caseSize != []) {
             $products = $products->whereIn('size_id', $req->caseSize);
         }

@@ -26,6 +26,9 @@ class BrandController extends Controller
         try {
             $brand = new Brand();
             $brand->name = $request->name;
+            $brand->meta_title = $request->meta_title;
+            $brand->meta_description = $request->meta_description;
+            $brand->meta_keywords = $request->meta_keywords;
             $brand->slug = Str::slug($request->name);
             $brand->image = $this->imageUpload($request, 'image', 'uploads/brand');
             $brand->is_homepage = $request->is_homepage;
@@ -67,12 +70,15 @@ class BrandController extends Controller
 
             $brandImg = $brand->image;
             if ($request->hasFile('image')) {
-                if (!empty($brand->image) && file_exists($brand->image)) 
+                if (!empty($brand->image) && file_exists($brand->image))
                     unlink($brand->image);
                 $brandImg = $this->imageUpload($request, 'image', 'uploads/brand');
             }
 
             $brand->name = $request->name;
+            $brand->meta_title = $request->meta_title;
+            $brand->meta_description = $request->meta_description;
+            $brand->meta_keywords = $request->meta_keywords;
             $brand->slug = Str::slug($request->name);
             $brand->image = $brandImg;
             $brand->is_homepage = $request->is_homepage;
@@ -99,13 +105,13 @@ class BrandController extends Controller
     {
         try {
             $checkProduct  = Product::where('category_id', $id)->count();
-          
+
             if($checkProduct > 0) {
                 return response()->json([
                     'message'=>'This Brand Already Used in product.Please! Product delete first',
                    'error' => true
                 ]);
-             
+
             }
             $brand = Brand::find($request->id);
             if($brand){
@@ -125,7 +131,7 @@ class BrandController extends Controller
                 'message'=>'data deleted failed',
                 'success'=> false
             ]);
-        } 
+        }
     }
 
     public function getBrands()

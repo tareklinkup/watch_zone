@@ -23,6 +23,8 @@ class CheckoutController extends Controller
             'phone' => 'required|digits:11',
             'address' => 'required|max:191',
             'order_total' => 'required',
+            'area' => 'required',
+            'district' => 'required',
             'total_amount' => 'required',
         ]);
 
@@ -71,10 +73,12 @@ class CheckoutController extends Controller
 
             DB::commit();
 
+            $this->sms("Your orders successfully completed", $request->phone);
             $notification = array(
                 'message'=>'Your Order Taken Successfully',
                 'alert-type'=>'success'
             );
+
             return Redirect()->route('customer.order.show', $order->id)->with($notification);
 
         } catch (\Exception $e) {

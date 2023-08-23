@@ -7,7 +7,8 @@
     <title>@yield('title') | {{ $content->com_name }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="robots" content="noindex, follow" />
-    <meta name="description" content="" />
+    <meta name="description" content="@yield('meta_description')" />
+    <meta name="keywords" content="@yield('meta_keywords')" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset($content->logo) }}" />
@@ -20,6 +21,7 @@
     <link rel="stylesheet" href="{{ asset('website/css/plugins/simple-line-icons.css') }}" />
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}" />
+    <link rel="canonical" href="{{ url()->current() }}">
 
     <link rel="stylesheet" href="{{ asset('website/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('website/css/custom.css') }}" />
@@ -374,7 +376,7 @@
         $(document).ready(function() {
             $(".buynow").on("click", function() {
                 var id = $(this).data('id');
-                // alert(id);
+                alert(id);
                 if (id) {
                     $.ajax({
                         url: "{{ url('/product/cart/buying/') }}/" + id,
@@ -382,7 +384,6 @@
                         dataType: "json",
                         success: function(data) {
                             miniCart();
-
                             //  start message
                             const Toast = Swal.mixin({
                                 toast: true,
@@ -423,8 +424,9 @@
                 dataType: "json",
                 success: function(response) {
                     //console.log(response);
+                    let total = parseFloat(response.cartTotal).toFixed(2);
 
-                    $('span[id="cartSubTotal"]').text(response.cartTotal);
+                    $('span[id="cartSubTotal"]').text(total);
                     $('#cartQty').text(response.cartQty);
 
                     var miniCart = '';
@@ -675,17 +677,17 @@
         }
 
         //Cart Increment
-        function cartIncrement(rowId) {
-            $.ajax({
-                type: 'GET',
-                url: "{{ url('/cart-increment/') }}/" + rowId,
-                dataType: 'json',
-                success: function(data) {
-                    cart();
-                    miniCart();
-                }
-            });
-        }
+        // function cartIncrement(rowId) {
+        //     $.ajax({
+        //         type: 'GET',
+        //         url: "{{ url('/cart-increment/') }}/" + rowId,
+        //         dataType: 'json',
+        //         success: function(data) {
+        //             cart();
+        //             miniCart();
+        //         }
+        //     });
+        // }
 
         //Cart Decrement
         function cartDecrement(rowId) {

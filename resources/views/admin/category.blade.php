@@ -31,23 +31,46 @@
 
                                 <div class="form-group row">
 
-
-                                    
-
                                     <label for="name" class="col-sm-3 col-form-label">Category</label>
                                     <div class="col-sm-9">
                                         <input type="text" name="name" id="name"
                                             value="{{ @$categoryData->name }}"
                                             class="form-control shadow-none form-control-sm @error('name') is-invalid @enderror">
                                     </div>
+
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+
+                                    <h5 class="text-center">SEO</h5>
+                                    <label for="meta_title" class="col-sm-3 col-form-label">Meta Title</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="meta_title" id="meta_title"
+                                            value="{{ @$categoryData->meta_title }}"
+                                            class="form-control shadow-none form-control-sm @error('name') is-invalid @enderror">
+                                    </div>
+
+                                    <label for="meta_description" class="col-sm-3 col-form-label">Meta Description</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="meta_description" id="meta_description"
+                                            value="{{ @$categoryData->meta_description }}"
+                                            class="form-control shadow-none form-control-sm @error('name') is-invalid @enderror">
+                                    </div>
+
+                                    <label for="meta_keywords" class="col-sm-3 col-form-label">Meta Keywords</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="meta_keywords" id="meta_keywords"
+                                            value="{{ @$categoryData->meta_keywords }}"
+                                            class="form-control shadow-none form-control-sm @error('name') is-invalid @enderror">
+                                    </div>
+
+
                                     <label for="name" class="col-sm-3 col-form-label">Is Homepage</label>
                                     <div class="col-sm-9">
-                                        <input type="checkbox" name="is_homepage" id="is_homepage" {{ !empty($categoryData->is_homepage) ? 'checked' : ''}} value="1">
+                                        <input type="checkbox" name="is_homepage" id="is_homepage"
+                                            {{ !empty($categoryData->is_homepage) ? 'checked' : '' }} value="1">
                                     </div>
                                     <label for="name" class="col-sm-3 col-form-label">Brands</label>
                                     <div class="col-sm-9">
@@ -71,7 +94,7 @@
                                     <div class="col-sm-9 mt-2">
                                         <input type="file" name="image"
                                             class="form-control shadow-none @error('image') is-invalid @enderror"
-                                            id="image"  onchange="mainThambUrl(this)">
+                                            id="image" onchange="mainThambUrl(this)">
 
                                         @error('image')
                                             <span class="invalid-feedback" role="alert">
@@ -165,17 +188,15 @@
     </main>
 @endsection
 @push('scripts')
-<script>
-    function mainThambUrl(input){
-      if (input.files && input.files[0]) {
-        var reader    = new FileReader();
-        reader.onload = function(e){
-            $('#mainThmb').attr('src',e.target.result).width(80).height(80);
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-</script>
-
-
+    <script>
+        function mainThambUrl(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#mainThmb').attr('src', e.target.result).width(80).height(80);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endpush

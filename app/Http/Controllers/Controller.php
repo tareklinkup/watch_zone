@@ -11,8 +11,27 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public function sendSms()
+    {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://api.sms.net.bd/sendsms',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => array(
+            'api_key' => 'gsn32LmNJ57EYTfE371C68M64An69DiJRGIIcL81',
+            'msg' => 'Order successfully completed',
+            'to' => '8801868332991'
+        ),
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+        return "Success";
 
-    // image upload 
+    }
+
+
+    // image upload
     public function imageUpload($request, $name, $directory)
     {
         $doUpload = function ($image) use ($directory) {
@@ -51,5 +70,5 @@ class Controller extends BaseController
         }
         return $prefix . $code;
     }
-    
+
 }

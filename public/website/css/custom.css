@@ -276,17 +276,16 @@
 .sub-header {
     /* background-color: #052043; */
     background-color: #052043;
-    width: 88%;
+    width: 100%;
     margin: auto;
 }
 
-.header-border {
+/* .header-border {
     padding: 2px 0px;
     background-color: #052043;
-    width: 88%;
+    width: 86%;
     margin: auto;
-}
-
+} */
 
 .sub-header h3 {
     color: #fff;
@@ -656,7 +655,7 @@
 }
 
 .feature-svg .svg-name {
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 
@@ -736,10 +735,18 @@
 
 
     .feature-svg {
-        border-right: 1px solid #e5e5e5;
+        /* border-right: 1px solid #e5e5e5; */
         display: block;
         text-align: center;
+        margin-bottom: 10px;
     }
+
+    .svg-name {
+        font-size: 13px;
+        font-weight: 600px;
+    }
+
+
 
 
     .header-top-action-area ul li {

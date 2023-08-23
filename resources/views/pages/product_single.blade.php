@@ -1,5 +1,8 @@
 @extends('layouts.web_master')
-@section('title', 'Product Details')
+@section('title', $productMeta->meta_title)
+@section('meta_description', $productMeta->meta_description)
+@section('meta_keywords', $productMeta->meta_keywords)
+
 @push('webcss')
     <link rel="stylesheet" href="{{ asset('website/css/zoom_style.css') }}" />
     <style>
@@ -16,14 +19,22 @@
         <div class="page-header-area">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="page-header-content">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a href="{{ route('home') }}">Home //</a>
+                                <li class="breadcrumb-item" style="margin-left:8px;">
+                                    <a href="{{ route('home') }}"> Home /</a>
                                 </li>
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    {{ $product->brand->name }}
+                                    <a href="{{ route('product.cat', $product->category->slug) }}">{{ $product->category->name }}
+                                        /</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    <a href="{{ route('product.brand', $product->brand->slug) }}">
+                                        {{ $product->brand->name }} /</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    {{ $product->name }}
                                 </li>
                             </ol>
                         </div>
@@ -113,50 +124,68 @@
                                 @endif
                             </div>
                             <ul class="product-detail-meta">
-                                <li><span><strong>Model :</strong> </span> {{ $product->model }}</li>
-                                <li><span><strong>Movement :</strong> </span> {{ optional($product->movement)->name }}</li>
-                                <li><span><strong>Case Size :</strong> </span> {{ optional($product->size)->name }}</li>
-                                <li><span><strong>Water Resistance :</strong></span> {{ $product->resistant }}</li>
-                                <li><span><strong>Warranty :</strong> </span> {{ $product->warranty }}</li>
+                                @if (isset($product->model))
+                                    <li><span><strong>Model :</strong> </span> {{ $product->model }}</li>
+                                @endif
+                                @if (isset($product->movement->name))
+                                    <li><span><strong>Movement :</strong> </span> {{ $product->movement->name }}
+                                    </li>
+                                @endif
+                                @if (isset($product->size->name))
+                                    <li><span><strong>Case Size :</strong> </span> {{ $product->size->name }}
+                                    </li>
+                                @endif
+                                @if (isset($product->resistant))
+                                    <li><span><strong>Water Resistance :</strong></span> {{ $product->resistant }}</li>
+                                @endif
+                                @if (isset($product->warranty))
+                                    <li><span><strong>Warranty :</strong> </span> {{ $product->warranty }}</li>
+                                @endif
                                 <li><span><strong>Categories :</strong> </span> {{ $product->category->name }}</li>
                                 <li><span><strong>Availability :</strong> </span>
                                     @if ($product->quantity == 0)
                                         <span class="prd-in-stock" data-stock-status="">Out of stock</span>
                                     @else
-                                        <span class="prd-in-stock" data-stock-status="">In stock</span>
+                                        <span class="prd-in-stock" data-stock-status="">In stock
+                                            {{ $product->quantity }}</span>
                                     @endif
 
                                 </li>
                             </ul>
                             <div class="my-2 d-flex">
-                                @if ($product->quantity == 0)
-                                    <div class="pro-qty" style="display: none">
-                                        <input type="text" title="Quantity" name="qty" min="1"
-                                            value="1" />
-                                    </div>
-                                @else
-                                    <div class="pro-qty">
-                                        <input type="text" title="Quantity" name="qty" min="1"
-                                            value="1" />
-                                    </div>
-                                @endif
+                                <form action="{{ route('add-cart') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="stock" id="stock"
+                                        value="{{ $product->quantity }}">
+                                    @if ($product->quantity == 0)
+                                        <div class="pro-qty" style="display: none">
+                                            <input type="text" title="Quantity" name="qty" min="1"
+                                                value="1" />
+                                        </div>
+                                    @else
+                                        <div class="pro-qty">
+                                            <input type="text" title="Quantity" name="qty" min="0"
+                                                max="3" value="1" />
+                                        </div>
+                                    @endif
 
-                                <input type="hidden" id="product_id" value="{{ $product->id }}">
-                                @if ($product->quantity == 0)
-                                    <div class="cart-button">
-                                        <button
-                                            class="product-detail-cart-btn js-prd-addtocar addcart btn-danger text-white"
-                                            disabled type="button">Out of stock</button>
-                                    </div>
-                                @else
-                                    <button class="product-detail-cart-btn buynow me-1" value="cart" type="button"
-                                        data-id="{{ $product->id }}">
-                                        Add to cart
-                                    </button>
-                                    <button class="product-detail-cart-btn buying ms-1" type="button"
-                                        data-id="{{ $product->id }}">
-                                        Buy Now
-                                    </button>
+                                    <input type="hidden" id="product_id" name="product_id"
+                                        value="{{ $product->id }}">
+
+                                    @if ($product->quantity == 0)
+                                        <div class="cart-button">
+                                            <button
+                                                class="product-detail-cart-btn js-prd-addtocar addcart btn-danger text-white"
+                                                disabled type="button">Out of stock</button>
+                                        </div>
+                                    @else
+                                        <input type="submit" value="Add To Cart" class="product-detail-cart-btn me-1">
+                                </form>
+
+                                <button class="product-detail-cart-btn buying ms-1" type="button"
+                                    data-id="{{ $product->id }}">
+                                    Buy Now
+                                </button>
                                 @endif
                             </div>
                             <p class="product-detail-desc">
@@ -434,30 +463,29 @@
         <div class="product-area section-bottom-space" style="background-color: #fff">
             <div class="container">
                 <h2 class="section-title text-center mt-3">Related Products</h2>
-
-
                 <div class="row masonryGrid mb-n6">
-                    @foreach ($related as $related)
-                        @if ($related->quantity !== 0)
-                            <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-6 masonry-item ">
+                    @foreach ($related as $relatedPro)
+                        @if ($relatedPro->quantity !== 0)
+                            <div class="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 mb-6 masonry-item ">
                                 <!--== Start Product Item ==-->
                                 <div class="product-item">
                                     <div class="product-img">
-                                        <a href="{{ route('product.show', $related->slug) }}" class="product-item-thumb">
+                                        <a href="{{ route('product.show', $relatedPro->slug) }}"
+                                            class="product-item-thumb">
                                             <img class="pic-1 "
-                                                src="{{ asset('uploads/product/thumbnail/' . $related->thumb_image) }}"
+                                                src="{{ asset('uploads/product/thumbnail/' . $relatedPro->thumb_image) }}"
                                                 alt="productimg1">
-                                            <img class="pic-2 " src="{{ asset($related->otherimage) }}"
+                                            <img class="pic-2 " src="{{ asset($relatedPro->otherimage) }}"
                                                 alt="productimg1-2">
                                         </a>
                                     </div>
-                                    @if ($related->discount > 0)
-                                        <span class="badges">Sale-{{ round($related->discount) }}%</span>
+                                    @if ($relatedPro->discount > 0)
+                                        <span class="badges">Sale-{{ round($relatedPro->discount) }}%</span>
                                     @endif
 
                                     <div class="product-item-action product-item-action--two d-none d-md-block">
                                         <button type="button" class="product-action-btn action-btn-wishlist addcart"
-                                            data-id="{{ $related->id }}">
+                                            data-id="{{ $relatedPro->id }}">
                                             <i class="fa fa-shopping-bag"></i>
                                         </button>
 
@@ -465,21 +493,21 @@
                                     <div class="product-item-info  bg-white pb-1">
                                         <h5 class="product-item-title pt-2 mb-4">
                                             <a
-                                                href="{{ route('product.show', $related->slug) }}">{{ Str::of($related->name)->limit(63) }}</a>
+                                                href="{{ route('product.show', $relatedPro->slug) }}">{{ Str::of($relatedPro->name)->limit(63) }}</a>
                                         </h5>
 
                                         <div class="product-item-price ">
-                                            @if ($related->discount_price > 0)
+                                            @if ($relatedPro->discount_price > 0)
                                                 <span
-                                                    class="price-old pe-1">&#2547;{{ number_format($related->selling_price, 2) }}</span>
-                                                &#2547;{{ number_format($related->selling_price - $related->discount_price, 2) }}
+                                                    class="price-old pe-1">&#2547;{{ number_format($relatedPro->selling_price, 2) }}</span>
+                                                &#2547;{{ number_format($relatedPro->selling_price - $relatedPro->discount_price, 2) }}
                                             @else
                                                 <span
-                                                    class="text-center">&#2547;{{ number_format($related->selling_price, 2) }}</span>
+                                                    class="text-center">&#2547;{{ number_format($relatedPro->selling_price, 2) }}</span>
                                             @endif
                                         </div>
 
-                                        @if ($related->quantity == 0)
+                                        @if ($relatedPro->quantity == 0)
                                             <div class="cart-button text-center">
                                                 <button class="product-detail-cart-btn js-prd-addtocar addcart" disabled
                                                     type="button"> Out of stock</button>
@@ -487,12 +515,12 @@
                                         @else
                                             <div class="cart-button">
                                                 <button class="product-detail-cart-btn js-prd-addtocar addcart me-1"
-                                                    type="button" data-id="{{ $related->id }}"
+                                                    type="button" data-id="{{ $relatedPro->id }}"
                                                     data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithCartSidebar"
                                                     aria-controls="offcanvasWithCartSidebar">Add to
                                                     cart</button>
                                                 <button class="product-detail-cart-btn buynow" type="button"
-                                                    data-id="{{ $related->id }}">Buy
+                                                    data-id="{{ $relatedPro->id }}">Buy
                                                     Now</button>
                                             </div>
                                         @endif
@@ -527,6 +555,35 @@
 
         $(document).ready(function() {
             $('.zoom').zoom();
+        });
+    </script>
+
+    <script>
+        var proQty = $(".pro-qty");
+
+        proQty.append('<div class= "dec qty-btn">-</div>');
+        proQty.append('<div class="inc qty-btn">+</div>');
+        $('.qty-btn').on('click', function(e) {
+            e.preventDefault();
+            var $button = $(this);
+            var oldValue = $button.parent().find('input').val();
+            var stock = $("#stock").val();
+            var newStock = parseFloat(stock) + 1;
+            if ($button.hasClass('inc')) {
+
+                var newVal = parseFloat(oldValue) + 1;
+                if (newStock == newVal) {
+                    return;
+                }
+            } else {
+                // Don't allow decrementing below zero
+                if (oldValue > 1) {
+                    var newVal = parseFloat(oldValue) - 1;
+                } else {
+                    newVal = 1;
+                }
+            }
+            $button.parent().find('input').val(newVal);
         });
     </script>
 
