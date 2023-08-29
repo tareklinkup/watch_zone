@@ -54,6 +54,7 @@ class CheckoutController extends Controller
             $order->status = 'Pending';
             $order->save();
 
+
             $contents = Cart::content();
             // return $contents;
             foreach ($contents as $content) {
@@ -69,11 +70,19 @@ class CheckoutController extends Controller
                 $stock = $product->quantity - $content->qty;
                 $product->update(['quantity' => $stock]);
             }
+
             Cart::destroy();
 
             DB::commit();
 
-            $this->sms("Your orders successfully completed", $request->phone);
+            // $this->sms("Your orders successfully completed", $request->phone);
+
+            $user = Auth::guard('customer')->user();
+            // $order = Order::with('order_details')->where('id', $order->id)->first();
+            $order = Order::where('id', $order->id)->first();
+            $orderItem = OrderDetail::with('product')->where('order_id', $order->id)->latest()->get();
+            $this->sendOrderConfirmationEmail($user, $order, $orderItem);
+
             $notification = array(
                 'message'=>'Your Order Taken Successfully',
                 'alert-type'=>'success'

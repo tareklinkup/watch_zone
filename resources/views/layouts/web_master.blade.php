@@ -528,6 +528,7 @@
                             `
                         });
                     } else {
+                        $("#amount").addClass('d-none');
                         rows += `
                          <tr>
                                 <td colspan="5" style="text-align:center;">

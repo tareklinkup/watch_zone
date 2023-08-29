@@ -1975,7 +1975,8 @@ only screen and (max-width: 767px) {
 
 .home-five-wrapper .vmenu-content {
     z-index: 2;
-    background-color: #052043;
+    background-color: #fafafa;
+    color: rgb(54, 54, 54);
 }
 
 .sidebar-cart-modal {

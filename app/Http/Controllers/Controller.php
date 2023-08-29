@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderConfirmation;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Controller extends BaseController
 {
@@ -30,6 +32,11 @@ class Controller extends BaseController
 
     }
 
+    public function sendOrderConfirmationEmail($user, $order, $orderItem)
+    {
+        // dd($user);
+        Mail::to($user->email)->send(new OrderConfirmation($user, $order, $orderItem));
+    }
 
     // image upload
     public function imageUpload($request, $name, $directory)

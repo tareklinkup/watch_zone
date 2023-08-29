@@ -70,10 +70,10 @@
         <!--== End Page Header Area Wrapper ==-->
         <section>
             <div class="container">
-                <div class="side_bar mt-3 d-block d-md-none">
+                <div class="side_bar mt-3 mb-0 d-block d-md-none">
                     <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-                        aria-controls="offcanvasExample">
-                        <i class="fa fa-bars"></i> <span>Filters</span>
+                        aria-controls="offcanvasExample" style="width:100%; border-radius:5px;">
+                        <i class="fa fa-bars"></i> <span> Product Filters</span>
                     </a>
                 </div>
             </div>
@@ -741,14 +741,26 @@
                     this.selectdialColor = [];
                     this.selectedSeries = [];
 
-                    axios.post('/get-filter-products', {
-                            brandId: this.brandId,
-                            catId: this.selectedCategories,
-                            sortBy: this.sortBy
-                        })
-                        .then(res => {
-                            this.products = res.data;
-                        })
+                    if (this.selectedCategories != '') {
+                        axios.post('/get-filter-products', {
+                                brandId: this.brandId,
+                                catId: this.selectedCategories,
+                                sortBy: this.sortBy
+                            })
+                            .then(res => {
+                                this.products = res.data;
+                            })
+                    } else {
+                        axios.post('/get-filter-products-by-brand', {
+                                brandId: this.brandId,
+                                sortBy: this.sortBy
+                            })
+                            .then(res => {
+                                this.products = res.data;
+                            })
+                    }
+
+
 
                     if (this.selectedCategories != '') {
                         this.getCasesize();
@@ -759,7 +771,7 @@
                         this.getSeriesByCategory();
                     } else {
                         this.getCasesize();
-                        this.getDialColor();
+                        this.getDialColors();
                         this.getMovements();
                         this.getBrandMaterials();
                         this.getSeries();

@@ -19,12 +19,14 @@ class SearchController extends Controller
                             ->orWhere("slug", "LIKE", "%".$request->search."%")
                             ->orWhere("model", "LIKE", "%".$request->search."%")
                             ->orWhere("selling_price", "LIKE", "%".$request->search."%")
+                            ->orWhere("description", "LIKE", "%".$request->search."%")
                             ->paginate(60);
         $categories = Category::withCount('products')->take(2)->get();
+        $metaCategories = Category::withCount('products')->take(2)->get();
         $brands = Brand::withCount('product')->orderBy('id', 'asc')->get();
-        return view('pages.category', compact('product', 'categories', 'brands'));
+        return view('pages.category', compact('product', 'categories', 'brands', 'metaCategories'));
     }
-  
+
     // Get Product
     public function productGet(Request $request)
     {
@@ -35,9 +37,10 @@ class SearchController extends Controller
                             ->orWhere("slug", "LIKE", "%".$request->search."%")
                             ->orWhere("model", "LIKE", "%".$request->search."%")
                             ->orWhere("selling_price", "LIKE", "%".$request->search."%")
+                            ->orWhere("description", "LIKE", "%" . $request->search . "%")
                             ->take(15)->get();
-        
+
         return $product;
     }
-    
+
 }

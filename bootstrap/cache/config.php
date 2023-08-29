@@ -510,11 +510,11 @@
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'host' => 'thelookbd.com',
+        'host' => 'smtp.gmail.com',
         'port' => '465',
         'encryption' => 'ssl',
-        'username' => 'info@thelookbd.com',
-        'password' => '7]NZW+(3IDu9',
+        'username' => 'watchzoneweb@gmail.com',
+        'password' => 'qrgufufknwiguypu',
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
@@ -547,7 +547,7 @@
     ),
     'from' => 
     array (
-      'address' => 'info@thelookbd.com',
+      'address' => 'watchzoneweb@gmail.com',
       'name' => 'Watch Zone',
     ),
     'markdown' => 

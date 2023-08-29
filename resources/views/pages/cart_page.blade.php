@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-12 col-lg-4 ms-auto">
+                    <div class="col-md-12 col-lg-4 ms-auto" id="amount">
                         <div class="grand-total-wrap mt-10 mt-lg-0">
                             <div class="grand-total-content">
                                 <h5>Subtotal <span id="cartSubTotal"></span></h5>

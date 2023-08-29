@@ -159,7 +159,7 @@ class HomeController extends Controller
             $product->where('size_id', request()->query('size'));
         }
 
-        $data['product'] = $product->orderBy('quantity', 'desc')->paginate(200);
+        $data['product'] = $product->orderBy('quantity', 'asc')->paginate(200);
 
         $data['categories'] = Category::withCount('products')->get();
         $data['brands'] = Brand::with('product')->orderBy('id', 'asc')->get();
@@ -459,7 +459,6 @@ class HomeController extends Controller
         return $categories;
     }
 
-
     public function getFilterPoducts(Request $req)
     {
 
@@ -474,9 +473,9 @@ class HomeController extends Controller
         //     $products = $products->where('id', $req->productId);
         // }
 
-        // if (isset($req->brandId)) {
-        //     $products = $products->where('brand_id', $req->brandId);
-        // }
+        if (isset($req->brandId) && $req->catId == []) {
+            $products = $products->where('brand_id', $req->brandId);
+        }
 
           // if (isset($req->catId)) {
         //     $products = $products->where('category_id', $req->catId);
@@ -504,6 +503,41 @@ class HomeController extends Controller
         if (isset($req->caseSize) && $req->caseSize != []) {
             $products = $products->whereIn('size_id', $req->caseSize);
         }
+
+        if (isset($req->sortBy)) {
+            if ($req->sortBy == 'priceLowtoHigh') {
+                $products = $products->orderBy('selling_price', 'ASC');
+            }
+
+            if ($req->sortBy == 'priceHightoLow') {
+                $products = $products->orderBy('selling_price', 'DESC');
+            }
+
+            if ($req->sortBy == 'nameAtoZ') {
+                $products = $products->orderBy('name', 'ASC');
+            }
+
+            if ($req->sortBy == 'nameZtoA') {
+                $products = $products->orderBy('name', 'DESC');
+            }
+        }
+
+        $products = $products->get();
+        return $products;
+    }
+
+    public function getFilterPoductsByBrand(Request $req)
+    {
+        $products = Product::with(['brand', 'category'])->where('status', true);
+
+         // if (isset($req->productId)) {
+        //     $products = $products->where('id', $req->productId);
+        // }
+
+        if (isset($req->brandId)) {
+            $products = $products->where('brand_id', $req->brandId);
+        }
+
 
         if (isset($req->sortBy)) {
             if ($req->sortBy == 'priceLowtoHigh') {

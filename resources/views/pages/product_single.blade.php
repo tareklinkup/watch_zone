@@ -67,14 +67,20 @@
                                             alt="Image" />
                                     </a>
                                     @foreach ($product_images as $multi)
-                                        <a class="lightbox-image swiper-slide zoom" data-fancybox="gallery" href="#">
+                                        {{-- <a class="lightbox-image swiper-slide zoom" data-fancybox="gallery" href="#">
                                             <img src="{{ asset($product->otherimage) }}" width="640" height="530"
                                                 alt="Image" />
-                                        </a>
-                                        <a class="lightbox-image swiper-slide zoom" data-fancybox="gallery" href="#">
+                                        </a> --}}
+                                        {{-- <a class="lightbox-image swiper-slide zoom" data-fancybox="gallery" href="#">
                                             <img src="{{ asset($multi->multiimage) }}"
                                                 data-zoom-image="{{ asset($multi->multiimage) }}" width="640"
                                                 height="530" alt="Image" />
+                                        </a> --}}
+
+                                        <a class="lightbox-image swiper-slide nav-item zoom" data-fancybox="gallery"
+                                            href="#">
+                                            <img src="{{ asset($multi->multiimage) }}" width="640" height="530"
+                                                alt="Image" />
                                         </a>
                                     @endforeach
                                 </div>
@@ -96,6 +102,11 @@
                                             <div class="nav-item swiper-slide">
                                                 <img src="{{ asset($multiimg->multiimage) }}" alt="Image" width="127"
                                                     height="127" />
+                                                {{-- <a class="lightbox-image swiper-slide nav-item" data-fancybox="gallery"
+                                                    href="#">
+                                                    <img src="{{ asset($multiimg->multiimage) }}" width="640"
+                                                        height="530" alt="Image" />
+                                                </a> --}}
                                             </div>
                                         @endforeach
                                     </div>
@@ -155,8 +166,7 @@
                             <div class="my-2 d-flex">
                                 <form action="{{ route('add-cart') }}" method="post">
                                     @csrf
-                                    <input type="hidden" name="stock" id="stock"
-                                        value="{{ $product->quantity }}">
+                                    <input type="hidden" name="stock" id="stock" value="{{ $product->quantity }}">
                                     @if ($product->quantity == 0)
                                         <div class="pro-qty" style="display: none">
                                             <input type="text" title="Quantity" name="qty" min="1"
@@ -183,7 +193,7 @@
                                 </form>
 
                                 <button class="product-detail-cart-btn buying ms-1" type="button"
-                                    data-id="{{ $product->id }}">
+                                    style="margin-top: 4px;" data-id="{{ $product->id }}">
                                     Buy Now
                                 </button>
                                 @endif

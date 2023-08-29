@@ -8,11 +8,22 @@
         border: none;
     }
 
-    /* .form-control[readonly] {
-        background-color: #fff;
-        opacity: 1;
-        border: none;
-    } */
+    .select2-container {
+        width: 200px;
+
+    }
+
+    .select2-selection {
+        border: 1px solid #ccc;
+        background-color: #ffffff;
+        height: 50px;
+        border-radius: 9px;
+    }
+
+    .select2-selection__arrow {
+        background-color: #ffffff;
+        color: white;
+    }
 </style>
 @section('website-content')
     <main class="main-content">
@@ -103,8 +114,8 @@
                                                 <div class="select-style">
                                                     <select class="select-active @error('area') is-invalid @enderror"
                                                         id="area" required name="area">
-                                                        <option>Select an option…</option>
-                                                        <option value="80" selected>Inside Dhaka</option>
+                                                        <option>Select ....</option>
+                                                        <option value="80">Inside Dhaka</option>
                                                         <option value="150">Outside Dhaka</option>
                                                     </select>
                                                     @error('area')
@@ -119,8 +130,7 @@
                                                 <label>District/City
                                                     <small class="text-danger" title="required">*</small> </label>
                                                 <div class="select-style">
-                                                    <select
-                                                        class="select2 select-active @error('district') is-invalid @enderror"
+                                                    <select class="select-active @error('district') is-invalid @enderror"
                                                         id="district" name="district" required>
                                                         <option>Select an option…</option>
                                                         @foreach ($district as $item)
@@ -475,7 +485,9 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.select2').select2({})
+            $("#district").select2({
+                theme: 'custom',
+            })
         })
     </script>
 @endpush

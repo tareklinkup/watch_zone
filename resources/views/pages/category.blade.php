@@ -1,8 +1,6 @@
 @extends('layouts.web_master')
 
-@section('title', $metaCategories->meta_title);
-@section('meta_description', $metaCategories->meta_description);
-@section('meta_keywords', $metaCategories->meta_keywords);
+@section('title', 'Product Category')
 
 @section('website-content')
 

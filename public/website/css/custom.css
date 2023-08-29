@@ -276,7 +276,12 @@
 .sub-header {
     /* background-color: #052043; */
     background-color: #052043;
-    width: 100%;
+    width: 90%;
+    margin: auto;
+}
+
+.custom-container {
+    width: 98%;
     margin: auto;
 }
 
@@ -422,14 +427,17 @@
     .sub-header {
         /* background-color: #052043; */
         background-color: #052043;
-        width: 98%;
+        width: 100%;
         margin: auto;
     }
 
-    .header-border {
-        padding: 2px 0px;
-        background-color: #052043;
-        width: 98%;
+    .sub-header h3 {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .custom-container {
+        width: 97%;
         margin: auto;
     }
 

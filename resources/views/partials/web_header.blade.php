@@ -1,3 +1,27 @@
+<style>
+    .brnd-item {
+        display: block;
+        margin: 5px 5px;
+        transition: .5s;
+        font-size: 14px;
+    }
+
+    .brnd-item :hover {
+        background-color: #c2c2c2;
+
+    }
+
+    .vmenu-content {
+        width: 600px;
+        display: none;
+    }
+
+    .vertical-menu:hover .vmenu-content {
+        display: block;
+    }
+</style>
+
+
 <header class="header-wrapper">
     <div class="header-top d-none d-md-block">
         <div class="container">
@@ -164,7 +188,7 @@
         <div class="container-fluid">
             <div class="row align-items-center justify-content-between">
                 <div class="col-auto">
-                    <div class="vertical-menu">
+                    {{-- <div class="vertical-menu">
                         <button class="vmenu-btn">
                             <i class="icon fa fa-list-ul"></i> All Brands
                             <i class="icon fa fa-angle-down"></i>
@@ -182,12 +206,49 @@
                             @endforeach
                         </ul>
                         <!-- menu content -->
+                    </div> --}}
+
+                    <div class="vertical-menu">
+                        <button class="vmenu-btn" id="brandButton">
+                            <i class="icon fa fa-list-ul"></i> All Brands
+                            <i class="icon fa fa-angle-down"></i>
+                        </button>
+                        @php
+                            $brands = App\Models\Brand::orderBy('name', 'asc')->get();
+                        @endphp
+                        <ul class="vmenu-content">
+                            <table>
+                                <tr>
+                                    @foreach ($brands->chunk(10) as $brand)
+                                        <td style="width: 185px;">
+                                            @foreach ($brand as $item)
+                                                <a class="brnd-item"
+                                                    href="{{ route('product.brand', $item->slug) }}">{{ $item->name }}</a>
+                                            @endforeach
+                                        </td>
+                                    @endforeach
+                                </tr>
+                            </table>
+                            {{-- @foreach ($brands->chunk(2) as $brand)
+                                <li class="vmenu-item">
+                                    style="display: none; overflow-y:scroll;"
+                                    <ul>
+                                        @foreach ($brand as $item)
+                                            <li>
+                                                <a href="{{ route('product.brand', $item->slug) }}">
+                                                    {{ $item->name }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endforeach --}}
+                        </ul>
+                        <!-- menu content -->
                     </div>
                 </div>
                 <div class="col-auto d-none d-lg-block">
-                    <div class="header-navigation header-navigation-light ">
+                    <div class="header-navigation ">
                         <ul class="main-nav">
-
                             @php
                                 $categories = App\Models\Category::where('is_homepage', 1)
                                     ->take(7)
@@ -200,7 +261,6 @@
                                         $catb = $category->brandChild;
                                         $caterorisBrad = App\Models\Brand::whereIn('id', explode(',', $catb))->get();
                                     @endphp
-
 
                                     <a class="main-nav-link"
                                         href="{{ route('product.cat', $category->slug) }}">{{ $category->name }}
@@ -267,6 +327,17 @@
             },
         });
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#brandButton').hover(
+                function() {
+
+                    $('#brandItem').addClass('vmenu-content');
+                }
+            );
+        });
+    </script>
     <script>
         $("body").on("keyup", "#search", function() {
             let searchData = $(this).val();
@@ -283,7 +354,7 @@
                         if (result.length > 0) {
                             $.each(result, (index, value) => {
                                 ulData +=
-                                    `<li > <a href='/product/single/${value.slug}'> ${value.name} </a></li>`;
+                                    `<li> <img style="width:40px;" src="/uploads/product/${value.image}"> <a href='/product/single/${value.slug}'> ${value.name} </a> ${value.selling_price}</li>`;
                             })
                         } else {
                             ulData += "<li>No Found Data</li>";

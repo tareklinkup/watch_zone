@@ -68,10 +68,10 @@
         <!--== End Page Header Area Wrapper ==-->
         <section>
             <div class="container">
-                <div class="side_bar mt-3 d-block d-md-none" style="float:left">
+                <div class="side_bar mt-3 d-block d-md-none">
                     <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-                        aria-controls="offcanvasExample">
-                        <i class="fa fa-bars"></i> <span>Filters</span>
+                        aria-controls="offcanvasExample" style="border-radius:5px; width:100%; letter-spacing:1px;">
+                        <i class="fa fa-bars"></i> <span>Product Filters</span>
                     </a>
                 </div>
             </div>
@@ -471,11 +471,6 @@
                             </ul>
                         </div>
                     </div>
-
-
-
-
-
 
                 </div>
             </div>

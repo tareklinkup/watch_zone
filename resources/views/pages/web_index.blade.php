@@ -75,11 +75,13 @@
         <section class="category-area">
 
             <div class="header-border"></div>
-            <div class="container">
-                <div class="sub-header" style="width:100%; padding:0 30px;">
+            <div class="custom-container">
+                <div class="sub-header" style="padding:0 30px;">
                     <h3 class="text-center"> Authenticity Guaranteed and 1-5 Year Warranty On All
                         Watches.</h3>
                 </div>
+            </div>
+            <div class="container">
                 <div class="category-content">
                     <div class="row">
                         @foreach ($categories as $item)

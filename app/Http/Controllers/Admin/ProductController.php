@@ -542,7 +542,7 @@ class ProductController extends Controller
             $products = $products->where('category_id', $req->catId);
         }
 
-        $products = $products->orderBy('id', 'desc')->get();
+        $products = $products->orderBy('quantity', 'desc')->get();
         return $products;
     }
 
