@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('website/css/plugins/swiper-bundle.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('website/css/plugins/font-awesome.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('website/css/plugins/simple-line-icons.css') }}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}" />
     <link rel="canonical" href="{{ url()->current() }}">
@@ -161,7 +162,7 @@
                                 <a href="javascript:void(0)">All Brands</a>
 
                                 @php
-                                    $brand = App\Models\Brand::get();
+                                    $brand = App\Models\Brand::orderBy('name', 'asc')->get();
                                 @endphp
                                 <ul class="vmenu-content">
                                     @foreach ($brand as $item)
@@ -209,6 +210,9 @@
     <script src="{{ asset('website/js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
     <script src="{{ asset('website/js/vendor/bootstrap.bundle.min.js') }}"></script>
 
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

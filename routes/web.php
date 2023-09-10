@@ -46,10 +46,12 @@ Route::get('/product/brand/{brand}', [HomeController::class, 'brand'])->name('pr
 Route::get('/category/{cat}', [HomeController::class, 'category'])->name('product.cat');
 Route::get('/all/products', [HomeController::class, 'allProduct'])->name('all.products');
 Route::get('/product/single/{slug}', [HomeController::class, 'show'])->name('product.show');
-Route::get('/sale-product', [HomeController::class, 'saleProduct'])->name('sale');
+Route::get('/sale', [HomeController::class, 'saleProduct'])->name('sale');
 Route::post('/contact/send', [HomeController::class, 'sendMsg'])->name('contact.send.msg');
 Route::get('/about/page', [HomeController::class, 'about'])->name('about.page');
 Route::get('/terms/condition', [HomeController::class, 'termsCondition'])->name('terms.condition');
+Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
+
 Route::get('/privacy-policy', [HomeController::class, 'privacy'])->name('privacy.policy');
 Route::get('/customer-service', [HomeController::class, 'customerService'])->name('customer.service');
 Route::get('/warranty-policy', [HomeController::class, 'warranty'])->name('warranty.policy');

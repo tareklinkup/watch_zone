@@ -110,7 +110,7 @@
                                 <div class="row mb-n6 lozad" id="product-row" style="display: none"
                                     :style="{ display: products.length > 0 ? '' : 'none' }">
                                     <div v-for="(product, ind) in products"
-                                        class="col-sm-6 col-md-4 col-6 mb-6 masonry-item" :key="ind">
+                                        class="col-sm-6 col-md-4 col-6 mb-3 masonry-item" :key="ind">
                                         <div class="product-item pb-2">
                                             <div class="product-img">
                                                 <a class="product-item-thumb"
@@ -119,7 +119,7 @@
                                                         :src="'/uploads/product/thumbnail/' + product.thumb_image"
                                                         width="270" height="264" alt="product_image" />
                                                     <img class="pic-2 " :src="`${baseUrl}/` + product.otherimage"
-                                                        alt="productimg1-2">
+                                                        alt="No-Image">
                                                 </a>
                                             </div>
                                             <span v-if="product.discount > 0"
@@ -134,9 +134,9 @@
                                             </div>
                                             <div class="product-item-info text-center pb-3">
                                                 <p>@{{ product.brand?.name }}</p>
-                                                <h5 class="product-item-title mb-2">
+                                                <h5 class="product-item-title mb-2" style="text-align: left;">
                                                     <a
-                                                        :href="`${baseUrl}/product/single/${product.slug}`">@{{ product.name }}</a>
+                                                        :href="`${baseUrl}/product/single/${product.slug}`">@{{ product.name.length > 65 ? product.name.slice(0, 65) + '...' : product.name }}</a>
                                                 </h5>
 
                                                 <div class="product-item-price ">
@@ -149,7 +149,7 @@
                                                     <span v-else class="text-center">&#2547;@{{ parseFloat(product.selling_price) | decimal }}</span>
 
                                                 </div>
-                                                <div v-if="product.quantity == 0" class="cart-button text-center stock_out">
+                                                <div v-if="product.quantity == 0" class="cart-button">
                                                     <button
                                                         class="product-detail-cart-btn js-prd-addtocar btn-danger text-white"
                                                         disabled type="button"> Out of stock</button>
@@ -161,9 +161,9 @@
                                                         data-bs-target="#offcanvasWithCartSidebar"
                                                         aria-controls="offcanvasWithCartSidebar">Add to
                                                         cart</button>
-                                                    <button onclick="BuyNow(event)" class="product-detail-cart-btn buyNow"
-                                                        type="button" :value="product.id">Buy
-                                                        Now</button>
+                                                    {{-- <button onclick="BuyNow(event)" class="product-detail-cart-btn buyNow"
+                                                        type="button" :value="product.id" id="product_buy">Buy
+                                                        Now</button> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -412,7 +412,7 @@
                         <h4 class="accordion-header" id="headingTwo4">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseTwo4" aria-expanded="false" aria-controls="collapseTwo4">
-                                Movements
+                                Movement
                             </button>
                         </h4>
 
@@ -523,7 +523,7 @@
                         <h4 class="accordion-header" id="headingTwo">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Brand
+                                All Brands
                             </button>
                         </h4>
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"

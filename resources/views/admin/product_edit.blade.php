@@ -518,7 +518,7 @@
                                                                     </td>
                                                                     <td><input type="text"
                                                                             class="form-control form-control-sm shadow-none"
-                                                                            name="movement_value[]" placeholder="Value">
+                                                                            name="band_value[]" placeholder="Value">
                                                                     </td>
                                                                     <td><input type="button" class="add5"
                                                                             value="+" title="Add More" /></td>

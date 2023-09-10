@@ -51,6 +51,7 @@
                             <ul class="widget-nav">
                                 <li><a href="{{ route('home') }}">Home</a></li>
                                 <li><a href="{{ route('privacy.policy') }}">Privacy Policy</a></li>
+                                <li><a href="{{ route('faq') }}">FAQ</a></li>
                                 <li><a href="{{ route('terms.condition') }}">Terms & Conditions</a></li>
                                 {{-- <li><a href="#">FAQ's</a></li> --}}
                             </ul>

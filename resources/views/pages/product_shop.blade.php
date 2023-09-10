@@ -68,7 +68,7 @@
         <!--== End Page Header Area Wrapper ==-->
         <section>
             <div class="container">
-                <div class="side_bar mt-3 d-block d-md-none">
+                <div class="side_bar mt-3 d-block d-md-none" v-if="categoryId == 1 || categoryId == 2">
                     <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
                         aria-controls="offcanvasExample" style="border-radius:5px; width:100%; letter-spacing:1px;">
                         <i class="fa fa-bars"></i> <span>Product Filters</span>
@@ -132,9 +132,9 @@
                                             </div>
                                             <div class="product-item-info text-center pb-3">
                                                 <p>@{{ product.brand?.name }}</p>
-                                                <h5 class="product-item-title mb-2">
+                                                <h5 class="product-item-title mb-2" style="text-align:left;">
                                                     <a
-                                                        :href="`${baseUrl}/product/single/${product.slug}`">@{{ product.name }}</a>
+                                                        :href="`${baseUrl}/product/single/${product.slug}`">@{{ product.name.length > 65 ? product.name.slice(0, 65) + '...' : product.name }}</a>
                                                 </h5>
 
                                                 <div class="product-item-price ">
@@ -147,7 +147,7 @@
                                                     <span v-else class="text-center">&#2547;@{{ parseFloat(product.selling_price) | decimal }}</span>
 
                                                 </div>
-                                                <div v-if="product.quantity == 0" class="cart-button text-center stock_out">
+                                                <div v-if="product.quantity == 0" class="cart-button">
                                                     <button
                                                         class="product-detail-cart-btn js-prd-addtocar btn-danger text-white"
                                                         disabled type="button"> Out of stock</button>
@@ -159,9 +159,9 @@
                                                         data-bs-target="#offcanvasWithCartSidebar"
                                                         aria-controls="offcanvasWithCartSidebar">Add to
                                                         cart</button>
-                                                    <button onclick="BuyNow(event)" class="product-detail-cart-btn buyNow"
+                                                    {{-- <button onclick="BuyNow(event)" class="product-detail-cart-btn buyNow"
                                                         type="button" :value="product.id">Buy
-                                                        Now</button>
+                                                        Now</button> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -196,9 +196,8 @@
                                         <div class="accordion-body side_area">
                                             <div class="form-group" v-for="(movement, ml) in movements">
                                                 <input class="form-check-input check-input sort-form"
-                                                    :id="`ml-${ml}`" :value="movement.id"
-                                                    v-model="selectmovements" type="checkbox"
-                                                    @@change="getMovementFilters"> <label
+                                                    :id="`ml-${ml}`" :value="movement.id" v-model="selectmovements"
+                                                    type="checkbox" @@change="getMovementFilters"> <label
                                                     class="form-check-label"
                                                     :for="`ml-${ml}`">@{{ movement.name }}</label>
                                             </div>
@@ -336,9 +335,9 @@
         </div>
         <!--== End Product Area Wrapper ==-->
         <div class="offcanvas offcanvas-start product_items_filter" tabindex="-1" id="offcanvasExample"
-            aria-labelledby="offcanvasExampleLabel">
+            aria-labelledby="offcanvasExampleLabel" v-if="categoryId == 1 || categoryId == 2">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Side Manu</h5>
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Products Filterrrr</h5>
                 <button type="button" class="btn-close text-reset " data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
             </div>
@@ -350,7 +349,7 @@
                         <h4 class="accordion-header" id="headingTwo4">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseTwo4" aria-expanded="false" aria-controls="collapseTwo4">
-                                Movements
+                                Movement
                             </button>
                         </h4>
 

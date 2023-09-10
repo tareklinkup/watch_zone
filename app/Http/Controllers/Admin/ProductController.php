@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Validation\Rules\Unique;
 use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
@@ -110,6 +111,10 @@ class ProductController extends Controller
         Image::make($image)->resize(800, 800)->save('uploads/product/' . $Image);
         Image::make($image)->resize(800, 800)->save('uploads/product/thumbnail/' . $thumbImage);
 
+       $exixtProducts = Product::where('slug', $request->name)->first();
+
+        $uniqeCode = Str::random(3);
+
         $product = new Product();
         $product->category_id = $request->category_id;
         $product->brand_id = $request->brand_id;
@@ -119,7 +124,7 @@ class ProductController extends Controller
         $product->size_id = $request->size_id ?? null;
         $product->movement_id = $request->movement_id ?? null;
         $product->name = $request->name;
-        $product->slug = Str::slug($request->name);
+        $product->slug = $exixtProducts ?  Str::slug($request->name).$uniqeCode : Str::slug($request->name);
         $product->model = $request->model ?? null;
         $product->selling_price = $request->selling_price;
         $product->discount = $request->discount;
@@ -263,6 +268,7 @@ class ProductController extends Controller
         $product = Product::with(['images'])->find($id);
         return view('admin.product_show', compact('product'));
     }
+
 
     public function update(Request $request, $id)
     {
@@ -542,7 +548,7 @@ class ProductController extends Controller
             $products = $products->where('category_id', $req->catId);
         }
 
-        $products = $products->orderBy('quantity', 'desc')->get();
+        $products = $products->orderBy('quantity', 'desc')->orderBy('id', 'desc')->get();
         return $products;
     }
 

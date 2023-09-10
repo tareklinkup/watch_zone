@@ -29,14 +29,14 @@
         </div>
         <!--== End Page Header Area Wrapper ==-->
         <section>
-            <div class="container">
+            {{-- <div class="container">
                 <div class="side_bar mt-3 d-block d-md-none">
                     <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
                         aria-controls="offcanvasExample">
                         <i class="fa fa-bars"></i> <span>Filters</span>
                     </a>
                 </div>
-            </div>
+            </div> --}}
         </section>
         <!--== Start Product Area Wrapper ==-->
         <div class="product-area section-space">
@@ -94,7 +94,7 @@
                                                     </div>
 
                                                     @if ($item->quantity == 0)
-                                                        <div class="cart-button text-center stock_out">
+                                                        <div class="cart-button">
                                                             <button
                                                                 class="product-detail-cart-btn js-prd-addtocar btn-danger text-white"
                                                                 disabled type="button"> Out of stock</button>
@@ -108,9 +108,9 @@
                                                                 data-bs-target="#offcanvasWithCartSidebar"
                                                                 aria-controls="offcanvasWithCartSidebar">Add to
                                                                 cart</button>
-                                                            <button class="product-detail-cart-btn buynow" type="button"
+                                                            {{-- <button class="product-detail-cart-btn buynow" type="button"
                                                                 data-id="{{ $item->id }}">Buy
-                                                                Now</button>
+                                                                Now</button> --}}
                                                         </div>
                                                     @endif
 
@@ -142,7 +142,7 @@
                         <!--== Start Sidebar Area Wrapper ==-->
                         <div class="sidebar-area mt-10 mt-lg-0 accordion" id="accordionExample">
 
-                            <div class="widget-item widget-item-one">
+                            {{-- <div class="widget-item widget-item-one">
                                 <h4 class="accordion-header" id="headingTwo1">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo1">
@@ -163,7 +163,7 @@
                                     </div>
 
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="widget-item widget-item-one">
                                 <h4 class="accordion-header" id="headingTwo">
@@ -174,8 +174,8 @@
                                 </h4>
                                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                                     data-bs-parent="#accordionExample">
-                                    <div id="collapseTwo" class="accordion-collapse collapse"
-                                        aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                        data-bs-parent="#accordionExample">
                                         <ul class="accordion-body side_area">
                                             @foreach ($brands as $item)
                                                 <li class="border-bottom"><a
@@ -198,7 +198,7 @@
         </div>
         <!--== End Product Area Wrapper ==-->
 
-        <div class="offcanvas offcanvas-start product_items_filter" tabindex="-1" id="offcanvasExample"
+        {{-- <div class="offcanvas offcanvas-start product_items_filter" tabindex="-1" id="offcanvasExample"
             aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasExampleLabel">Side Manu</h5>
@@ -258,11 +258,11 @@
 
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 
 
-        <div class="offcanvas offcanvas-start product_items_filter" tabindex="-1" id="offcanvasExample"
+        {{-- <div class="offcanvas offcanvas-start product_items_filter" tabindex="-1" id="offcanvasExample"
             aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasExampleLabel">Side Manu</h5>
@@ -317,7 +317,7 @@
 
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 
         </form>

@@ -10,6 +10,66 @@
             transition-duration: 0ms;
             transform: translate3d(0px, 0px, 0px) !important;
         }
+
+        /* Styles for product images */
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .image-link {
+            display: inline-block;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .zoomable-image {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Styles for enlarge button */
+        /* #enlarge-button {
+                                                                                                                                                            display: block;
+                                                                                                                                                            margin: 20px auto;
+                                                                                                                                                            padding: 10px 20px;
+                                                                                                                                                            cursor: pointer;
+                                                                                                                                                        } */
+
+        /* Styles for enlarged image */
+        .enlarged-image-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #686868e6;
+            opacity: 0.8.05;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        #enlarged-image {
+            max-width: 100%;
+            max-height: 100%;
+            margin: auto;
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
     </style>
 @endpush
 @section('website-content')
@@ -49,23 +109,47 @@
         <div class="product-detail-area section-space">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6">
+
+                    <div class="col-lg-6 product-details-mobile col-md-none ">
+
                         <div class="product-detail-thumb me-lg-6">
+
+                            <div class="enlarged-image-container" id="enlarged-image-container">
+                                <span class="close" id="close-btn">&times;</span>
+                                <img src alt="Enlarged Product Image" id="enlarged-image">
+                            </div>
+
                             <div class="swiper single-product-thumb-slider">
                                 @if ($product->discount > 0)
                                     <span class="badges">Sale-{{ round($product->discount) }}%</span>
                                 @endif
+
                                 <div class="swiper-wrapper">
-                                    <a class="lightbox-image swiper-slide zoom" data-fancybox="gallery" href="#">
+
+                                    <button id="enlarge-button"
+                                        style="height:40px; width:25%; margin-top:50px; backround:transfarent; display:none;">
+                                        Zoom </button>
+                                    <a class="lightbox-image swiper-slide zoom image-link" data-fancybox="gallery"
+                                        href="#" id="zoomAdd">
                                         <img src="{{ asset('uploads/product/' . $product->image) }}"
                                             data-zoom-image="{{ asset('uploads/product/' . $product->image) }}"
-                                            width="640" height="530" alt="Image" />
+                                            width="640" height="530" alt="Image" class="zoomable-image" />
+                                        <span
+                                            style="margin-top:0px; font-size:18px; font-weight:bold; text-align:center; border:1px solid #ccc; width:40%; margin:auto; border-radius:5px; padding:1px;"
+                                            class="d-none"> Touch
+                                            Zoom</span>
                                     </a>
-                                    <a class="lightbox-image swiper-slide nav-item zoom" data-fancybox="gallery"
+
+                                    <a class="lightbox-image swiper-slide nav-item zoom image-link" data-fancybox="gallery"
                                         href="#">
                                         <img src="{{ asset($product->otherimage) }}" width="640" height="530"
-                                            alt="Image" />
+                                            alt="Image" class="zoomable-image" />
+                                        <span
+                                            style="margin-top:0px; font-size:18px; font-weight:bold; text-align:center; border:1px solid #ccc; width:40%; margin:auto; border-radius:5px; padding:1px;"
+                                            class="d-none"> Touch
+                                            Zoom</span>
                                     </a>
+
                                     @foreach ($product_images as $multi)
                                         {{-- <a class="lightbox-image swiper-slide zoom" data-fancybox="gallery" href="#">
                                             <img src="{{ asset($product->otherimage) }}" width="640" height="530"
@@ -77,10 +161,14 @@
                                                 height="530" alt="Image" />
                                         </a> --}}
 
-                                        <a class="lightbox-image swiper-slide nav-item zoom" data-fancybox="gallery"
-                                            href="#">
+                                        <a class="lightbox-image swiper-slide nav-item zoom image-link"
+                                            data-fancybox="gallery" href="#">
                                             <img src="{{ asset($multi->multiimage) }}" width="640" height="530"
-                                                alt="Image" />
+                                                alt="Image" class="zoomable-image" />
+                                            <span
+                                                style="margin-top:0px; font-size:18px; font-weight:bold; text-align:center; border:1px solid #ccc; width:40%; margin:auto; border-radius:5px; padding:1px;"
+                                                class="d-none"> Touch
+                                                Zoom</span>
                                         </a>
                                     @endforeach
                                 </div>
@@ -119,7 +207,10 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-------Mobile view---------->
                     </div>
+
                     <div class="col-lg-6">
                         <div class="product-detail-content">
                             <h2 class="product-detail-title mt-n1 me-10">
@@ -127,11 +218,12 @@
                             </h2>
                             <div class="product-item-price  single_price" style="text-align: left">
                                 @if ($product->discount_price > 0)
-                                    <span
-                                        class="price-old pe-1 sinlge_old">&#2547;{{ number_format($product->selling_price, 2) }}</span>
+                                    <span class="price-old pe-1 sinlge_old"
+                                        style="color:#646464">&#2547;{{ number_format($product->selling_price, 2) }}</span>
                                     &#2547;{{ number_format($product->selling_price - $product->discount_price, 2) }}
                                 @else
-                                    <span class="text-center">&#2547;{{ number_format($product->selling_price, 2) }}</span>
+                                    <span
+                                        class="text-center">&#2547;{{ number_format($product->selling_price, 2) }}</span>
                                 @endif
                             </div>
                             <ul class="product-detail-meta">
@@ -152,13 +244,14 @@
                                 @if (isset($product->warranty))
                                     <li><span><strong>Warranty :</strong> </span> {{ $product->warranty }}</li>
                                 @endif
-                                <li><span><strong>Categories :</strong> </span> {{ $product->category->name }}</li>
-                                <li><span><strong>Availability :</strong> </span>
+                                <li><span><strong>Category :</strong> </span> {{ $product->category->name }}</li>
+                                <li><span><strong style="color:#055805;">Availability :</strong> </span>
                                     @if ($product->quantity == 0)
                                         <span class="prd-in-stock" data-stock-status="">Out of stock</span>
                                     @else
-                                        <span class="prd-in-stock" data-stock-status="">In stock
-                                            {{ $product->quantity }}</span>
+                                        <span class="prd-in-stock" data-stock-status=""> {{ $product->quantity }} in
+                                            stock
+                                        </span>
                                     @endif
 
                                 </li>
@@ -166,7 +259,8 @@
                             <div class="my-2 d-flex">
                                 <form action="{{ route('add-cart') }}" method="post">
                                     @csrf
-                                    <input type="hidden" name="stock" id="stock" value="{{ $product->quantity }}">
+                                    <input type="hidden" name="stock" id="stock"
+                                        value="{{ $product->quantity }}">
                                     @if ($product->quantity == 0)
                                         <div class="pro-qty" style="display: none">
                                             <input type="text" title="Quantity" name="qty" min="1"
@@ -192,15 +286,15 @@
                                         <input type="submit" value="Add To Cart" class="product-detail-cart-btn me-1">
                                 </form>
 
-                                <button class="product-detail-cart-btn buying ms-1" type="button"
-                                    style="margin-top: 4px;" data-id="{{ $product->id }}">
+                                <button class="product-detail-cart-btn buying ms-1 " type="button"
+                                    data-id="{{ $product->id }}" id="buyButton">
                                     Buy Now
                                 </button>
                                 @endif
                             </div>
                             <p class="product-detail-desc">
                                 For more live images and videos, Contact us now
-                            <div class="whats-btn mb-2">
+                            <div class="mb-2 wbutton whats-btn">
                                 <a href="{{ $content->whatsapp }}" target="_blank">WhatsApp</a>
                             </div>
                             <strong><a href="tel:{{ $content->phone_one }}">{{ $content->phone_one }}</a></strong>
@@ -211,8 +305,9 @@
                 </div>
             </div>
         </div>
-        <!--== End Product Detail Area Wrapper ==-->
 
+
+        <!--== End Product Detail Area Wrapper ==-->
 
         <div class="product_details">
             <div class="container">
@@ -251,7 +346,7 @@
                     </div>
 
                     <div class="col-lg-3 col-6">
-                        <div class="feature-svg">
+                        <div class="feature-svg ">
 
                             <div class="svg d-none d-md-block">
                                 <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" fill="none" stroke="#333"
@@ -529,9 +624,9 @@
                                                     data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithCartSidebar"
                                                     aria-controls="offcanvasWithCartSidebar">Add to
                                                     cart</button>
-                                                <button class="product-detail-cart-btn buynow" type="button"
+                                                {{-- <button class="product-detail-cart-btn buynow" type="button"
                                                     data-id="{{ $relatedPro->id }}">Buy
-                                                    Now</button>
+                                                    Now</button> --}}
                                             </div>
                                         @endif
                                     </div>
@@ -564,7 +659,114 @@
         });
 
         $(document).ready(function() {
-            $('.zoom').zoom();
+
+            if (window.innerWidth > 768) {
+                $('.zoom').zoom();
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            let toggleVariable = false;
+
+            // Get a reference to the button element
+            const toggleButton = document.getElementById('zoombutton');
+
+            // Add a click event listener to the button
+            toggleButton.addEventListener('click', function() {
+                // Toggle the variable between true and false
+                toggleVariable = !toggleVariable;
+
+                // Print the current value of the variable
+                console.log('Variable is now:', toggleVariable);
+                if (toggleVariable == true) {
+                    startZoom();
+                } else {
+                    stopZoom();
+                }
+
+                // $(".zoom-button").click(function() {
+
+                // });
+
+            })
+
+            function startZoom() {
+                $('.wbutton').addClass('whats-btn');
+                $('.addZoom1').addClass('zoom');
+                $('.addZoom2').addClass('zoom');
+                $('.addZoom3').addClass('zoom');
+                $('.zoom').zoom();
+                zoomActive = true;
+            }
+
+            function stopZoom() {
+                $('.wbutton').removeClass('whats-btn');
+                $('.addZoom1').removeClass('zoom');
+                $('.zoom').zoom();
+                $('.addZoom2').removeClass('zoom');
+                $('.addZoom3').removeClass('zoom');
+
+                zoomActive = false;
+            }
+            // $("#zoombutton").click(function() {
+
+            // })
+
+            // $("#zoombutton").click(function() {
+            //     if (!zoomed) {
+            //         zoomMethod();
+            //     }
+            //     console.log(zoomed);
+            //     zoomed = true;
+            // })
+
+            // function zoomMethod() {
+            //     $('.zoom').zoom();
+            // }
+        })
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const imageLinks = document.querySelectorAll(".image-link");
+            const enlargeButton = document.getElementById("enlarge-button");
+            const enlargedImageContainer = document.getElementById(
+                "enlarged-image-container"
+            );
+            const enlargedImage = document.getElementById("enlarged-image");
+            const closeBtn = document.getElementById("close-btn");
+
+            // Click event listener for image links
+            imageLinks.forEach(function(link) {
+                link.addEventListener("click", function(e) {
+                    e.preventDefault(); // Prevent the default link behavior
+                    const imageUrl = link
+                        .querySelector(".zoomable-image")
+                        .getAttribute("src");
+                    enlargedImage.setAttribute("src", imageUrl);
+                    enlargedImageContainer.style.display = "block";
+                });
+            });
+
+            // Click event listener for the enlarge button
+            enlargeButton.addEventListener("click", function() {
+                enlargedImageContainer.style.display = "block";
+            });
+
+            // Click event listener to close the enlarged image
+            closeBtn.addEventListener("click", function() {
+                enlargedImageContainer.style.display = "none";
+            });
+
+            // Click event listener to close the enlarged image by clicking outside
+            enlargedImageContainer.addEventListener("click", function(e) {
+                if (e.target === enlargedImageContainer) {
+                    enlargedImageContainer.style.display = "none";
+                }
+            });
         });
     </script>
 

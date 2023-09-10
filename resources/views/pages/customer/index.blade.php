@@ -16,7 +16,7 @@
                             </ol>
                         </div>
                     </div>
-                  
+
                 </div>
             </div>
         </div>
@@ -54,7 +54,8 @@
                                     <div class="myaccount-content">
                                         <h3>Dashboard</h3>
                                         <div class="welcome">
-                                            <p>Hello, <strong>{{ Auth::guard('customer')->user()->name }}</strong> Welcome to our Website.</p>
+                                            <p>Hello, <strong>{{ Auth::guard('customer')->user()->name }}</strong> Welcome
+                                                to our Website.</p>
                                         </div>
                                         <p class="mb-0">From your account dashboard. you can easily check & view your
                                             recent orders, manage your shipping and billing addresses and edit your password
@@ -76,30 +77,32 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($orders as $key=> $item)
-                                                    
-                                                <tr>
-                                                    <td>{{$key+1}}</td>
-                                                    <td>{{ date('F j, Y',strtotime($item->order_date)) }}</td>
-                                                    <td>{{ $item->order_number }}</td>
-                                                    <td>{{ $item->status }}</td>
-                                                    <td><span class="color">&#2547; {{ number_format($item->total_amount, 2) }}</span></td>
-                                                   
-                                                    <td><a href="{{ route('customer.order.show', $item->id) }}"
-                                                            class="check-btn sqr_btn_eye " title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                @foreach ($orders as $key => $item)
+                                                    <tr>
+                                                        <td>{{ $key + 1 }}</td>
+                                                        <td>{{ date('F j, Y', strtotime($item->order_date)) }}</td>
+                                                        <td>{{ $item->order_number }}</td>
+                                                        <td>{{ $item->status }}</td>
+                                                        <td><span class="color">&#2547;
+                                                                {{ number_format($item->total_amount, 2) }}</span></td>
+
+                                                        <td><a href="{{ route('customer.order.show', $item->id) }}"
+                                                                class="check-btn sqr_btn_eye " title="View"><i
+                                                                    class="fa fa-eye" aria-hidden="true"></i></a>
 
                                                             @if ($item->status == 'Delivered')
-                                                            <a href="{{ route('customer.order.print', $item->id) }}"
-                                                                class="check-btn sqr-btn " title="canceled Order"><i class="fa fa-print" aria-hidden="true"></i></a>
-                                                                @else
-                                                                <a href="{{ route('customer.canceled', $item->id) }}"
-                                                                    class="check-btn sqr-btn " title="canceled Order"><i class="fa fa-times" aria-hidden="true"></i></a>
-                                                                
+                                                                <a href="{{ route('customer.order.print', $item->id) }}"
+                                                                    class="check-btn sqr-btn " title="canceled Order"><i
+                                                                        class="fa fa-print" aria-hidden="true"></i></a>
+                                                            @else
+                                                                {{-- <a href="{{ route('customer.canceled', $item->id) }}"
+                                                                    class="check-btn sqr-btn " title="canceled Order"><i
+                                                                        class="fa fa-times" aria-hidden="true"></i></a> --}}
                                                             @endif
                                                         </td>
-                                                </tr>
+                                                    </tr>
                                                 @endforeach
-                                               
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -122,21 +125,23 @@
                                             <p>{{ Auth::guard('customer')->user()->email }}</p>
                                             <p>{{ Auth::guard('customer')->user()->address }}</p>
                                         </address>
-                                       
+
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="account-info" role="tabpanel"
                                     aria-labelledby="account-info-tab">
                                     <div class="myaccount-content">
                                         <h3>Account Details</h3>
-                                        <form class="account-details-form mt-4" action="{{ route('customer.address.update', Auth::guard('customer')->user()->id) }}" method="POST">
+                                        <form class="account-details-form mt-4"
+                                            action="{{ route('customer.address.update', Auth::guard('customer')->user()->id) }}"
+                                            method="POST">
                                             @csrf
 
                                             @method('PUT')
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="single-input-item">
-                                                        
+
                                                         <label for="name" class="required"> Name</label>
                                                         <input type="text" name="name"
                                                             value="{{ Auth::guard('customer')->user()->name }}" />
@@ -183,7 +188,7 @@
 
 
 
-  
+
 
 @endsection
 

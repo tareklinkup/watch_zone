@@ -281,8 +281,9 @@
 }
 
 .custom-container {
-    width: 98%;
+    width: 93%;
     margin: auto;
+
 }
 
 /* .header-border {
@@ -429,11 +430,13 @@
         background-color: #052043;
         width: 100%;
         margin: auto;
+        margin-top: -40px;
     }
 
     .sub-header h3 {
-        font-size: 14px;
+        font-size: 11px;
         font-weight: 600;
+        margin-bottom: 7px;
     }
 
     .custom-container {
@@ -657,13 +660,18 @@
 }
 
 .feature-svg {
-    border-right: 1px solid #e5e5e5;
     display: flex;
-    align-items: center;
+    align-items: left;
+    border-right: 1px solid #ccc;
+}
+
+
+.another {
+    border-right: 1px solid transparent;
 }
 
 .feature-svg .svg-name {
-    margin-left: 5px;
+    margin-left: 3px;
 }
 
 
@@ -961,6 +969,10 @@
 
     .header-name-area span {
         font-size: 17px;
+    }
+
+    .feature-svg {
+        border-right: 1px solid transparent;
     }
 
     .order_submit {

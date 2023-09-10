@@ -508,7 +508,7 @@
                                                                     </td>
                                                                     <td><input type="text"
                                                                             class="form-control form-control-sm shadow-none"
-                                                                            name="movement_value[]" placeholder="Value">
+                                                                            name="band_value[]" placeholder="Value">
                                                                     </td>
                                                                     <td><input type="button" class="add5"
                                                                             value="+" title="Add More" /></td>
@@ -815,11 +815,20 @@
 
         });
 
+        // $('#item-table').on('click', '.add1', function() {
+        //     $(this).val('-');
+        //     $(this).attr('class', 'del1');
+        //     var appendTxt =
+        //         "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='value[]' placeholder='Value'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='value[]' placeholder='Value'></td> <td><input type='button' class='add1' title='Add More' value='+' /></td></tr>";
+        //     $("#item-table tr:last").after(appendTxt);
+
+        // });
+
         $('#item-table').on('click', '.add1', function() {
             $(this).val('-');
             $(this).attr('class', 'del1');
             var appendTxt =
-                "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='value[]' placeholder='Value'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='value[]' placeholder='Value'></td> <td><input type='button' class='add1' title='Add More' value='+' /></td></tr>";
+                "<tr><td><input type='text' class='form-control form-control-sm shadow-none' name='label[]' placeholder='Label'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='value[]' placeholder='Value'></td>  <td><input type='button' class='add1' value='+' title='Add' /></td></tr>";
             $("#item-table tr:last").after(appendTxt);
 
         });
@@ -875,11 +884,19 @@
 
         });
 
+        // $('#brand-table').on('click', '.add5', function() {
+        //     $(this).val('-');
+        //     $(this).attr('class', 'del5');
+        //     var appendTxt =
+        //         "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='band_label[]' placeholder='Label'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='band_value[]' placeholder='Value'></td> <td><input type='button' class='add5' title='Add More' value='+' /></td></tr>";
+        //     $("#brand-table tr:last").after(appendTxt);
+
+        // });
         $('#brand-table').on('click', '.add5', function() {
             $(this).val('-');
             $(this).attr('class', 'del5');
             var appendTxt =
-                "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='band_label[]' placeholder='Label'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='band_value[]' placeholder='Value'></td> <td><input type='button' class='add5' title='Add More' value='+' /></td></tr>";
+                "<tr> <td><input type='text' class='form-control form-control-sm shadow-none' name='band_label[]' placeholder='Label'></td> <td><input type='text' class='form-control form-control-sm shadow-none'name='band_value[]' placeholder='Value'></td> <td><input type='button' class='add5' value='+' title='Add' /></td></tr>";
             $("#brand-table tr:last").after(appendTxt);
 
         });

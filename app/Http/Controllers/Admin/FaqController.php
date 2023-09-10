@@ -18,12 +18,14 @@ class FaqController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'qustion' => 'required|max:60',
+            'question' => 'required|max:60',
         ]);
 
+        // dd($request->all());
         try {
+
             $faqs = new Faq();
-            $faqs->qustion = $request->qustion;
+            $faqs->name = $request->question;
             $faqs->description = $request->description;
             $faqs->ip_address = $request->ip();
             $faqs->created_by = Auth::user()->id;
@@ -53,13 +55,13 @@ class FaqController extends Controller
 
     public function update(Request $request, $id)
     {
-        
+
         try {
             $faqs = Faq::find($id);
 
-          
-            
-            $faqs->qustion = $request->qustion;
+
+
+            $faqs->name = $request->question;
             $faqs->description = $request->description;
             $faqs->ip_address = $request->ip();
             $faqs->updated_by = Auth::user()->id;
@@ -94,6 +96,6 @@ class FaqController extends Controller
                 'message'=>'Something went wrong!',
                 'success'=> false
             ]);
-        } 
+        }
     }
 }

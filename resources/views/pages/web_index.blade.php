@@ -237,7 +237,7 @@
                                         <p>{{ optional($item->brand)->name }}</p>
                                         <h5 class="product-item-title mb-2">
                                             <a
-                                                href="{{ route('product.show', $item->slug) }}">{{ Str::of($item->name)->limit(63) }}</a>
+                                                href="{{ route('product.show', $item->slug) }}">{{ Str::of($item->name)->limit(65) }}</a>
                                         </h5>
                                         <div class="product-item-price ">
                                             @if ($item->discount_price > 0)
@@ -251,7 +251,7 @@
                                         </div>
 
                                         @if ($item->quantity == 0)
-                                            <div class="cart-button text-center stock_out">
+                                            <div class="cart-button">
                                                 <button
                                                     class="product-detail-cart-btn js-prd-addtocar btn-danger text-white"
                                                     disabled type="button"> Out of stock</button>
@@ -263,9 +263,9 @@
                                                     data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithCartSidebar"
                                                     aria-controls="offcanvasWithCartSidebar">Add to
                                                     cart</button>
-                                                <button class="product-detail-cart-btn buynow" type="button"
+                                                {{-- <button class="product-detail-cart-btn buynow" type="button"
                                                     data-id="{{ $item->id }}">Buy
-                                                    Now</button>
+                                                    Now</button> --}}
                                             </div>
                                         @endif
                                     </div>

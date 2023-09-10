@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\BrandMaterial;
 use App\Models\Coupon;
+use App\Models\Faq;
 use App\Models\Movement;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -30,6 +31,7 @@ use App\Models\Size;
 
 class HomeController extends Controller
 {
+
     public function index()
     {
         $data['slider'] = Slider::where('status', 1)->get();
@@ -39,7 +41,6 @@ class HomeController extends Controller
         $data['coupon'] = Coupon::first();
         return view('pages.web_index', $data);
     }
-
 
     // category Product Page
     public function category($cat)
@@ -56,7 +57,7 @@ class HomeController extends Controller
 
     public function saleProduct()
     {
-        $product = Product::with(['brand', 'images'])->where('sale', 1)->orderBy('quantity', 'desc');
+        $product = Product::with(['brand', 'images'])->where('sale', 1)->orderBy('quantity', 'desc')->orderBy('id', 'desc');
         $product = $product->paginate(200);
         $brands = Brand::with('product')->orderBy('id', 'asc')->get();
         $categories = Category::with('products')->orderBy('id', 'asc')->take(2)->get();
@@ -73,7 +74,9 @@ class HomeController extends Controller
 
           $brandMeta = Brand::find($brand_id);
 
-          $product = Product::with(['brand', 'images'])->where('brand_id', $brand_id)->orderBy('quantity', 'desc');
+          $product = Product::with(['brand', 'images'])->where('brand_id', $brand_id)
+          ->orderBy('id', 'desc')
+          ->orderBy('quantity', 'desc');
 
         //     echo "<pre>";
         //      print_r($product);
@@ -124,7 +127,6 @@ class HomeController extends Controller
       }
 
 
-
     // Category Product Page
     public function shop($category)
     {
@@ -136,6 +138,7 @@ class HomeController extends Controller
             $product = Product::with(['brand', 'images'])->where('category_id', $id);
             $categoryId = $id;
         }
+
         if(request()->query('brand')) {
 
             $brand_id = Brand::where('slug', request()->query('brand'))->first()->id;
@@ -159,10 +162,11 @@ class HomeController extends Controller
             $product->where('size_id', request()->query('size'));
         }
 
-        $data['product'] = $product->orderBy('quantity', 'asc')->paginate(200);
+        $data['product'] = $product->orderBy('quantity', 'desc')->orderBy('id', 'desc')->paginate(200);
 
         $data['categories'] = Category::withCount('products')->get();
-        $data['brands'] = Brand::with('product')->orderBy('id', 'asc')->get();
+        $data['brands'] = Brand::with('product')->orderBy('name', 'asc')->get();
+
         if(isset($brand_id)) {
             $data['series']= Series::where('brand_id', $id)->orderBy('name', 'asc')->get();
             $data['brand_material']= BrandMaterial::where('brand_id', $id)->orderBy('name', 'asc')->get();
@@ -171,11 +175,12 @@ class HomeController extends Controller
             $data['movements']= Movement::where('brand_id', $id)->orderBy('name', 'asc')->get();
             $brandId = $brand_id;
         }
+
         $data['brandId'] = $brandId;
         $data['categoryId'] = $categoryId;
 
+        return view('pages.product_shop', $data);
 
-    return view('pages.product_shop', $data);
     }
 
     public function allProduct() {
@@ -276,7 +281,14 @@ class HomeController extends Controller
     // Terms & Condition Page
     public function termsCondition()
     {
+
         return view('pages.terms_condition');
+    }
+
+    public function faq()
+    {
+       $faqs = Faq::latest()->orderBy('id', 'asc')->get();
+        return view('pages.faq', compact('faqs'));
     }
 
     public function privacy()

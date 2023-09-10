@@ -16,7 +16,7 @@
                             </ol>
                         </div>
                     </div>
-                
+
                 </div>
             </div>
         </div>
@@ -38,18 +38,18 @@
                                     <div class="alert alert-success"><small>{{ session('success') }}</small></div>
                                 @endif
                                 <p>Welcome back! Please enter your username and password to login.</p>
-                               
+
                             </div>
                             <div class="login-register-style ">
                                 <form action="{{ route('customer.login.process') }}" method="post">
                                     @csrf
-                                    <input type="hidden" name="loginDetail" value="{{Session::get('loginDetail')}}">
+                                    <input type="hidden" name="loginDetail" value="{{ Session::get('loginDetail') }}">
                                     <div class="row">
                                         <div class="col-lg-3 col-4"><label for="">Phone</label></div>
                                         <div class="col-lg-9 col-8">
                                             <div class="login-register-input">
-                                                <input type="number" name="phone" class="@error('phone') is-invalid @enderror"
-                                                    placeholder="Phone Number">
+                                                <input type="number" name="phone"
+                                                    class="@error('phone') is-invalid @enderror" placeholder="Phone Number">
                                                 @error('phone')
                                                     <span class="invalid-feedback" role="alert">
                                                         <small>{{ $message }}</small>
@@ -76,8 +76,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                  
-                                    
+
+
                                     <div class="btn-register text-end">
                                         <button class="btn-register-now">Login</button>
                                     </div>
@@ -94,13 +94,15 @@
                             <div class="login-register-style">
                                 <form action="{{ route('customer.register.store') }}" method="post">
                                     @csrf
-                                    <input type="hidden" name="loginDetail" value="{{Session::get('loginDetail')}}">
+                                    <input type="hidden" name="loginDetail" value="{{ Session::get('loginDetail') }}">
                                     <div class="row">
-                                        <div class="col-lg-4 col-4"><label for="">Name <span class="text-danger">*</span></label></div>
+                                        <div class="col-lg-4 col-4"><label for="">Name <span
+                                                    class="text-danger">*</span></label></div>
                                         <div class="col-lg-8 col-8">
                                             <div class="login-register-input">
                                                 <input type="text" name="name"
-                                                    class="@error('name') is-invalid @enderror" value="{{old('name')}}" placeholder="Full Name">
+                                                    class="@error('name') is-invalid @enderror" value="{{ old('name') }}"
+                                                    placeholder="Full Name">
                                                 @error('name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <small>{{ $message }}</small>
@@ -110,11 +112,13 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 col-4"><label for="">Phone <span class="text-danger">*</span></label></div>
+                                        <div class="col-lg-4 col-4"><label for="">Phone <span
+                                                    class="text-danger">*</span></label></div>
                                         <div class="col-lg-8 col-8">
                                             <div class="login-register-input">
-                                                <input type="number" name="phone" class="@error('phone') is-invalid @enderror"
-                                                value="{{old('phone')}}"  placeholder="Phone Number">
+                                                <input type="number" name="phone"
+                                                    class="@error('phone') is-invalid @enderror"
+                                                    value="{{ old('phone') }}" placeholder="Phone Number">
                                                 @error('phone')
                                                     <span class="invalid-feedback" role="alert">
                                                         <small>{{ $message }}</small>
@@ -127,8 +131,9 @@
                                         <div class="col-lg-4 col-4"><label for="">Email Address </label></div>
                                         <div class="col-lg-8 col-8">
                                             <div class="login-register-input">
-                                                <input type="email" name="email" class="@error('email') is-invalid @enderror"
-                                                value="{{old('email')}}" placeholder="E-mail Address">
+                                                <input type="email" name="email"
+                                                    class="@error('email') is-invalid @enderror"
+                                                    value="{{ old('email') }}" placeholder="E-mail Address">
                                                 @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                                         <small>{{ $message }}</small>
@@ -138,11 +143,12 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 col-4"><label for=""> Address <span class="text-danger">*</span></label></div>
+                                        <div class="col-lg-4 col-4"><label for=""> Address <span
+                                                    class="text-danger">*</span></label></div>
                                         <div class="col-lg-8 col-8">
                                             <div class="login-register-input">
-                                                <input type="text" name="address" value="{{old('address')}}" class="@error('address') is-invalid @enderror"
-                                                    placeholder=" Address">
+                                                <input type="text" name="address" value="{{ old('address') }}"
+                                                    class="@error('address') is-invalid @enderror" placeholder="Address">
                                                 @error('address')
                                                     <span class="invalid-feedback" role="alert">
                                                         <small>{{ $message }}</small>
@@ -152,11 +158,13 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 col-4"><label for=""> Password <span class="text-danger">*</span></label></div>
+                                        <div class="col-lg-4 col-4"><label for=""> Password <span
+                                                    class="text-danger">*</span></label></div>
                                         <div class="col-lg-8 col-8">
                                             <div class="login-register-input">
                                                 <input type="password" name="password"
-                                                    class="@error('password') is-invalid @enderror" placeholder="Password">
+                                                    class="@error('password') is-invalid @enderror"
+                                                    placeholder="Password">
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
                                                         <small>{{ $message }}</small>
@@ -166,7 +174,8 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 col-4"><label for=""> Confirm Password <span class="text-danger">*</span></label></div>
+                                        <div class="col-lg-4 col-4"><label for=""> Confirm Password <span
+                                                    class="text-danger">*</span></label></div>
                                         <div class="col-lg-8 col-8">
                                             <div class="login-register-input">
                                                 <input type="password" name="password_confirmation"
@@ -180,7 +189,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                  
+
                                     <div class="login-register-paragraph">
                                         <p>Your personal data will be used to support your experience throughout this
                                             website, to manage access to your account, and for other purposes described in
