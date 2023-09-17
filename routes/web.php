@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SMSController;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\RoleController;
@@ -160,8 +161,11 @@ Route::group(['middleware' => 'customer'], function () {
     //Checkout Routes
     Route::get('/get-shipamount/{id}', [CartController::class, 'getShipAmount'])->name('get.ship.amount');
     Route::post('/checkout/store', [CheckoutController::class, 'checkoutStore'])->name('checkout.store');
-    Route::get('/sms-check', [HomeController::class, 'sendMsgs']);
+    // Route::get('/sms-check', [HomeController::class, 'sendMsgs']);
 });
+
+// SMS testing......
+Route::get('/send-sms', [SMSController::class, 'sendSMS']);
 
 Route::get('/product/checkout', [CartController::class, 'checkout'])->name('product.checkout');
 

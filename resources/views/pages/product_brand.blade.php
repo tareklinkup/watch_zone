@@ -73,7 +73,7 @@
                 <div class="side_bar mt-3 mb-0 d-block d-md-none">
                     <a class="btn" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
                         aria-controls="offcanvasExample" style="width:100%; border-radius:5px;">
-                        <i class="fa fa-bars"></i> <span> Product Filters</span>
+                        <i class="fa fa-bars"></i> <span> Product Filters </span>
                     </a>
                 </div>
             </div>
@@ -199,7 +199,8 @@
                                         aria-labelledby="headingTwo11" data-bs-parent="#accordionExample">
 
                                         <div class="accordion-body side_area">
-                                            <div class="form-group " v-for="(categories, ind) in categories">
+                                            <div class="form-group" style="margin-bottom:0rem"
+                                                v-for="(categories, ind) in categories">
                                                 <input class="form-check-input check-input sort-form"
                                                     v-bind:value="categories.id" :id="`s-${ind}`" type="checkbox"
                                                     v-model="selectedCategories"
@@ -225,7 +226,8 @@
                                     <div id="collapseTwo4" class="accordion-collapse collapse"
                                         aria-labelledby="headingTwo4" data-bs-parent="#accordionExample">
                                         <div class="accordion-body side_area">
-                                            <div class="form-group" v-for="(movement, ml) in movements">
+                                            <div class="form-group" style="margin-bottom:0rem"
+                                                v-for="(movement, ml) in movements">
                                                 <input class="form-check-input check-input sort-form"
                                                     :id="`ml-${ml}`" :value="movement.id"
                                                     v-model="selectmovements" type="checkbox"
@@ -251,7 +253,8 @@
                                     <div id="collapseTwo5" class="accordion-collapse collapse"
                                         aria-labelledby="headingTwo5" data-bs-parent="#accordionExample">
                                         <div class="accordion-body side_area">
-                                            <div class="form-group" v-for="(csize, csl) in caseSize">
+                                            <div class="form-group" style="margin-bottom:0rem"
+                                                v-for="(csize, csl) in caseSize">
                                                 <input class="form-check-input check-input sort-form"
                                                     :id="`csl-${csl}`" :value="csize.id"
                                                     v-model="selectCaseSize" type="checkbox"
@@ -275,7 +278,8 @@
                                     <div id="collapseTwo3" class="accordion-collapse collapse"
                                         aria-labelledby="headingTwo3" data-bs-parent="#accordionExample">
                                         <div class="accordion-body side_area">
-                                            <div class="form-group" v-for="(dcolor, cl) in dialColor">
+                                            <div class="form-group" style="margin-bottom:0rem"
+                                                v-for="(dcolor, cl) in dialColor">
                                                 <input class="form-check-input check-input sort-form"
                                                     :id="`cl-${cl}`" :value="dcolor.id"
                                                     v-model="selectdialColor" type="checkbox"
@@ -299,7 +303,8 @@
                                     <div id="collapseTwo2" class="accordion-collapse collapse"
                                         aria-labelledby="headingTwo2" data-bs-parent="#accordionExample">
                                         <div class="accordion-body side_area">
-                                            <div class="form-group" v-for="(bmaterial, sl) in brandMaterials">
+                                            <div class="form-group" style="margin-bottom:0rem"
+                                                v-for="(bmaterial, sl) in brandMaterials">
                                                 <input class="form-check-input check-input sort-form"
                                                     :id="`bm-${sl}`" :value="bmaterial.id"
                                                     v-model="selectedMaterial" type="checkbox"
@@ -326,7 +331,8 @@
                                         aria-labelledby="headingTwo1" data-bs-parent="#accordionExample">
 
                                         <div class="accordion-body side_area">
-                                            <div class="form-group " v-for="(ser, ind) in series">
+                                            <div class="form-group" style="margin-bottom:0rem"
+                                                v-for="(ser, ind) in series">
                                                 <input class="form-check-input check-input sort-form"
                                                     v-bind:value="ser.id" :id="`s-${ind}`" type="checkbox"
                                                     v-model="selectedSeries"
@@ -374,7 +380,7 @@
         <div class="offcanvas offcanvas-start product_items_filter" tabindex="-1" id="offcanvasExample"
             aria-labelledby="offcanvasExampleLabel">
             <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Side Manu</h5>
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Side Menu</h5>
                 <button type="button" class="btn-close text-reset " data-bs-dismiss="offcanvas"
                     aria-label="Close"></button>
             </div>
@@ -395,12 +401,12 @@
                             data-bs-parent="#accordionExample">
 
                             <div class="accordion-body side_area">
-                                <div class="form-group " v-for="(categories, ind) in categories">
+                                <div class="form-group" style="margin-bottom: 0rem"
+                                    v-for="(categories, ind) in categories">
                                     <input class="form-check-input check-input sort-form" v-bind:value="categories.id"
                                         :id="`s-${ind}`" type="checkbox" v-model="selectedCategories"
-                                        @@change="getProductCategoryFilters">
+                                        style="position: relative" @@change="getProductCategoryFilters">
                                     <label :for="`s-${ind}`" class="form-check-label">@{{ categories.name }}</label>
-
                                 </div>
                             </div>
                         </div>
@@ -419,11 +425,11 @@
                         <div id="collapseTwo4" class="accordion-collapse collapse" aria-labelledby="headingTwo4"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body side_area">
-                                <div class="form-group" v-for="(movement, ml) in movements">
+                                <div class="form-group" style="margin-bottom: 0rem" v-for="(movement, ml) in movements">
                                     <input class="form-check-input check-input sort-form" :id="`ml-${ml}`"
-                                        :value="movement.id" v-model="selectmovements" type="checkbox"
-                                        @@change="getMovementFilters"> <label class="form-check-label"
-                                        :for="`ml-${ml}`">@{{ movement.name }}</label>
+                                        style="position: relative" :value="movement.id" v-model="selectmovements"
+                                        type="checkbox" @@change="getMovementFilters"> <label
+                                        class="form-check-label" :for="`ml-${ml}`">@{{ movement.name }}</label>
                                 </div>
                             </div>
                         </div>
@@ -442,11 +448,11 @@
                         <div id="collapseTwo5" class="accordion-collapse collapse" aria-labelledby="headingTwo5"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body side_area">
-                                <div class="form-group" v-for="(csize, csl) in caseSize">
+                                <div class="form-group" style="margin-bottom: 0rem" v-for="(csize, csl) in caseSize">
                                     <input class="form-check-input check-input sort-form" :id="`csl-${csl}`"
                                         :value="csize.id" v-model="selectCaseSize" type="checkbox"
-                                        @@change="getcaseSizeFilters"> <label class="form-check-label"
-                                        :for="`csl-${csl}`">@{{ csize.name }}</label>
+                                        style="position: relative" @@change="getcaseSizeFilters"> <label
+                                        class="form-check-label" :for="`csl-${csl}`">@{{ csize.name }}</label>
                                 </div>
                             </div>
                         </div>
@@ -463,11 +469,11 @@
                         <div id="collapseTwo3" class="accordion-collapse collapse" aria-labelledby="headingTwo3"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body side_area">
-                                <div class="form-group" v-for="(dcolor, cl) in dialColor">
+                                <div class="form-group" style="margin-bottom: 0rem" v-for="(dcolor, cl) in dialColor">
                                     <input class="form-check-input check-input sort-form" :id="`cl-${cl}`"
                                         :value="dcolor.id" v-model="selectdialColor" type="checkbox"
-                                        @@change="getColorFilters"> <label class="form-check-label"
-                                        :for="`cl-${cl}`">@{{ dcolor.name }}</label>
+                                        style="position: relative" @@change="getColorFilters"> <label
+                                        class="form-check-label" :for="`cl-${cl}`">@{{ dcolor.name }}</label>
                                 </div>
                             </div>
                         </div>
@@ -485,10 +491,11 @@
                         <div id="collapseTwo2" class="accordion-collapse collapse" aria-labelledby="headingTwo2"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body side_area">
-                                <div class="form-group" v-for="(bmaterial, sl) in brandMaterials">
+                                <div class="form-group" style="margin-bottom: 0rem"
+                                    v-for="(bmaterial, sl) in brandMaterials">
                                     <input class="form-check-input check-input sort-form" :id="`bm-${sl}`"
-                                        :value="bmaterial.id" v-model="selectedMaterial" type="checkbox"
-                                        @@change="getBrandMaterialsFilters"> <label
+                                        style="position: relative" :value="bmaterial.id" v-model="selectedMaterial"
+                                        type="checkbox" @@change="getBrandMaterialsFilters"> <label
                                         class="form-check-label" :for="`bm-${sl}`">@{{ bmaterial.name }}</label>
                                 </div>
 
@@ -508,10 +515,10 @@
                         <div id="collapseTwo1" class="accordion-collapse collapse" aria-labelledby="headingTwo1"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body side_area">
-                                <div class="form-group" v-for="(ser, ind) in series">
+                                <div class="form-group" style="margin-bottom: 0rem" v-for="(ser, ind) in series">
                                     <input class="form-check-input check-input sort-form" v-bind:value="ser.id"
                                         :id="`s-${ind}`" type="checkbox" v-model="selectedSeries"
-                                        @@change="getProductSeriesFilters">
+                                        style="position: relative" @@change="getProductSeriesFilters">
                                     <label :for="`s-${ind}`" class="form-check-label">@{{ ser.name }}</label>
                                 </div>
                             </div>

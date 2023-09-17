@@ -217,7 +217,43 @@ class HomeController extends Controller
     public function sendMsgs()
     {
 
-        $this->sendSms();
+        //    return $this->sendSms();
+
+        // $curl = curl_init();
+        // curl_setopt_array($curl, array(
+        //     CURLOPT_URL => 'https://api.sms.net.bd/sendsms',
+        //     CURLOPT_RETURNTRANSFER => true,
+        //     CURLOPT_CUSTOMREQUEST => 'POST',
+        //     CURLOPT_POSTFIELDS => array(
+        //         'api_key' => '84ISgF9emjUo5DXp11n4UJNRg1pnQEIGFb5tzd7H',
+        //         'msg' => 'Order successfully completed',
+        //         'to' => '8801868332991'
+        //     ),
+        // ));
+        // $response = curl_exec($curl);
+        // curl_close($curl);
+
+
+        $postData = [
+            'api_key' => '84ISgF9emjUo5DXp11n4UJNRg1pnQEIGFb5tzd7H',
+            'msg' => 'Order successfully completed',
+            'to' => '+8801868332991'
+        ];
+
+        $postDataJson = json_encode($postData);
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.sms.net.bd/sendsms',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_POSTFIELDS => $postDataJson,
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($postDataJson)
+            ),
+        ));
+
     }
 
     public function show($slug)

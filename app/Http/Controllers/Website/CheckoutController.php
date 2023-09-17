@@ -75,7 +75,10 @@ class CheckoutController extends Controller
 
             DB::commit();
 
-            // $this->sms("Your orders successfully completed", $request->phone);
+
+            // $orderNumber = 'WZ'.mt_rand(10000000, 99999999);
+
+          $this->sms("Hi, {$request->name} \n Your Order is successfully placed. Your Order number: {$order->order_number} and Total Bill: {$request->total_amount} Taka. Delivery Time: Inside of Dhaka: 1-2 days and Outside of Dhaka: 2-4 days \n Thanks, \n Watch Zone \n Hotline: 01934-764333 ", $request->phone);
 
             $user = Auth::guard('customer')->user();
             // $order = Order::with('order_details')->where('id', $order->id)->first();

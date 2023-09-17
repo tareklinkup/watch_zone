@@ -90,6 +90,7 @@ class OrderController extends Controller
         $order->confirmed_date = Carbon::now();
         $order->save();
 
+
         $notification = array(
             'message' => 'Order Confirm Success',
             'alert-type' => 'success'
@@ -106,6 +107,9 @@ class OrderController extends Controller
         $order->cancel_date = Carbon::now();
         $order->save();
 
+
+        $this->sms("Hi, {$order->name} \n Your order #17079 at Watch Zone has been cancelled. Please contact our customer service team for any questions or concerns. \n Thanks, \n Watch Zone \n Hotline: 01934-764333 ", $order->phone);
+
         $notification = array(
             'message' => 'Order Cancelled Successfully',
             'alert-type' => 'success'
@@ -119,6 +123,8 @@ class OrderController extends Controller
         $order->status = 'Cancelled';
         $order->cancel_date = Carbon::now();
         $order->save();
+
+        $this->sms("Hi, {$order->name} \n Your order #17079 at Watch Zone has been cancelled. Please contact our customer service team for any questions or concerns. \n Thanks, \n Watch Zone \n Hotline: 01934-764333 ", $order->phone);
 
         $notification = array(
             'message' => 'delivered Cancelled Successfully',
@@ -192,6 +198,8 @@ class OrderController extends Controller
         $order->processing_date = Carbon::now();
         $order->save();
 
+        $this->sms("Hi, {$order->name} \n we are currently processing your order", $order->phone);
+
         $notification = array(
             'message' => 'Order Processing Success',
             'alert-type' => 'success'
@@ -209,6 +217,7 @@ class OrderController extends Controller
         $order->save();
 
 
+        $this->sms("Hi, {$order->name} \n Your order {$order->order_number} has been delivered. Thank you for Purchasing from us. Please let us know if you have any questions. \n Watch Zone \n Hotline: 01934-764333 ", $order->phone);
 
         $notification = array(
             'message' => 'Order Delivered Success',
@@ -258,7 +267,7 @@ class OrderController extends Controller
     {
         $res = new stdClass();
 
-        try {            
+        try {
             $orderData = $request->order;
 
             $order = new Order();
@@ -285,12 +294,12 @@ class OrderController extends Controller
 
             $orderCart = $request->cart;
 
-            foreach ($orderCart as $product) {                
+            foreach ($orderCart as $product) {
                 $order_details = new OrderDetail();
                 $order_details->order_id = $order->id;
-                $order_details->product_id = $product['productId'];             
-                $order_details->price = $product['total'];            
-                $order_details->quantity = $product['qty'];            
+                $order_details->product_id = $product['productId'];
+                $order_details->price = $product['total'];
+                $order_details->quantity = $product['qty'];
                 $order_details->save();
 
                 // main stock update
